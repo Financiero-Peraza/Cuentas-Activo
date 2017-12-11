@@ -1,48 +1,33 @@
-<html class="no-js">
+﻿<!DOCTYPE html>
+<html>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SpaceLab</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
-    <!-- Fonts from Font Awsome -->
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <!-- CSS Animate -->
-    <link rel="stylesheet" href="../css/animate.css">
-    <!-- Custom styles for this theme -->
-    <link rel="stylesheet" href="../css/main.css">
-    <!-- Vector Map  -->
-    <link rel="stylesheet" href="../plugins/jvectormap/css/jquery-jvectormap-1.2.2.css">
-    <!-- ToDos  -->
-    <link rel="stylesheet" href="../plugins/todo/css/todos.css">
-    <!-- Morris  -->
-    <link rel="stylesheet" href="../plugins/morris/css/morris.css">
-    <!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <!-- Feature detection -->
-    <script src="../js/modernizr-2.6.2.min.js"></script>
-    
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <title>SISTEMA DE CUENTAS POR COBRAR Y ACTIVO FIJO</title>
 
-<body>
-    
-<section id="container">
-    <header id="header">
-        <!--logo start-->
-        <div class="brand">
-            <a href="index.php" class="logo"><span>Space</span>Lab</a>
-        </div>
-        <!--logo end-->
-        <div class="toggle-navigation toggle-left">
-            <button type="button" class="btn btn-default" id="toggle-left" data-toggle="tooltip" data-placement="right" title="Toggle Navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-        </div>
+        <!-- Favicon-->
+        <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+        <!-- Bootstrap Core Css -->
+        <link href="../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+        <!-- Waves Effect Css -->
+        <link href="../plugins/node-waves/waves.css" rel="stylesheet" />
+
+        <!-- Animation Css -->
+        <link href="../plugins/animate-css/animate.css" rel="stylesheet" />
+
+        <!-- Custom Css -->
+        <link href="../css/style.css" rel="stylesheet">
+
+        <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+        <link href="../css/themes/all-themes.css" rel="stylesheet" />
+    </head>
+    <body class="theme-red">
+
         
-    </header>
