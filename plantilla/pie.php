@@ -1,23 +1,27 @@
 <!-- Jquery Core Js -->
-<script src="../plugins/jquery/jquery.min.js"></script>
+    <script src="../plugins/jquery/jquery.min.js"></script>
 
-<!-- Bootstrap Core Js -->
-<script src="../plugins/bootstrap/js/bootstrap.js"></script>
+    <!-- Bootstrap Core Js -->
+    <script src="../plugins/bootstrap/js/bootstrap.js"></script>
 
-<!-- Select Plugin Js -->
-<script src="../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <!-- Select Plugin Js -->
+    <script src="../plugins/bootstrap-select/js/bootstrap-select.js"></script>
 
-<!-- Slimscroll Plugin Js -->
-<script src="../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <!-- Slimscroll Plugin Js -->
+    <script src="../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
 
-<!-- Waves Effect Plugin Js -->
-<script src="../plugins/node-waves/waves.js"></script>
+    <!-- Jquery Validation Plugin Css -->
+    <script src="../plugins/jquery-validation/jquery.validate.js"></script>
 
-<!-- Custom Js -->
-<script src="../js/admin.js"></script>
+    <!-- JQuery Steps Plugin Js -->
+    <script src="../plugins/jquery-steps/jquery.steps.js"></script>
 
-<!-- Demo Js -->
-<script src="../js/demo.js"></script>
-</body>
+    <!-- Sweet Alert Plugin Js -->
+    <script src="../plugins/sweetalert/sweetalert.min.js"></script>
 
-</html>
+   <!-- Custom Js -->
+    <script src="../js/admin.js"></script>
+    <script src="../js/pages/forms/form-wizard.js"></script>
+
+    <!-- Demo Js -->
+    <script src="../js/demo.js"></script>

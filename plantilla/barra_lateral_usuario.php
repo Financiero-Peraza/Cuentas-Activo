@@ -20,39 +20,67 @@
         <!-- Menu -->
         <div class="menu">
             <ul class="list">
-                <li class="header text-center">MENU</li>
+                <li class="header text-center">CUENTAS POR COBRAR</li>
                 <li>
-                    <a href="#">
-                        <i class="material-icons col-green">explore</i>
-                        <span>Historia</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../activo_fijo/galeria.php">
+                    <a href="#" class="menu-toggle">
                         <i class="material-icons col-blue">collections</i>
-                        <span>Galerias</span>
+                        <span>Registro de Clientes</span>
                     </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="../cuenta_cobrar/registro_natura.php">Persona Natural</a>
+                        </li>
+                        <li>
+                            <a href="../cuenta_cobrar/registro_juridico.php">Persona Juridica</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="../activo_fijo/noticias.php">
+                    <a href="#" class="menu-toggle">
                         <i class="material-icons col-blue-grey">description</i>
-                        <span>Noticias</span>
+                        <span>Registro de Credito</span>
                     </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="#">Personal</a>
+                        </li>
+                        <li>
+                            <a href="#">Hipotecario</a>
+                        </li>
+                        <li>
+                            <a href="#">Agropecuario</a>
+                        </li>
+                        <li>
+                            <a href="#">Solidario</a>
+                        </li>
+                    </ul>
+                </li>
+                
+ <li>
+                    <a href="#" class="menu-toggle">
+                        <i class="material-icons col-deep-purple">event</i>
+                        <span>Cartera de Clientes</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="#">Normal</a>
+                        </li>
+                        <li>
+                            <a href="#">Mora</a>
+                        </li>
+                        <li>
+                            <a href="#">Incobrable</a>
+                        </li>
+                    </ul>
+
                 </li>
                 <li>
                     <a href="#">
                         <i class="material-icons col-deep-orange">book</i>
-                        <span>Catalogo de libros</span>
+                        <span>Registro de Abono</span>
                     </a>
                 </li>
-
-                <li>
-                    <a href="#">
-                        <i class="material-icons col-deep-purple">event</i>
-                        <span>Proximos Eventos</span>
-                    </a>
-                </li>
-                <li class="header">Nosotros</li>
+                <li class="header text-center">ACTIVO FIJO</li>
                 <li>
                     <a href="../activo_fijo/Contactenos.php">
                         <i class="material-icons col-red">contacts</i>
