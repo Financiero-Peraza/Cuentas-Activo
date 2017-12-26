@@ -1,3 +1,7 @@
+<?php
+include_once '../app/Conexion.php';
+?>
+
 ﻿<!DOCTYPE html>
 <html>
 
