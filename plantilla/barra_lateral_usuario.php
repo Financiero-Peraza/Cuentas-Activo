@@ -3,7 +3,7 @@
     <!-- User Info -->
     <div class="user-info">
         <div class="image">
-            <img src="../../images/user.png" width="48" height="48" alt="User" />
+            
         </div>
         <div class="info-container">
             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
@@ -48,16 +48,16 @@
                 </a>
                 <ul class="ml-menu">
                     <li>
-                        <a href="#">Personal</a>
+                        <a href="../cuenta_cobrar/credito_personal.php">Personal</a>
                     </li>
                     <li>
-                        <a href="#">Hipotecario</a>
+                        <a href="../cuenta_cobrar/credito_hipotecario.php">Hipotecario</a>
                     </li>
                     <li>
-                        <a href="#">Agropecuario</a>
+                        <a href="../cuenta_cobrar/credito_agropecuario.php">Agropecuario</a>
                     </li>
                     <li>
-                        <a href="#">Solidario</a>
+                        <a href="../cuenta_cobrar/credito_solidario.php">Solidario</a>
                     </li>
                 </ul>
             </li>
@@ -105,11 +105,9 @@
     <!-- Footer -->
     <div class="legal">
         <div class="copyright">
-            &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
+           © 2017 <a href="#">UES FMP.</a>
         </div>
-        <div class="version">
-            <b>Version: </b> 1.0.5
-        </div>
+        
     </div>
     <!-- #Footer -->
 </aside>

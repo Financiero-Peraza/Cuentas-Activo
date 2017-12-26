@@ -8,14 +8,6 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- Call Search -->
-
-                        <!-- #END# Call Search -->
-                        <!-- Notifications -->
-                        
-                        <!-- #END# Notifications -->
-
-
                     </ul>
                 </div>
             </div>
