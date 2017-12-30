@@ -88,15 +88,39 @@
             </li>
             <li class="header text-center">ACTIVO FIJO</li>
             <li>
-                <a href="../activo_fijo/Contactenos.php">
+                <a href="../activo_fijo/registro_activo.php">
                     <i class="material-icons col-red">contacts</i>
-                    <span>Contactenos</span>
+                    <span>Registro de Activo</span>
                 </a>
             </li>
             <li>
-                <a href="../activo_fijo/sugerencias.php">
+                <a href="../activo_fijo/registro_tipo_activo.php">
                     <i class="material-icons col-amber">mail</i>
-                    <span>Sugerencias</span>
+                    <span>Registro de Tipo de Activo</span>
+                </a>
+            </li>
+            <li>
+                <a href="../activo_fijo/registro_encargado.php">
+                    <i class="material-icons col-amber">mail</i>
+                    <span>Registro de Encargado</span>
+                </a>
+            </li>
+            <li>
+                <a href="../activo_fijo/registro_institucion.php">
+                    <i class="material-icons col-amber">mail</i>
+                    <span>Registro de Institucion</span>
+                </a>
+            </li>
+            <li>
+                <a href="../activo_fijo/registro_departamento.php">
+                    <i class="material-icons col-amber">mail</i>
+                    <span>Registro de Departamento</span>
+                </a>
+            </li>
+            <li>
+                <a href="../activo_fijo/registro_clasificacion.php">
+                    <i class="material-icons col-amber">mail</i>
+                    <span>Registro de Clasificacion de Activo</span>
                 </a>
             </li>
         </ul>
