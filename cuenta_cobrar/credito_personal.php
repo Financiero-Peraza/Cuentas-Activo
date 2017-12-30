@@ -227,6 +227,9 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                         </div>
                                     </div>
                                 </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary m-t-15 waves-effect">GUARDAR</button>
+                                </div>
                             </div>
                         </div>
                     </div>
