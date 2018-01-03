@@ -98,6 +98,39 @@ persona_natural.id_persona_natural = $codigo";
         return $resultado;
     }
 
+    
+    //****************  EXPEDIENTE **************
+     public static function insertar_expediente($conexion,  $expediente) {
+        $expediente_insertado = false;
+        //$expediente=new expediente_natural();
+                
+        if (isset($conexion)) {
+            try {
+
+                $dui = $expediente->getId_prestamo();
+                $nit = $expediente->getPersona_natural();
+                
+
+
+                $sql = 'INSERT INTO expediente_natural (id_prestamo,persona_natural)'
+                        . ' values ( :dui, :nit)';
+                ///estos son alias para que PDO pueda trabajar 
+                $sentencia = $conexion->prepare($sql);
+
+                $sentencia->bindParam(':dui', $dui, PDO::PARAM_STR);
+                $sentencia->bindParam(':nit', $nit, PDO::PARAM_STR);
+
+
+                $expediente_insertado = $sentencia->execute();
+//             $accion = 'Se registro al siguiente expediente de mantenimiento: ' . $nombre . ", con direccion ". $direccion . ", telefono ". $telefono.", y correo ".$correo ;
+//              self::insertar_bitacora($conexion, $accion);
+            } catch (PDOException $ex) {
+                echo '<script>swal("No se puedo realizar el registro", "Revise los datos ingresados  ", "warning");</script>';
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return $expediente_insertado;
+    }
 }
 
 ?>

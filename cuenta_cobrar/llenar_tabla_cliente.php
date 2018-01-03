@@ -31,6 +31,7 @@ foreach ($listado as $fila) {
             "<td>"+dir+"</td>",
             "</tr>"
             );
+    $("#tabla_cliente_cpersonal tbody").empty()//elino el anterior
     $("table#tabla_cliente_cpersonal tbody").append(linea);
    
     }else{

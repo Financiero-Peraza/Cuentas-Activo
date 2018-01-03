@@ -1,10 +1,5 @@
-<?php
-include_once '../plantilla/cabecera.php';
-include_once '../plantilla/barraSuperior.php';
-include_once '../plantilla/barra_lateral_usuario.php';
-?>
 <script language="javascript">
-    $(document).ready(function () {//para que no se enie el form al precinar enter
+    $(document).ready(function () {
 
         $('form').keypress(function (e) {
             if (e == 13) {
@@ -20,7 +15,13 @@ include_once '../plantilla/barra_lateral_usuario.php';
 
     });
 </script>
-<form action="" method="GET" name="credito_personal" id="credito_personal">
+<?php
+include_once '../plantilla/cabecera.php';
+include_once '../plantilla/barraSuperior.php';
+include_once '../plantilla/barra_lateral_usuario.php';
+?>
+
+<form action="" method="post" name="credito_personal" id="credito_personal" onsubmit="return validarTablas_cper()">
     <input type="hidden" id="pas_cp" name="pas_cp"/>
     <section class="content">
         <!--    INICIO DE DATOS-->
@@ -39,7 +40,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                             <div class="input-field"><i class="fa fa-search prefix" aria-hidden="true">
 
                                                 </i><label for="" style="font-size:16px">Buscar Cliente</label>
-                                                <input type="text" id="buscar_cliente"  name="" autofocus onkeypress="llenar_tabla_cliente(this)" list="lista_personas_naturales">
+                                                <input type="text" id="buscar_cliente"  name="" autofocus onkeypress="return llenar_tabla_cliente(this)" list="lista_personas_naturales">
                                             </div>              
                                         </div>
                                     </div>
@@ -96,7 +97,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text"class="form-control text-center" name="nameNombre" placeholder="NOMBRE...">
+                                                <input type="text"class="form-control text-center" required="" minlength="3" id="Nombre_fia_per" name="Nombre_fia_per" placeholder="NOMBRE...">
                                             </div>
                                         </div>
                                     </div>
@@ -104,7 +105,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control text-center" name="nameApellido" placeholder="APELLIDO...">
+                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Apellido_fia_per" name="Apellido_fia_per" placeholder="APELLIDO...">
                                             </div>
                                         </div>
                                     </div>
@@ -114,7 +115,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control text-center" name="NameDireccion" placeholder="DIRECCION...">
+                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Direccion_fia_per" name="Direccion_fia_per" placeholder="DIRECCION...">
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +123,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control text-center" name="NameTelefono" placeholder="TELEFONO...">
+                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Telefono_fia_per" name="Telefono_fia_per" placeholder="TELEFONO...">
                                             </div>
                                         </div>
                                     </div>
@@ -131,14 +132,14 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control text-center" name="NameDui" placeholder="DUI...">
+                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Dui_fia_per" name="Dui_fia_per" placeholder="DUI...">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control text-center" name="NameNit" placeholder="NIT...">
+                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Nit_fia_per" name="Nit_fia_per" placeholder="NIT...">
                                             </div>
                                         </div>
                                     </div>
@@ -147,14 +148,14 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="email" class="form-control text-center" name="NameEmail" placeholder="EMAIL...">
+                                                <input type="email" class="form-control text-center" required="" minlength="3" id="Email_fia_per" name="Email_fia_per" placeholder="EMAIL...">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="email" class="form-control text-center" name="NameTrabajo" placeholder="LUGAR DE TRABAJO...">
+                                                <input type="email" class="form-control text-center" required="" minlength="3" id="Trabajo_fia_per" name="Trabajo_fia_per" placeholder="LUGAR DE TRABAJO...">
                                             </div>
                                         </div>
                                     </div>
@@ -236,53 +237,88 @@ include_once '../plantilla/barra_lateral_usuario.php';
                         <div class="header"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-credito">
                                 <h2 class="text-center">DATOS DE CREDITO</h2>
                             </a></div>
-                        <div id="collapse-credito" class="panel-collapse collapse">
+                        <div id="collapse-credito" class="panel-collapse collapse in">
                             <div class="body">
                                 <div class="row clearfix">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="number" min="100" max="1000" class="form-control text-center" name="NameDireccion" placeholder="MONTO SOLICITADO($)...">
+                                                <input type="number" required="" min="1500" max="40000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="MONTO SOLICITADO($)... MINIMO $1,500, MAXIMO $40,000">
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <select class="form-control show-tick">
+                                                <select class="form-control show-tick" required="" id="mese_per">
                                                     <option value="">SELECCIONE EL NUMERO DE MESES</option>
-                                                    <option value="10">6 meses</option>
-                                                    <option value="20">12 meses</option>
-                                                    <option value="30">18 meses</option>
-                                                    <option value="40">24 meses</option>
-
+                                                    <?php
+                                                    $n = 12;
+                                                    for ($i = 0; $i <= 7; $i++) {//echo '<script language="javascript">alert("'.$n.'");</script>'; 
+                                                        echo '<option value="' . $n . '">' . $n . ' meses</option>';
+                                                        $n = $n + 12;
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="number" required="" min="3" max="20" class="form-control text-center" id="tasa_per" name="tasa_per" placeholder="TASA">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" onclick="cuota_per()" class="btn btn-primary m-t-15 waves-effect">CALCULAR</button>
+                                </div>
+                                <div class="row"><div class="text-center">
+                                        <button type="button" style="visibility: hidden" onclick="cuota_per()" class="btn btn-primary m-t-15 waves-effect">CALCULAR</button>
+                                    </div></div>
                                 <div class="row clearfix">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" class="form-control text-center" name="NameDireccion" placeholder="DIRECCION...">
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" class="form-control text-center" name="NameTelefono" placeholder="TELEFONO...">
+
+                                    <div class="row text-center">
+                                        <div class="col-sm-3 resultado">
+                                            <div class="big-bullet">
+                                                <div class="bullet"></div>
+                                                <div class="contenido text-120">Cuota Mensual</div>
                                             </div>
+                                            <p class="text-center" id="pils-cuota-txt">$00.00</p>
                                         </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">GUARDAR</button>
+                                        <div class="col-sm-3 resultado">
+                                            <div class="big-bullet">
+                                                <div class="bullet"></div>
+                                                <div class="contenido text-120">Monto de Préstamo</div>
+                                            </div>
+                                            <p class="text-center" id="pils-monto-txt">$00.00</p>
+                                        </div>
+                                        <div class="col-sm-3 resultado">
+                                            <div class="big-bullet">
+                                                <div class="bullet"></div>
+                                                <div class="contenido text-120">Plazo</div>
+                                            </div>
+                                            <p class="text-center" id="pils-tiempo-txt">0 meses</p>
+                                        </div>
+                                        <div class="col-sm-3 resultado">
+                                            <div class="big-bullet">
+                                                <div class="bullet"></div>
+                                                <div class="contenido text-120">Tasa</div>
+                                            </div>
+                                            <p class="text-center" id="pils-tasa-txt">00.00%</p>
+                                        </div>
                                     </div>
                                 </div>
+
+
+                                <div class="text-center">
+                                    <button type="submit" form="credito_personal" class="btn btn-primary m-t-15 waves-effect">GUARDAR</button>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -292,9 +328,9 @@ include_once '../plantilla/barra_lateral_usuario.php';
         <!--FIN DE DATO DE CREDITO-->
 
     </section>
-
-
 </form>
+
+
 <datalist id="lista_personas_naturales">
     <?php
     include_once '../app/Conexion.php';
@@ -312,7 +348,6 @@ include_once '../plantilla/barra_lateral_usuario.php';
 
 <script>
     function llenar_tabla_cliente(valor) {
-
         var depto = valor.value;
         var depto = $("#lista_personas_naturales option[value='" + $('#buscar_cliente').val() + "']").attr('label');//alert(depto);
         $("#lista_personas_naturales").load(" #lista_personas_naturales");//para actuaizar la datalist cuando registra 
@@ -323,31 +358,31 @@ include_once '../plantilla/barra_lateral_usuario.php';
                 $('#lista_personas_naturales').html(mensaje).fadeIn();
 
             });
-
         }
-
+        return false;//para qeu no se envie el form
     }
 
     function agr_refe() {//para agreagar a la tabla
-        var n=document.getElementById("ref_Nombre").value;
-        var a= document.getElementById("ref_Apellido").value;
+        var n = document.getElementById("ref_Nombre").value;
+        var a = document.getElementById("ref_Apellido").value;
         var nombre_ref = document.getElementById("ref_Nombre").value + " " + document.getElementById("ref_Apellido").value;
-        var tel_ref  = document.getElementById("ref_Telefono").value;
-        var dir_ref  = document.getElementById("ref_Direccion").value;
-        linea0="";
+        var tel_ref = document.getElementById("ref_Telefono").value;
+        var dir_ref = document.getElementById("ref_Direccion").value;
+        linea0 = "";
         linea0 = linea0.concat(
                 "<tr>",
                 '<td><input type="button" class="borrar_personatabla_ref_cpersonal btn-sm btn-danger" value="-"/>&nbsp;</td>',
-                '<td><input type="hidden"  name="nombre_ref[]" value="'+n+'"/> <input type="hidden"  name="ape_ref[]" value="'+a+'"/>' + nombre_ref  + "</td>",
-                '<td><input type="hidden"  name="tel_ref[]" value="'+tel_ref+'"/> ' + tel_ref  + "</td>",
-                '<td><input type="hidden"  name="dir_ref[]" value="'+dir_ref+'"/> ' + dir_ref  + "</td>",
+                '<td><input type="hidden"  name="nombre_ref[]" value="' + n + '"/> <input type="hidden"  name="ape_ref[]" value="' + a + '"/>' + nombre_ref + "</td>",
+                '<td><input type="hidden"  name="tel_ref[]" value="' + tel_ref + '"/> ' + tel_ref + "</td>",
+                '<td><input type="hidden"  name="dir_ref[]" value="' + dir_ref + '"/> ' + dir_ref + "</td>",
                 "</tr>"
-                );alert("paso "+linea0);
+                );
+        alert("paso " + linea0);
         $("table#tabla_referencias tbody").append(linea0);
-         document.getElementById("ref_Nombre").value = ""; 
-         document.getElementById("ref_Apellido").value = "";
-         document.getElementById("ref_Direccion").value = "";
-         document.getElementById("ref_Telefono").value = "";
+        document.getElementById("ref_Nombre").value = "";
+        document.getElementById("ref_Apellido").value = "";
+        document.getElementById("ref_Direccion").value = "";
+        document.getElementById("ref_Telefono").value = "";
 
     }
 //eliminar de la tabla
@@ -360,7 +395,122 @@ include_once '../plantilla/barra_lateral_usuario.php';
         $(this).closest('tr').remove();
     });
 
+    function cuota_per() {
+        var tasa = document.getElementById("tasa_per").value / 100 / 12;
+        var monto = document.getElementById("monto_per").value;
+        var meses = document.getElementById("mese_per").value;
+        var cuota = 0;
+
+        cuota = monto * ((Math.pow(1 + tasa, meses) * tasa) / (Math.pow(1 + tasa, meses) - 1));
+        cuota = cuota.toFixed(2);
+        //alert("$"+cuota);
+        // cuota = monto * Math.pow( 1 + tasa, meses ) / meses; pils-monto-txt pils-tiempo-txt pils-tasa-txt
+
+        document.getElementById('pils-cuota-txt').innerHTML = "$" + cuota;
+        document.getElementById('pils-monto-txt').innerHTML = "$" + monto;
+        document.getElementById('pils-tiempo-txt').innerHTML = meses + " meses";
+        document.getElementById('pils-tasa-txt').innerHTML = document.getElementById("tasa_per").value + "%";
+        // $( '#pils-cuota-txt' ).text( '$' + numberWithCommas( cuota ) );
+    }
+
+    function validarTablas_cper() {
+        var okk = true;
+        if ($('#tabla_cliente_cpersonal >tbody >tr').length == 0) {
+            okk = false;
+
+            swal("Ooops", "Tabla de cliente vacia", "warning");
+        } else {
+            if ($('#tabla_referencias >tbody >tr').length == 0) {
+                okk = false;
+                swal("Ooops", "Tabla de Referencias vacia", "warning");
+
+            }
+
+        }
+
+
+
+        return okk;
+    }
 </script>
 <?php
 include_once '../plantilla/pie.php';
+if (isset($_REQUEST["pas_cp"])) {
+
+    include_once '../app/Conexion.php';
+    include_once '../modelos/fiador.php';
+    include_once '../modelos/referencias.php';
+    include_once '../modelos/presamo.php';
+    include_once '../modelos/expediente_natural.php';
+    include_once '../repositorios/repositorio_fiador.php';
+    include_once '../repositorios/repositorio_referencias.php';
+    include_once '../repositorios/repositorio_prestamo.php';
+    include_once '../repositorios/repositorio_expediente_natural.php';
+
+
+
+    Conexion::abrir_conexion();
+//echo '<script language="javascript">alert("juas");</script>'; 
+
+    $fiador = new fiador();
+    $fiador->setNombre($_REQUEST["Nombre_fia_per"]);
+    $fiador->setApellido($_REQUEST["Apellido_fia_per"]);
+    $fiador->setCorreo($_REQUEST["Email_fia_per"]);
+    $fiador->setDireccion($_REQUEST["Direccion_fia_per"]);
+    $fiador->setDui($_REQUEST["Dui_fia_per"]);
+    $fiador->setNit($_REQUEST["Nit_fia_per"]);
+    $fiador->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
+    $fiador->setId_telefono($_REQUEST["Telefono_fia_per"]);
+    $fiador->setLugar_trabajo($_REQUEST["Trabajo_fia_per"]);
+    repositorio_fiador::insertar_fiador(Conexion::obtener_conexion(), $fiador);
+    
+    $prestamo = new presamo();
+    $prestamo->setId_pago("1");
+    $prestamo->setId_plan("1");
+    $prestamo->setId_asesor("1");
+    $prestamo->setPrestamo_original($_REQUEST["monto_per"]);
+    $prestamo->setId_plan("1");
+    repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo);
+    
+    $prestamo1 = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());
+    $expediente = new expediente_natural();
+    $expediente->setId_prestamo($prestamo1);
+    $expediente->setPersona_natural($_REQUEST["codCliente_cpersonal"]);
+    repositorio_expediente_natural::insertar_expediente(Conexion::obtener_conexion(), $expediente);
+    
+    $referencias=new referencias();
+    $nombres=$_REQUEST["Nombre_fia_per"];
+    $apellidos=$_REQUEST["ape_ref"];
+    $tels=$_REQUEST["tel_ref"];
+    $l=count($_REQUEST["nombre_ref"]);
+    for ($i = 0; $i < $l; $i++) {
+            $referencias->setNombre($nombres[$i]);
+            $referencias->setApellido($apellidos[$i]);
+            $referencias->setTelefono($tels[$i]);
+            $referencias->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
+            if (repositorio_referencias::insertar_referencia(Conexion::obtener_conexion(), $referencias )) {
+                
+            }else{
+                echo "<script type='text/javascript'>";
+                echo 'swal({
+                    title: "Ooops",
+                    text: "Prestamo no Registrado",
+                    type: "error"},
+                    function(){
+                       
+                       
+                     
+                        
+                    }
+
+                    );';
+//echo "alert('datos no atualizados')";
+//echo "location.href='inicio_b.php'";
+                echo "</script>";
+            }
+        }
+
+    //
+    //Conexion::cerrar_conexion();
+}
 ?>

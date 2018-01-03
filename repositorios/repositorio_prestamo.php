@@ -12,6 +12,56 @@
  * @author Miranda
  */
 class repositorio_prestamo {
-    //put your code here
+   public static function insertar_prestamo($conexion, $prestamo) {
+        $prestamo_insertado = false;
+        //$prestamo = new presamo();
+        if (isset($conexion)) {
+            try {
+
+                $dui = $prestamo->getId_asesor();
+                $nit = $prestamo->getId_plan();
+                $nit1 = $prestamo->getId_pago();
+                $nombre = $prestamo->getPrestamo_original();
+                
+
+
+                $sql = 'INSERT INTO prestamo (id_plan,  id_asesor, prestamo_original, estado ,id_pago) '
+                        . ' values (:nit, :dui, :nombre, :nit,:nit)';
+                ///estos son alias para que PDO pueda trabajar 
+                $sentencia = $conexion->prepare($sql);
+                
+                $sentencia->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+                $sentencia->bindParam(':dui', $dui, PDO::PARAM_STR);
+                $sentencia->bindParam(':nit', $nit, PDO::PARAM_STR);
+                // $sentencia->bindParam(':nit1', $nit1, PDO::PARAM_STR);
+
+
+                $prestamo_insertado = $sentencia->execute();
+//             $accion = 'Se registro al siguiente prestamo de mantenimiento: ' . $nombre . ", con direccion ". $direccion . ", telefono ". $telefono.", y correo ".$correo ;
+//              self::insertar_bitacora($conexion, $accion);
+            } catch (PDOException $ex) {
+                echo '<script>swal("No se puedo realizar el registro", "Revise los datos ingresados  ", "warning");</script>';
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return $prestamo_insertado;
+    }
+    
+   public static function obtenerU_ultimo_prestamo($conexion) {
+        $codigo = "";
+        $resultado = "";
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT id_prestamo from prestamo order by id_prestamo desc limit 1";
+                $resultado = $conexion->query($sql);
+            } catch (PDOException $ex) {
+                print 'ERROR: ' . $ex->getMessage();
+            }
+            foreach ($resultado as $fila) {
+                $codigo = $fila[0];
+            }
+        }
+        return $codigo;
+    }
 }
 ?>
