@@ -16,6 +16,7 @@ if (isset($_REQUEST['nameEnviar'])) {
     
     Conexion::abrir_conexion();
     
+    ////////esto es para guardar persona juridica
     $juridica = new persona_juridica();
     $juridica->setId_nombre($_REQUEST['nameNombre']);
     $juridica->setNumero($_REQUEST['nameNumero']);
@@ -25,9 +26,19 @@ if (isset($_REQUEST['nameEnviar'])) {
         
         foreach ($numero as $lista){
             $id_juridico = $lista->getId_persona_juridica();
-            echo $id_juridico;
-        }
-            
+    }
+    ///////////esto es para guardar rel balance general            
+        $balance = new balance_general();
+        $balance->setEfectivo($_REQUEST['nameEfectivo']);
+        $balance->setValor_negociable($_REQUEST['nameNegociable']);
+        $balance->setCuenta_por_cobrar($_REQUEST['NameCuentaXcobrar']);
+        $balance->setInventarios($_REQUEST['NameInventario']);
+        $balance->setTerrenos($_REQUEST['NameTerreno']);
+        $balance->setEdificio_equipo($_REQUEST['NameEdificio']);
+        $balance->setDepreciacion($_REQUEST['NameDepreciacion']);
+        $balance->setId_persona($id_juridico);
+        
+        repositorio_balance::insertar_balance_general(Conexion::obtener_conexion(), $balance);
         
         
     }
@@ -96,7 +107,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <span class="input-group-addon" id="basic-addon1">EFECTIVO($)</span>
-                                                    <input type="number" min="0" step="any" class="form-control text-center" required="" name="nameEfectivo" placeholder="EFECTIVO($)">
+                                                    <input type="number"   min="0" step="any" class="form-control text-center" required="" name="nameEfectivo" placeholder="EFECTIVO($)">
                                                 </div>
                                             </div>
                                         </div>

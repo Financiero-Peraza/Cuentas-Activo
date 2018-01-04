@@ -115,7 +115,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`balance_general` (
   `id_balance` INT NOT NULL ,
-  `id_persona_juridica` INT NOT NULL ,
+  `id_persona_juridica` INT NOT NULL AUTO_INCREMENT ,
   `periodo` INT NULL ,
   `prestable` TINYINT(1) NULL ,
   `efectivo` FLOAT NULL ,
