@@ -54,7 +54,7 @@ class repositorio_expediente_natural {
     }
 
     public static function obtener_persona_natural($conexion, $codigo) {
-       $resultado = "";
+        $resultado = "";
         if (isset($conexion)) {
             try {
                 $sql = "SELECT
@@ -72,6 +72,40 @@ FROM
 persona_natural
 WHERE
 persona_natural.id_persona_natural = $codigo";
+                $resultado = $conexion->query($sql);
+            } catch (PDOException $ex) {
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return $resultado;
+    }
+
+    public static function obtener_persona_natural_abono($conexion, $codigo) {
+        $resultado = ""; //echo '<script language="javascript">alert("cod '.$codigo.'");</script>'; 
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+persona_natural.id_persona_natural AS idper,
+(CONCAT(persona_natural.nombre,' ',persona_natural.apellido)) AS nombre,
+persona_natural.dui AS dui,
+persona_natural.nit AS nit,
+prestamo.id_prestamo AS idp,
+prestamo.prestamo_original as monto,
+prestamo.saldo_actual as sact,
+prestamo.mora_acumulada as mora,
+prestamo.intereses_acumulados as intacu,
+plan_pago.tasa AS tasa,
+(CONCAT(usuario.nombre,' ',usuario.apellido)) AS nombreuser,
+usuario.id_usuario AS idu,
+prestamo.tiempo as tiempo
+FROM
+persona_natural
+INNER JOIN expediente_natural ON expediente_natural.persona_natural = persona_natural.id_persona_natural
+INNER JOIN prestamo ON expediente_natural.id_prestamo = prestamo.id_prestamo
+INNER JOIN plan_pago ON prestamo.id_plan = plan_pago.id_plan
+INNER JOIN usuario ON prestamo.id_asesor = usuario.id_usuario
+WHERE
+persona_natural.id_persona_natural = $codigo ";
                 $resultado = $conexion->query($sql);
             } catch (PDOException $ex) {
                 print 'ERROR: ' . $ex->getMessage();
@@ -98,18 +132,35 @@ persona_natural.id_persona_natural = $codigo";
         return $resultado;
     }
 
-    
+    public static function lista_clientes($conexion) {
+        $resultado = "";
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                persona_natural.id_persona_natural as id,
+                (CONCAT(persona_natural.nombre,' ',persona_natural.apellido))  as nombre,
+                persona_natural.apellido
+                FROM
+                persona_natural";
+                $resultado = $conexion->query($sql);
+            } catch (PDOException $ex) {
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return $resultado;
+    }
+
     //****************  EXPEDIENTE **************
-     public static function insertar_expediente($conexion,  $expediente) {
+    public static function insertar_expediente($conexion, $expediente) {
         $expediente_insertado = false;
         //$expediente=new expediente_natural();
-                
+
         if (isset($conexion)) {
             try {
 
                 $dui = $expediente->getId_prestamo();
                 $nit = $expediente->getPersona_natural();
-                
+
 
 
                 $sql = 'INSERT INTO expediente_natural (id_prestamo,persona_natural)'
@@ -131,6 +182,7 @@ persona_natural.id_persona_natural = $codigo";
         }
         return $expediente_insertado;
     }
+
 }
 
 ?>

@@ -30,7 +30,8 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="../css/themes/all-themes.css" rel="stylesheet" />
-    
-  </head>
+<!--    SCRIPT-->
+ <script type="text/javascript" src="../js/script.js"></script>
+</head>
 
 <body class="theme-red">        

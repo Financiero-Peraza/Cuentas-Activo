@@ -20,13 +20,12 @@ class repositorio_prestamo {
 
                 $dui = $prestamo->getId_asesor();
                 $nit = $prestamo->getId_plan();
-                $nit1 = $prestamo->getId_pago();
                 $nombre = $prestamo->getPrestamo_original();
                 
 
 
-                $sql = 'INSERT INTO prestamo (id_plan,  id_asesor, prestamo_original, estado ,id_pago) '
-                        . ' values (:nit, :dui, :nombre, :nit,:nit)';
+                $sql = 'INSERT INTO prestamo (id_plan,  id_asesor, prestamo_original, estado ) '
+                        . ' values (:nit, :dui, :nombre, :nit)';
                 ///estos son alias para que PDO pueda trabajar 
                 $sentencia = $conexion->prepare($sql);
                 

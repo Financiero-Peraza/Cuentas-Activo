@@ -23,6 +23,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
 
 <form action="" method="post" name="credito_personal" id="credito_personal" onsubmit="return validarTablas_cper()">
     <input type="hidden" id="pas_cp" name="pas_cp"/>
+    <input type="radio" id="uno" checked="" style="visibility: hidden"/>
     <section class="content">
         <!--    INICIO DE DATOS-->
         <div class="container-fluid">
@@ -240,7 +241,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                         <div id="collapse-credito" class="panel-collapse collapse in">
                             <div class="body">
                                 <div class="row clearfix">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <input type="number" required="" min="1500" max="40000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="MONTO SOLICITADO($)... MINIMO $1,500, MAXIMO $40,000">
@@ -248,7 +249,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <select class="form-control show-tick" required="" id="mese_per">
@@ -265,16 +266,22 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <input type="number" required="" min="3" max="20" class="form-control text-center" id="tasa_per" name="tasa_per" placeholder="TASA">
                                             </div>
+
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+
+                                            <button type="button" onclick="cuota_per()" class="btn btn-primary m-t-15 waves-effect">CALCULAR</button>
+                                        </div></div>
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" onclick="cuota_per()" class="btn btn-primary m-t-15 waves-effect">CALCULAR</button>
+
                                 </div>
                                 <div class="row"><div class="text-center">
                                         <button type="button" style="visibility: hidden" onclick="cuota_per()" class="btn btn-primary m-t-15 waves-effect">CALCULAR</button>
@@ -312,11 +319,28 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                             <p class="text-center" id="pils-tasa-txt">00.00%</p>
                                         </div>
                                     </div>
+                                    <div class="text-center ">
+                                        <table class="table table-striped table-bordered" id="plan_pago_personal">
+                                            <caption>PLAN DE PAGO</caption>
+                                            <tbody>
+                                                <tr>
+                                                    <td>N </td>
+                                                    <td>Capital</td>
+                                                    <td>Interes</td>
+                                                    <td>Cuota</td>
+<!--                                                    <td>CARGOS</td>
+                                                    <td>TORAL</td>-->
+                                                    <td>Saldo</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
 
 
                                 <div class="text-center">
                                     <button type="submit" form="credito_personal" class="btn btn-primary m-t-15 waves-effect">GUARDAR</button>
+                                    <button type="reset" form="credito_personal" class="btn btn-primary m-t-15 waves-effect">CANCELAR</button>
                                 </div>
 
                             </div>
@@ -377,7 +401,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                 '<td><input type="hidden"  name="dir_ref[]" value="' + dir_ref + '"/> ' + dir_ref + "</td>",
                 "</tr>"
                 );
-        alert("paso " + linea0);
+        //alert("paso " + linea0);
         $("table#tabla_referencias tbody").append(linea0);
         document.getElementById("ref_Nombre").value = "";
         document.getElementById("ref_Apellido").value = "";
@@ -396,21 +420,22 @@ include_once '../plantilla/barra_lateral_usuario.php';
     });
 
     function cuota_per() {
-        var tasa = document.getElementById("tasa_per").value / 100 / 12;
-        var monto = document.getElementById("monto_per").value;
-        var meses = document.getElementById("mese_per").value;
-        var cuota = 0;
+        var tasa_persona = document.getElementById("tasa_per").value / 100 / 12;
+        var monto_persona = document.getElementById("monto_per").value;
+        var meses_persona = document.getElementById("mese_per").value;
+        var cuota_persona = 0;
 
-        cuota = monto * ((Math.pow(1 + tasa, meses) * tasa) / (Math.pow(1 + tasa, meses) - 1));
-        cuota = cuota.toFixed(2);
+        cuota_persona = monto_persona * ((Math.pow(1 + tasa_persona, meses_persona) * tasa_persona) / (Math.pow(1 + tasa_persona, meses_persona) - 1));
+        cuota_persona = cuota_persona.toFixed(2);
         //alert("$"+cuota);
-        // cuota = monto * Math.pow( 1 + tasa, meses ) / meses; pils-monto-txt pils-tiempo-txt pils-tasa-txt
+        // cuota = monto_persona * Math.pow( 1 + tasa_persona, meses_persona ) / meses_persona; pils-monto_persona-txt pils-tiempo-txt pils-tasa_persona-txt
 
-        document.getElementById('pils-cuota-txt').innerHTML = "$" + cuota;
-        document.getElementById('pils-monto-txt').innerHTML = "$" + monto;
-        document.getElementById('pils-tiempo-txt').innerHTML = meses + " meses";
+        document.getElementById('pils-cuota-txt').innerHTML = "$" + cuota_persona;
+        document.getElementById('pils-monto-txt').innerHTML = "$" + monto_persona;
+        document.getElementById('pils-tiempo-txt').innerHTML = meses_persona + " meses";
         document.getElementById('pils-tasa-txt').innerHTML = document.getElementById("tasa_per").value + "%";
         // $( '#pils-cuota-txt' ).text( '$' + numberWithCommas( cuota ) );
+        addfilas("plan_pago_personal");
     }
 
     function validarTablas_cper() {
@@ -462,39 +487,45 @@ if (isset($_REQUEST["pas_cp"])) {
     $fiador->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
     $fiador->setId_telefono($_REQUEST["Telefono_fia_per"]);
     $fiador->setLugar_trabajo($_REQUEST["Trabajo_fia_per"]);
-    repositorio_fiador::insertar_fiador(Conexion::obtener_conexion(), $fiador);
-    
+
+
     $prestamo = new presamo();
-    $prestamo->setId_pago("1");
     $prestamo->setId_plan("1");
     $prestamo->setId_asesor("1");
     $prestamo->setPrestamo_original($_REQUEST["monto_per"]);
     $prestamo->setId_plan("1");
-    repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo);
+
+
     
-    $prestamo1 = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());
+
+
+    $referencias = new referencias();
+    $nombres = $_REQUEST["Nombre_fia_per"];
+    $apellidos = $_REQUEST["ape_ref"];
+    $tels = $_REQUEST["tel_ref"];
+    $l = count($_REQUEST["nombre_ref"]);
+    if (
+            repositorio_fiador::insertar_fiador(Conexion::obtener_conexion(), $fiador) &&
+            repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo) 
+            
+    ) { 
+        $prestamo1 = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());
     $expediente = new expediente_natural();
     $expediente->setId_prestamo($prestamo1);
-    $expediente->setPersona_natural($_REQUEST["codCliente_cpersonal"]);
-    repositorio_expediente_natural::insertar_expediente(Conexion::obtener_conexion(), $expediente);
-    
-    $referencias=new referencias();
-    $nombres=$_REQUEST["Nombre_fia_per"];
-    $apellidos=$_REQUEST["ape_ref"];
-    $tels=$_REQUEST["tel_ref"];
-    $l=count($_REQUEST["nombre_ref"]);
-    for ($i = 0; $i < $l; $i++) {
+   $expediente->setPersona_natural($_REQUEST["codCliente_cpersonal"]);
+   repositorio_expediente_natural::insertar_expediente(Conexion::obtener_conexion(), $expediente);
+        for ($i = 0; $i < $l; $i++) {
             $referencias->setNombre($nombres[$i]);
             $referencias->setApellido($apellidos[$i]);
             $referencias->setTelefono($tels[$i]);
             $referencias->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
-            if (repositorio_referencias::insertar_referencia(Conexion::obtener_conexion(), $referencias )) {
+            if (repositorio_referencias::insertar_referencia(Conexion::obtener_conexion(), $referencias)) {
                 
-            }else{
+            } else {
                 echo "<script type='text/javascript'>";
                 echo 'swal({
                     title: "Ooops",
-                    text: "Prestamo no Registrado",
+                    text: "Credito no Registrado",
                     type: "error"},
                     function(){
                        
@@ -510,7 +541,25 @@ if (isset($_REQUEST["pas_cp"])) {
             }
         }
 
-    //
-    //Conexion::cerrar_conexion();
+        //
+        //Conexion::cerrar_conexion();
+    } else {
+        echo "<script type='text/javascript'>";
+        echo 'swal({
+                    title: "Ooops",
+                    text: "Credito  no Registrado",
+                    type: "error"},
+                    function(){
+                       
+                       
+                     
+                        
+                    }
+
+                    );';
+//echo "alert('datos no atualizados')";
+//echo "location.href='inicio_b.php'";
+        echo "</script>";
+    }
 }
 ?>

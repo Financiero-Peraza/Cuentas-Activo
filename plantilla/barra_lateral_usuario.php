@@ -81,7 +81,7 @@
 
             </li>
             <li>
-                <a href="#">
+                <a href="../cuenta_cobrar/abono.php">
                     <i class="material-icons col-deep-orange">book</i>
                     <span>Registro de Abono</span>
                 </a>
