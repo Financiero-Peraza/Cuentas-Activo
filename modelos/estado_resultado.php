@@ -7,15 +7,64 @@ private $id_persona_juridica;
 private $periodo;
 private $prestable;
 private $ingreso_venta;
+private $valor_negociable;
 private $costo_venta;
 private $utilidad_bruta;
 private $gasto_operativo;
 private $gasto_venta;
 private $gasto_administrativo;
+private $gasto_arrendamiento;
+private $gasto_depreciacion;
+private $gasto_interes;
+private $utilidad_operativa;
 
 function __construct() {
     
 }
+function getUtilidad_operativa() {
+    return $this->utilidad_operativa;
+}
+
+function setUtilidad_operativa($utilidad_operativa) {
+    $this->utilidad_operativa = $utilidad_operativa;
+}
+
+
+function getGasto_interes() {
+    return $this->gasto_interes;
+}
+
+function setGasto_interes($gasto_interes) {
+    $this->gasto_interes = $gasto_interes;
+}
+
+
+function getGasto_depreciacion() {
+    return $this->gasto_depreciacion;
+}
+
+function setGasto_depreciacion($gasto_depreciacion) {
+    $this->gasto_depreciacion = $gasto_depreciacion;
+}
+
+
+function getValor_negociable() {
+    return $this->valor_negociable;
+}
+function getGasto_arrendamiento() {
+    return $this->gasto_arrendamiento;
+}
+
+function setGasto_arrendamiento($gasto_arrendamiento) {
+    $this->gasto_arrendamiento = $gasto_arrendamiento;
+}
+
+
+
+function setValor_negociable($valor_negociable) {
+    $this->valor_negociable = $valor_negociable;
+}
+
 function getId_estado() {
     return $this->id_estado;
 }

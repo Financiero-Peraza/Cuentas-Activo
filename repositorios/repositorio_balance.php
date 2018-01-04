@@ -6,24 +6,66 @@ class repositorio_balance {
         $resultado = FALSE;
         if (isset($conexion)) {
             try {
-                $balance = new balance_general();
-                
-                $sql = "INSERT INTO `balance_general` "
-                     . "(id_persona_juridica, periodo,  efectivo, valor_negociable, cuentas_por_cobrar, inventarios, terrenos, edificio_equipo, depreciacion_acumulada) "
-                     . "VALUES ('".$balance->getId_persona()."', '".$balance->getPeriodo()."', '".$balance->getEfectivo()."', '".$balance->getValor_negociable()."', '".$balance->getCuenta_por_cobrar()."', '".$balance->getInventarios()."', '".$balance."', '".$balance->getTerrenos()."', '".$balance->getEdificio_equipo()."', '".$balance->getDepreciacion()."');";
+                //$balance = new balance_general();
+                $idPersona = $balance->getId_persona();
+                $periodo = '2017';
+                $efectivo = $balance->getEfectivo();
+                $valorNegociable = $balance->getValor_negociable();
+                $cuentaXcobrar = $balance->getCuenta_por_cobrar();
+                $inventario = $balance->getInventarios();
+                $terresno = $balance->getTerrenos();
+                $edificio = $balance->getEdificio_equipo();
+                $depreciacion = $balance->getDepreciacion();
+                $activo_corriente = $efectivo + $valorNegociable + $cuentaXcobrar + $inventario;
+                $activo_no_corriente = $terresno + $edificio - $depreciacion;
+                $total_activo = $activo_corriente + $activo_no_corriente;
+
+                $cuentaXpagar = $balance->getCuenta_por_pagar();
+                $documentoXpagar = $balance->getDocumento_por_pagar();
+                $deuda = $balance->getDeuda_largop();
+                $acciones = $balance->getAccioneC();
+                $ganaciasR = $balance->getGanancias_retenidas();
+                $pasivo_corriente = $cuentaXpagar + $documentoXpagar;
+                $pasivo_no_corriente = $deuda + $acciones + $ganaciasR;
+                $total_pasivo = $pasivo_corriente + $pasivo_no_corriente;
+
+
+                $sql = "INSERT INTO balance_general (id_persona_juridica, periodo,  efectivo, valor_negociable, cuentas_por_cobrar, inventarios, terrenos, edificio_equipo, depreciacion_acumulada, total_activo_corriente, total_activo_pasivo, total_activo, cuentas_por_pagar, documentos_por_pagar, total_pasivo_corriente, deuda_largo_plazo, acciones_comunes, ganancias_retenidas, total_pasivo)"
+                        . " VALUES (:id_persona_juridica, :periodo,  :efectivo, :valor_negociable, :cuentas_por_cobrar, :inventarios, :terrenos, :edificio_equipo, :depreciacion_acumulada, :total_activo_corriente, :total_activo_pasivo, :total_activo, :cuentas_por_pagar, :documentos_por_pagar, :total_pasivo_corriente, :deuda_largo_plazo, :acciones_comunes, :ganancias_retenidas, :total_pasivo)";
 
                 $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':id_persona_juridica', $idPersona, PDO::PARAM_STR);
+                $sentencia->bindParam(':periodo', $periodo, PDO::PARAM_STR);
+                $sentencia->bindParam(':efectivo', $efectivo, PDO::PARAM_STR);
+                $sentencia->bindParam(':valor_negociable', $valorNegociable, PDO::PARAM_STR);
+                $sentencia->bindParam(':cuentas_por_cobrar', $cuentaXcobrar, PDO::PARAM_STR);
+                $sentencia->bindParam(':inventarios', $inventario, PDO::PARAM_STR);
+                $sentencia->bindParam(':terrenos', $terresno, PDO::PARAM_STR);
+                $sentencia->bindParam(':edificio_equipo', $edificio, PDO::PARAM_STR);
+                $sentencia->bindParam(':depreciacion_acumulada', $depreciacion, PDO::PARAM_STR);
+                $sentencia->bindParam(':total_activo_corriente', $activo_corriente, PDO::PARAM_STR);
+                $sentencia->bindParam(':total_activo_pasivo', $activo_no_corriente, PDO::PARAM_STR);
+                $sentencia->bindParam(':total_activo', $total_activo, PDO::PARAM_STR);
+                $sentencia->bindParam(':cuentas_por_pagar', $cuentaXpagar, PDO::PARAM_STR);
+                $sentencia->bindParam(':documentos_por_pagar', $documentoXpagar, PDO::PARAM_STR);
+                $sentencia->bindParam(':total_pasivo_corriente', $pasivo_corriente, PDO::PARAM_STR);
+                $sentencia->bindParam(':deuda_largo_plazo', $deuda, PDO::PARAM_STR);
+                $sentencia->bindParam(':acciones_comunes', $acciones, PDO::PARAM_STR);
+                $sentencia->bindParam(':ganancias_retenidas', $ganaciasR, PDO::PARAM_STR);
+                $sentencia->bindParam(':total_pasivo', $total_pasivo, PDO::PARAM_STR);
+
 
                 $resultado = $sentencia->execute();
-                echo 'persona guardada';
+                echo 'balance guardada';
             } catch (PDOException $ex) {
-                echo 'persona no guardado';
+                echo 'balance no guardado';
                 print 'ERROR: ' . $ex->getMessage();
             }
         } else {
             echo 'no hay conexion';
         }
-    
+
         return $resultado;
-        }
+    }
+
 }

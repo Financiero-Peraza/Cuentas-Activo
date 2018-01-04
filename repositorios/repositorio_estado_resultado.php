@@ -1,17 +1,71 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of repositorio_estado_resultado
- *
- * @author Miranda
- */
 class repositorio_estado_resultado {
-    //put your code here
+
+    public static function insertar_estado_resultado($conexion, $estado) {
+        $resultado = FALSE;
+        if (isset($conexion)) {
+            try {
+//                $estado = new estado_resultado();
+                $idPersona = $estado->getId_persona_juridica();
+                $periodo = '2017';
+                $ingresoXventa = $estado->getIngreso_venta();
+                $costoVenta = $estado->getCosto_venta();
+                $utlidad_bruta = $ingresoXventa - $costoVenta;
+                $gasto_venta = $estado->getGasto_venta();
+                $gasto_admi = $estado->getGasto_administrativo();
+                $gasto_arrendamiento = $estado->getGasto_arrendamiento();
+                $gasto_depreciacion = $estado->getGasto_depreciacion();
+                $total_gasto = $gasto_venta + $gasto_admi + $gasto_arrendamiento + $gasto_depreciacion;
+
+                $utilidad_operativa = $utlidad_bruta - $total_gasto;
+
+                if ($utilidad_operativa <= 0) {
+                    $gasto_intereses = '0';
+                    $utilidad_antes_impuestos = '0';
+                    $imputestos = '0';
+                    $utilidad_neta = '0';
+                } else {
+
+                    $gasto_intereses = $estado->getGasto_interes();
+                    $utilidad_antes_impuestos = $utilidad_operativa - $gasto_intereses;
+                    $imputestos = $utilidad_antes_impuestos * 0.3;
+                    $utilidad_neta = $utilidad_antes_impuestos - $imputestos;
+                }
+                $sql = "INSERT INTO estado_resultado (id_persona_juridica, periodo, ingreso_ventas, costo_venta, utilidad_bruta,  gasto_venta, gasto_administrativo, gasto_arrendamiento, gasto_depreciacion, total_gasto_operativo, utlidad_operativa, gasto_interes, utilidad_antes_impuestos, impuestos, utilidad_neta)"
+                        . " VALUES (:id_persona_juridica, :periodo, :ingreso_ventas, :costo_venta, :utilidad_bruta, :gasto_venta, :gasto_administrativo, :gasto_arrendamiento, :gasto_depreciacion, :total_gasto_operativo, :utlidad_operativa, :gasto_interes, :utilidad_antes_impuestos, :impuestos, :utilidad_neta)";
+
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':id_persona_juridica', $idPersona, PDO::PARAM_STR);
+                $sentencia->bindParam(':periodo', $periodo, PDO::PARAM_STR);
+                $sentencia->bindParam(':ingreso_ventas', $ingresoXventa, PDO::PARAM_STR);
+                $sentencia->bindParam(':costo_venta', $costoVenta, PDO::PARAM_STR);
+                $sentencia->bindParam(':utilidad_bruta', $utlidad_bruta, PDO::PARAM_STR);
+                $sentencia->bindParam(':gasto_venta', $gasto_venta, PDO::PARAM_STR);
+                $sentencia->bindParam(':gasto_administrativo', $gasto_admi, PDO::PARAM_STR);
+                $sentencia->bindParam(':gasto_arrendamiento', $gasto_arrendamiento, PDO::PARAM_STR);
+                $sentencia->bindParam(':gasto_depreciacion', $gasto_depreciacion, PDO::PARAM_STR);
+                $sentencia->bindParam(':total_gasto_operativo', $total_gasto, PDO::PARAM_STR);
+                $sentencia->bindParam(':utlidad_operativa', $utilidad_operativa, PDO::PARAM_STR);
+                $sentencia->bindParam(':gasto_interes', $gasto_intereses, PDO::PARAM_STR);
+                $sentencia->bindParam(':utilidad_antes_impuestos', $utilidad_antes_impuestos, PDO::PARAM_STR);
+                $sentencia->bindParam(':impuestos', $imputestos, PDO::PARAM_STR);
+                $sentencia->bindParam(':utilidad_neta', $utilidad_neta, PDO::PARAM_STR);
+
+
+                $resultado = $sentencia->execute();
+                echo ' estado guardada';
+            } catch (PDOException $ex) {
+                echo 'balance no guardado';
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        } else {
+            echo 'no hay conexion';
+        }
+
+        return $resultado;
+    }
+
 }
+
 ?>

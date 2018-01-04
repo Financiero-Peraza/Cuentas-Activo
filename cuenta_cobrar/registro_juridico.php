@@ -12,7 +12,7 @@ if (isset($_REQUEST['nameEnviar'])) {
 
     include_once '../repositorios/repositorio_juridico.php';
     include_once '../repositorios/repositorio_balance.php';
-    include_once '../repositorios/repositorio_estado.php';
+    include_once '../repositorios/repositorio_estado_resultado.php';
     
     Conexion::abrir_conexion();
     
@@ -29,6 +29,7 @@ if (isset($_REQUEST['nameEnviar'])) {
     }
     ///////////esto es para guardar rel balance general            
         $balance = new balance_general();
+        $balance->setId_persona($id_juridico);
         $balance->setEfectivo($_REQUEST['nameEfectivo']);
         $balance->setValor_negociable($_REQUEST['nameNegociable']);
         $balance->setCuenta_por_cobrar($_REQUEST['NameCuentaXcobrar']);
@@ -36,9 +37,26 @@ if (isset($_REQUEST['nameEnviar'])) {
         $balance->setTerrenos($_REQUEST['NameTerreno']);
         $balance->setEdificio_equipo($_REQUEST['NameEdificio']);
         $balance->setDepreciacion($_REQUEST['NameDepreciacion']);
-        $balance->setId_persona($id_juridico);
-        
+        $balance->setCuenta_por_pagar($_REQUEST['NameCuentaXpagar']);
+        $balance->setDocumento_por_pagar($_REQUEST['NameDocumentoXpagar']);
+        $balance->setDeuda_largop($_REQUEST['NameDeuda']);
+        $balance->setAccioneC($_REQUEST['NameAcciones']);
+        $balance->setGanancias_retenidas($_REQUEST['NameRetenidas']);
+               
         repositorio_balance::insertar_balance_general(Conexion::obtener_conexion(), $balance);
+        
+        ///////////////////////esto es para el registro de estado de resultado 
+        $estado = new estado_resultado();
+        $estado->setId_persona_juridica($id_juridico);
+        $estado->setIngreso_venta($_REQUEST['nameIngresoVenta']);
+        $estado->setValor_negociable($_REQUEST['nameNegociable']);
+        $estado->setGasto_venta($_REQUEST['nameGastoVenta']);
+        $estado->setGasto_administrativo($_REQUEST['nameGastoAdmi']);
+        $estado->setGasto_arrendamiento($_REQUEST['nameGastoArrendamiento']);
+        $estado->setGasto_depreciacion($_REQUEST['nameGastoDepreciacion']);
+        $estado->setGasto_interes($_REQUEST['nameGastoInteres']);
+        repositorio_estado_resultado::insertar_estado_resultado(Conexion::obtener_conexion(), $estado);
+        
         
         
     }
@@ -97,7 +115,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                         <div class="card">
                             <div class="header">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse-balance">
-                                    <h2 class="text-center">BALANCE GENERAL</h2>
+                                    <h2 class="text-center">BALANCE GENERAL (AL 31 DE DICIEMBRE DE 2017)</h2>
                                 </a>
                             </div>
                             <div id="collapse-balance" class="panel-collapse collapse">
@@ -169,6 +187,52 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row clearfix">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">CUENTAS POR PAGAR($)</span>
+                                                    <input type="number"  min="0" step="any" class="form-control text-center" name="NameCuentaXpagar" placeholder="CUENTAS POR PAGAR($)" required="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">DOCUMENTOS POR PAGAR($)</span>
+                                                    <input type="number"  min="0" step="any" class="form-control text-center" name="NameDocumentoXpagar" placeholder="DOCUMENTOS POR PAGAR($)" required="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">DEUDA A LARGO PLAZO</span>
+                                                    <input type="number"  min="0" step="any" class="form-control text-center" name="NameDeuda" placeholder="DEUDA A LARGO PLAZO($)" required="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">ACCIONES COMUNES($)</span>
+                                                    <input type="number"  min="0" step="any" class="form-control text-center" name="NameAcciones" placeholder="ACCIONES COMUNES($)" required="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">GANANCIAS RETENIDAS($)</span>
+                                                    <input type="number"  min="0" step="any" class="form-control text-center" name="NameRetenidas" placeholder="GANANCIAS RETENIDAS($)" required="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +252,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                         <div class="card">
                             <div class="header">
                                 <a  data-toggle="collapse" data-parent="#accordion" href="#collapse-estado">
-                                    <h2 class="text-center">ESTADO DE RESULTADOS</h2>
+                                    <h2 class="text-center">ESTADO DE RESULTADOS (AL 31 DE DICIEMBRE DE 2017)</h2>
                                 </a>
                             </div>
                             <div id="collapse-estado" class="panel-collapse collapse">

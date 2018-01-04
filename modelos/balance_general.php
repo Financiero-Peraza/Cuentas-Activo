@@ -12,6 +12,11 @@ class balance_general {
  private $terrenos;
  private $edificio_equipo;
  private $depreciacion;
+ private $cuenta_por_pagar;
+ private $documento_por_pagar ;
+ private $deuda_largop;
+ private $accioneC;
+ private $ganancias_retenidas;
          
  function __construct() {
      
@@ -104,6 +109,46 @@ class balance_general {
  function setEdificio_equipo($edificio_equipo) {
      $this->edificio_equipo = $edificio_equipo;
  }
+ function getCuenta_por_pagar() {
+     return $this->cuenta_por_pagar;
+ }
+
+ function getDocumento_por_pagar() {
+     return $this->documento_por_pagar;
+ }
+
+ function getDeuda_largop() {
+     return $this->deuda_largop;
+ }
+
+ function getAccioneC() {
+     return $this->accioneC;
+ }
+
+ function getGanancias_retenidas() {
+     return $this->ganancias_retenidas;
+ }
+
+ function setCuenta_por_pagar($cuenta_por_pagar) {
+     $this->cuenta_por_pagar = $cuenta_por_pagar;
+ }
+
+ function setDocumento_por_pagar($documento_por_pagar) {
+     $this->documento_por_pagar = $documento_por_pagar;
+ }
+
+ function setDeuda_largop($deuda_largop) {
+     $this->deuda_largop = $deuda_largop;
+ }
+
+ function setAccioneC($accioneC) {
+     $this->accioneC = $accioneC;
+ }
+
+ function setGanancias_retenidas($ganancias_retenidas) {
+     $this->ganancias_retenidas = $ganancias_retenidas;
+ }
+
 
 
 }
