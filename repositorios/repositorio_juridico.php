@@ -7,11 +7,14 @@ class repositorio_juridico {
         $resultado = FALSE;
         if (isset($conexion)) {
             try {
-                //$juridica = new persona_juridica();
+               //$juridica = new persona_juridica();
                 $nombre = $juridica->getId_nombre();
                 $numero = $juridica->getNumero();
+                $dui = $juridica->getDui();
+                $nit = $juridica->getNit();
 
-                $sql = "INSERT INTO persona_juridica (nombre, numero) VALUES ( '" . $nombre . "', '" . $numero . "');";
+                $sql = "INSERT INTO persona_juridica (nombre, numero,dui,nit)"
+                        . " VALUES ( '" . $nombre . "' , '" . $numero . "' , '".$dui."' ,'".$nit."');";
 
                 $sentencia = $conexion->prepare($sql);
 
@@ -50,6 +53,66 @@ class repositorio_juridico {
         }
 
         return $lista;
+    }
+    
+    public static function obtener_persona_juridca($conexion, $codigo) {
+        $juridica = new persona_juridica;
+        //echo 'esta en administradodr actual<br>';
+        if (isset($conexion)) {
+            //echo 'hay conexion<br>';
+            try {
+                $sql = "select * from persona_juridica where (id_persona_juridica = '$codigo')";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+                if (count($resultado)) {
+                    foreach ($resultado as $fila) {
+                        $juridica = new persona_juridica();
+                        $juridica->setId_persona_juridica($fila['id_persona_juridica']);
+                        $juridica->setId_nombre($fila['nombre']);
+                        $juridica->setNumero($fila['numero']);
+                        $juridica->setDui($fila['dui']);
+                        $juridica->setDui($fila['nit']);
+                    }
+                }
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        } else {
+            //echo 'no hay conexion<br>';
+        }
+        return $juridica;
+    }
+    
+    public static function lista_persona_juridca($conexion) {
+        $administrador = new Administrador();
+        //echo 'esta en administradodr actual<br>';
+        if (isset($conexion)) {
+            //echo 'hay conexion<br>';
+            try {
+                $sql = "select * from persona_juridica";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+ 
+                if (count($resultado)) {
+                    foreach ($resultado as $fila) {
+                        $juridica = new persona_juridica();
+                        $juridica->setId_persona_juridica($fila['id_persona_juridica']);
+                        $juridica->setId_nombre($fila['nombre']);
+                        $juridica->setNumero($fila['numero']);
+                        $juridica->setDui($fila['dui']);
+                        $juridica->setDui($fila['nit']);
+                    }
+                }
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        } else {
+            //echo 'no hay conexion<br>';
+        }
+        return $juridica;
     }
 
 }

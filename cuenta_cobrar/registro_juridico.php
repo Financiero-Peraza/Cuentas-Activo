@@ -20,6 +20,8 @@ if (isset($_REQUEST['nameEnviar'])) {
     $juridica = new persona_juridica();
     $juridica->setId_nombre($_REQUEST['nameNombre']);
     $juridica->setNumero($_REQUEST['nameNumero']);
+    $juridica->setDui($_REQUEST['nameDuiJuridico']);
+    $juridica->setNit($_REQUEST['nameNitJuridico']);
     
     if (repositorio_juridico::insertar_persona_juridica(Conexion::obtener_conexion(), $juridica)) {
         $numero = repositorio_juridico::ultima_persona_insertada(Conexion::obtener_conexion());
@@ -92,6 +94,24 @@ if (isset($_REQUEST['nameEnviar'])) {
                                                 <div class="form-line">
                                                     <span class="input-group-addon" id="basic-addon1">N EMPRESA</span>
                                                     <input type="text" class="form-control text-center" name="nameNumero" placeholder="NUMERO DE LA EMPRESA" required="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row clearfix">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">DUI REPRESENTANTE JURIDICO</span>
+                                                    <input type="text" class="form-control text-center" name="nameDuiJuridico" placeholder="DUI DEL REPRESENTANTE JURIDICO" required="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">NIT REPRESENTANTE JURIDICO</span>
+                                                    <input type="text" class="form-control text-center" name="nameNitJuridico" placeholder="NIT DEL REPRESENTANTE JURIDICO" required="">
                                                 </div>
                                             </div>
                                         </div>

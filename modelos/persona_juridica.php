@@ -4,11 +4,29 @@ class persona_juridica {
  private $id_nombre;
  private $id_categoria;
  private $numero;
+  private $dui;
+  private $nit;
  
  function __construct() {
      
  }
- 
+ function getDui() {
+     return $this->dui;
+ }
+
+ function getNit() {
+     return $this->nit;
+ }
+
+ function setDui($dui) {
+     $this->dui = $dui;
+ }
+
+ function setNit($nit) {
+     $this->nit = $nit;
+ }
+
+  
  function getNumero() {
      return $this->numero;
  }
