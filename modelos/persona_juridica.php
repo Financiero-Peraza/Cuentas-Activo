@@ -3,11 +3,21 @@ class persona_juridica {
  private $id_persona_juridica;
  private $id_nombre;
  private $id_categoria;
+ private $numero;
  
  function __construct() {
      
  }
- function getId_persona_juridica() {
+ 
+ function getNumero() {
+     return $this->numero;
+ }
+
+ function setNumero($numero) {
+     $this->numero = $numero;
+ }
+
+  function getId_persona_juridica() {
      return $this->id_persona_juridica;
  }
 

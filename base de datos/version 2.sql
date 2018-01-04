@@ -105,6 +105,7 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`persona_juridica` (
   `id_persona_juridica` INT NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(45) NULL ,
   `categoria` VARCHAR(45) NULL ,
+  `numero` VARCHAR(45) NULL ,
   PRIMARY KEY (`id_persona_juridica`) )
 ENGINE = InnoDB;
 

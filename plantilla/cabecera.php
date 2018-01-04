@@ -32,6 +32,11 @@
     <link href="../css/themes/all-themes.css" rel="stylesheet" />
 <!--    SCRIPT-->
  <script type="text/javascript" src="../js/script.js"></script>
+ <link href="../css/sweetalert.css" rel="stylesheet" />
+ <link href="../js/sweetalert.min.js" rel="stylesheet" />
+ <link href="../js/sweetalert-dev.js" rel="stylesheet" />
+ 
+ 
 </head>
 
 <body class="theme-red">        
