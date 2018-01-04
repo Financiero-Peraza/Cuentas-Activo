@@ -213,14 +213,17 @@ include_once '../plantilla/barra_lateral_usuario.php';
 <datalist id="lista_personas_naturales">
     <?php
     include_once '../app/Conexion.php';
-    include_once '../modelos/Libros.php';
-    include_once '../repositorios/repositorio_expediente_natural.php';
+    include_once '../modelos/persona_juridica.php';
+    include_once '../repositorios/repositorio_juridico.php';
     Conexion::abrir_conexion();
-    $listado = repositorio_expediente_natural::lista_persona_natural(Conexion::obtener_conexion());
+    $listado = repositorio_juridico::lista_persona_juridca(Conexion::obtener_conexion());
+    
+    
 
 
     foreach ($listado as $fila) {
-        echo '<option value="' . $fila[2] . '" label="' . $fila[0] . '" > ';
+        echo '<option value="' . $fila->getId_persona_juridica() . '" label="' . $fila->getId_nombre() . '" > ';
+              
     }
     ?>
 </datalist>

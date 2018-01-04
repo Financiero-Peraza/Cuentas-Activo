@@ -86,7 +86,7 @@ class repositorio_juridico {
     }
     
     public static function lista_persona_juridca($conexion) {
-        $administrador = new Administrador();
+        $lista_juridica =  Array();
         //echo 'esta en administradodr actual<br>';
         if (isset($conexion)) {
             //echo 'hay conexion<br>';
@@ -104,6 +104,9 @@ class repositorio_juridico {
                         $juridica->setNumero($fila['numero']);
                         $juridica->setDui($fila['dui']);
                         $juridica->setDui($fila['nit']);
+                        
+                        $lista_juridica[] = $juridica;
+                        
                     }
                 }
             } catch (PDOException $exc) {
@@ -112,7 +115,7 @@ class repositorio_juridico {
         } else {
             //echo 'no hay conexion<br>';
         }
-        return $juridica;
+        return $lista_juridica;
     }
 
 }
