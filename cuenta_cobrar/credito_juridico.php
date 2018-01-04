@@ -52,28 +52,17 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                 <caption>CLIENTE</caption>
                                 <thead>
                                 <th>Codigo</th>
-                                <th>Nombre</th>
-                                <th>Dui</th>
-                                <th>Nit</th>
-                                <th>Telefono</th>
-                                <th>Direccion</th>  
+                                <th>Nombre de la empresa</th>
+                                <th>Numero de empresa</th>
+                                <th>Dui de la empresa</th>
+                                <th>Nit de la empresa</th>
+                               
                                 </thead>
                                 <tbody>
 
                                 </tbody>
                             </table>
-                            <table class="table table-striped table-bordered" id="tabla_referencias">
-                                <caption>REFERENCIAS</caption>
-                                <thead>
-                                <th>&nbsp;</th>    
-                                <th>Nombre</th>
-                                <th>Telefono</th>
-                                <th>Direccion</th>                                   
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
+                         
                         </div>
                     </div>
                 </div>
