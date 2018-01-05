@@ -524,7 +524,15 @@ if (isset($_REQUEST["pas_cp"])) {
             $referencias->setTelefono($tels[$i]);
             $referencias->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
             if (repositorio_referencias::insertar_referencia(Conexion::obtener_conexion(), $referencias)) {
-                
+                echo "<script type='text/javascript'>";
+        echo 'swal({
+                    title: "Exito",
+                    text: "Credito registrado",
+                    type: "success"},
+                    function(){
+                    }
+                    );';
+        echo "</script>";
             } else {
                 echo "<script type='text/javascript'>";
                 echo 'swal({
@@ -532,12 +540,7 @@ if (isset($_REQUEST["pas_cp"])) {
                     text: "Credito no Registrado",
                     type: "error"},
                     function(){
-                       
-                       
-                     
-                        
                     }
-
                     );';
 //echo "alert('datos no atualizados')";
 //echo "location.href='inicio_b.php'";
