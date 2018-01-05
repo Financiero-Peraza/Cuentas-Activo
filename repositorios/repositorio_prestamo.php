@@ -22,21 +22,19 @@ class repositorio_prestamo {
                 $user = $prestamo->getId_asesor();
                 $plan = $prestamo->getId_plan();
                 $nombre = $prestamo->getPrestamo_original();
-                $pp = $prestamo->getFecha();
                 $fecha = $prestamo->getFecha();
                 $t = $prestamo->getTiempo();
 
 
 
                 $sql = 'INSERT INTO prestamo (id_plan,  id_asesor, prestamo_original, estado, proximo_pago, saldo_actual, fecha, tiempo ) '
-                        . " values (:plan, :user, :nombre, '1', :pp, :nombre, :fecha, :t)";
+                        . " values (:plan, :user, :nombre, '1', DATE_ADD( CURDATE( ), INTERVAL 1 MONTH ), :nombre, :fecha, :t)";
                 ///estos son alias para que PDO pueda trabajar 
                 $sentencia = $conexion->prepare($sql);
 
                 $sentencia->bindParam(':nombre', $nombre, PDO::PARAM_STR);
                 $sentencia->bindParam(':user', $user, PDO::PARAM_STR);
                 $sentencia->bindParam(':plan', $plan, PDO::PARAM_STR);
-                $sentencia->bindParam(':pp', $pp, PDO::PARAM_STR);
                 $sentencia->bindParam(':fecha', $fecha, PDO::PARAM_STR);
                 $sentencia->bindParam(':t', $t, PDO::PARAM_STR);
                 // $sentencia->bindParam(':nit1', $nit1, PDO::PARAM_STR);
