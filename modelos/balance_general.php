@@ -11,7 +11,8 @@ class balance_general {
  private $inventarios;
  private $terrenos;
  private $edificio_equipo;
- 
+ private $depreciacion;
+         
  function __construct() {
      
  }
@@ -19,6 +20,15 @@ class balance_general {
      return $this->id_balance;
  }
 
+ function getDepreciacion() {
+     return $this->depreciacion;
+ }
+
+ function setDepreciacion($depreciacion) {
+     $this->depreciacion = $depreciacion;
+ }
+
+  
  function getId_persona() {
      return $this->id_persona;
  }

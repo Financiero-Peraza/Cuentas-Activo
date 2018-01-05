@@ -89,7 +89,8 @@ include_once '../plantilla/barra_lateral_usuario.php';
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-fiador">
+                        <div class="header">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-fiador">
                                 <h2 class="text-center">DATOS DE FIADOR</h2>
                             </a></div>
                         <div id="collapse-fiador" class="panel-collapse collapse">
