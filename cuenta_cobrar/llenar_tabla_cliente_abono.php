@@ -13,34 +13,39 @@ foreach ($listado as $fila) {
     <script type="text/javascript">
         //alert("codigo"); 
         document.getElementById('nprestamo_fat').innerHTML = "NO PRESTAMO: <?php echo $fila['idp'] ?>";
+         document.getElementById('id_prestamo_abono').value= "<?php echo $fila['idp'] ?>";
         document.getElementById('nombre_fat').innerHTML = "NOMBRE: <?php echo $fila['nombre'] ?>";
-        document.getElementById('fecha_pres_fat').innerHTML = "FECHA DE APLICACION: <?php echo date("d-m-Y"); ?>";
+        document.getElementById('fecha_pres_fat').innerHTML = "FECHA DE APLICACION: <?php echo $fila['fech']; ?>";
         document.getElementById('nit_fat').innerHTML = "NIT: <?php echo $fila['nit'] ?>";
         document.getElementById('dui_fat').innerHTML = "DUI: <?php echo $fila['dui'] ?>";
         document.getElementById('fecha_pago_fat').innerHTML = "FECHA: <?php echo date("d-m-Y"); ?>";
         document.getElementById('fecha_fin_fat').innerHTML = "FECHA VENCIMIENTO: <?php echo date("d-m-Y"); ?>";
         document.getElementById('fecha_ultimo_fat').innerHTML = "FECHA ULTIMO PAGO: <?php echo date("d-m-Y"); ?>";
-        document.getElementById('monto_fat').innerHTML = "MONT: $ <?php echo $fila['monto'] ?>";
+        document.getElementById('monto_fat').innerHTML = "MONTO: $ <?php echo $fila['monto'] ?>";
         
         document.getElementById('tasa_fat').innerHTML = "TASA NOMINAL:  <?php echo $fila['tasa'] ?>%";
-        document.getElementById('cap_fat').innerHTML = "$ <?php echo "calcular cap" ?>";
+        document.getElementById('cap_fat').innerHTML = "$ 0";
         document.getElementById('saldo_ant_fat').innerHTML = "SALDO ANTERIOR: $ <?php echo $fila['sact'] ?>";
-        document.getElementById('saldo_act_fat').innerHTML = "SALDO ACTUAL: $ <?php echo "CAL SA" ?>";
+        document.getElementById('saldo_act_fat').innerHTML = "SALDO ACTUAL: $ 0";
         document.getElementById('mora_fat').innerHTML = "$ <?php echo $fila['mora'] ?>";
         document.getElementById('nom_caj_fat').innerHTML = "<?php echo $fila['nombreuser'] ?>";
-        document.getElementById('suma_capital_fat').innerHTML = "$ <?php echo "calcular suma"; ?>";
-        document.getElementById('int_mora_fat').innerHTML = "$ <?php echo "cal suma "; ?>";
         document.getElementById('total_fat').innerHTML = "$ <?php echo "cal toal" ?>";
         document.getElementById('int_fat').innerHTML = "$ <?php echo $fila['intacu'] ?>";
         document.getElementById('id_cajero_fat').innerHTML = "CAJERO NO:  <?php echo $fila['idu'] ?>";
         
         var tasa_personaa = <?php echo $fila['tasa'] ?> / 100 / 12;
+         var tasa_personaa2 = <?php echo $fila['tasa'] ?> / 100 ;
         var monto_personaa = "<?php echo $fila['monto'] ?>";
         var meses_personaa = "<?php echo $fila['tiempo'] ?>";
+        document.getElementById('saldo_act').value= "<?php echo $fila['sact'] ?>";
+        document.getElementById('interes').value=tasa_personaa2 ;
+        document.getElementById('fecha_pago').value="<?php echo $fila['pp'] ?>" ;
+         document.getElementById('fecha_hoy').value="<?php echo date("Y-m-d"); ?>" ;
         var cuota_personaa = 0;
 
         cuota_personaa = monto_personaa * ((Math.pow(1 + tasa_personaa, meses_personaa) * tasa_personaa) / (Math.pow(1 + tasa_personaa, meses_personaa) - 1));
         cuota_personaa = cuota_personaa.toFixed(2);
+        document.getElementById('cuota_hoy').value=cuota_personaa;
         document.getElementById('cuota_fat').innerHTML = "CUOTA: $ "+cuota_personaa;
         var codigo = "<?php echo $fila['idper']; ?>";
         var pass = doSearch(codigo);
@@ -54,12 +59,13 @@ foreach ($listado as $fila) {
             var linea = "";
             linea = linea.concat(
                     "<tr>",
-                    '<td><input type="button" class="borrar_personatabla_cliente_abono btn-sm btn-danger" value="-"/>&nbsp;&nbsp; <input type="hidden" id="codCliente_abono" name="codCliente_abono" value="' + codigo + '"> ' + codigo + "</td>",
+                    '<td><input type="hidden" id="codCliente_abono" name="codCliente_abono" value="' + codigo + '"> ' + codigo + "</td>",
                     "<td>" + nombre + "</td>",
                     "<td>" + dui + "</td>",
                     "<td>" + nit + "</td>",
                     "<td>" + tel + "</td>",
                     "<td>" + dir + "</td>",
+                     "<td>" + cuota_personaa + "</td>",
                     "</tr>"
                     );
             $("#tabla_cliente_abono tbody").empty()//elimino el anterior

@@ -124,7 +124,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Telefono_fia_per" name="Telefono_fia_per" placeholder="TELEFONO...">
+                                                <input type="tel" class="form-control text-center" required="" minlength="3" id="Telefono_fia_per" name="Telefono_fia_per" placeholder="TELEFONO...">
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="email" class="form-control text-center" required="" minlength="3" id="Trabajo_fia_per" name="Trabajo_fia_per" placeholder="LUGAR DE TRABAJO...">
+                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Trabajo_fia_per" name="Trabajo_fia_per" placeholder="LUGAR DE TRABAJO...">
                                             </div>
                                         </div>
                                     </div>
@@ -210,7 +210,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control text-center" id="ref_Telefono" name="ref_Telefono" placeholder="TELEFONO...">
+                                                <input type="tel" class="form-control text-center" id="ref_Telefono" name="ref_Telefono" placeholder="TELEFONO...">
                                             </div>
                                         </div>
                                     </div>
@@ -252,7 +252,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <select class="form-control show-tick" required="" id="mese_per">
+                                                <select class="form-control show-tick" required="" id="mese_per" name="mese_per">
                                                     <option value="">SELECCIONE EL NUMERO DE MESES</option>
                                                     <?php
                                                     $n = 12;
@@ -493,8 +493,11 @@ if (isset($_REQUEST["pas_cp"])) {
     $prestamo->setId_plan("1");
     $prestamo->setId_asesor("1");
     $prestamo->setPrestamo_original($_REQUEST["monto_per"]);
-    $prestamo->setId_plan("1");
-
+    $prestamo->setId_plan("1");    
+    $devolucion = date("d-m-Y");
+    $devolucion = date_format(date_create($devolucion), 'Y-m-d');
+    $prestamo->setFecha($devolucion);
+    $prestamo->setTiempo($_REQUEST["mese_per"]);
 
     
 

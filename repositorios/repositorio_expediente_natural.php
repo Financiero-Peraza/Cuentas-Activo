@@ -97,7 +97,9 @@ prestamo.intereses_acumulados as intacu,
 plan_pago.tasa AS tasa,
 (CONCAT(usuario.nombre,' ',usuario.apellido)) AS nombreuser,
 usuario.id_usuario AS idu,
-prestamo.tiempo as tiempo
+prestamo.tiempo as tiempo,
+prestamo.proximo_pago as pp,
+prestamo.fecha as fech
 FROM
 persona_natural
 INNER JOIN expediente_natural ON expediente_natural.persona_natural = persona_natural.id_persona_natural

@@ -56,19 +56,19 @@ function llenar_tabla_clientenulll(valor) {
         var element2 = document.createElement("input");
         element2.type = "text";
         element2.size = "10";
-        element2.value = " 1  ";
+        element2.value = "   ";
         cell2.appendChild(element2);
         var cell3 = row.insertCell(2);
         var element3 = document.createElement("input");
         element3.type = "text";
         element3.size = "10";
-        element3.value = "2   ";
+        element3.value = "   ";
         cell3.appendChild(element3);
         var cell4 = row.insertCell(3);
         var element4 = document.createElement("input");
         element4.type = "text";
         element4.size = "10";
-        element4.value = " 3 ";
+        element4.value = "  ";
         cell4.appendChild(element4);
 //        var cell5 = row.insertCell(4);  COLUMNAS QUE NO SE OCUPAN
 //        var element5 = document.createElement("input");
