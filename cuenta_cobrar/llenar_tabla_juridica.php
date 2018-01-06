@@ -6,32 +6,33 @@ Conexion::abrir_conexion();
 
 $listado = repositorio_juridico::obtener_persona_juridca(Conexion::obtener_conexion(), $_POST['libro']);
  
-
-foreach ($listado as $fila) {
+$fila=$listado;// echo '<script language="javascript">alert("'.$fila->getId_nombre().'");</script>'; 
+//foreach ($listado as $fila) {
     ?>
 <script type="text/javascript">
-     var codigo="<?php echo $fila['id']; ?>";    
-   var pass=doSearch(codigo);
-   if(pass){
+    
+     var codigo="<?php echo $fila->getId_persona_juridica(); ?>";    
+   //var pass=doSearch(codigo);
+   if(true){
         
         var nombre="<?php echo  $fila->getId_nombre(); ?>";
         var numero="<?php echo  $fila->getNumero(); ?>" ;
         var dui="<?php echo  $fila->getDui(); ?>" ;
         var nit="<?php echo  $fila->getNit(); ?>" ;
-        
-        var linea="";
-        linea=linea.concat(
+       
+        var linea2="";
+        linea2=linea2.concat(
             "<tr>",
-            '<td><input type="button" class="borrar_personatabla_cliente_cpersonal btn-sm btn-danger" value="-"/>&nbsp;&nbsp; <input type="hidden" id="codCliente_cpersonal" name="codCliente_cpersonal" value="'+codigo+'"> '+codigo+"</td>",
+            '<td><input type="hidden" id="codCliente_cpersonal" name="codCliente_cpersonal" value="'+codigo+'"> '+codigo+"</td>",
             "<td>"+nombre+"</td>",
             "<td>"+numero+"</td>",
             "<td>"+dui+"</td>",
             "<td>"+nit+"</td>",
             "</tr>"
             );
-    $("#tabla_cliente_cpersonal tbody").empty()//elino el anterior
-    $("table#tabla_cliente_cpersonal tbody").append(linea);
-   
+    $("#tabla_cliente_juridico tbody").empty()//elino el anterior
+    $("table#tabla_cliente_juridico tbody").append(linea2);
+    
     }else{
          swal("Importane!",  codigo+" ya fue ingresado", "warning")
      
@@ -82,7 +83,7 @@ foreach ($listado as $fila) {
 
 
     <?php
-}
+//}
 ?>
     <script>//para no ingrasar los mismos activoa a la tabla de presatamo
         

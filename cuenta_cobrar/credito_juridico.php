@@ -41,14 +41,14 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                             <div class="input-field"><i class="fa fa-search prefix" aria-hidden="true">
 
                                                 </i><label for="" style="font-size:16px">Buscar Empresa</label>
-                                                <input type="text" id="buscar_cliente"  name="" autofocus onkeypress="return llenar_tabla_cliente(this)" list="lista_personas_naturales">
+                                                <input type="text" id="buscar_cliente"  name="" autofocus onkeypress="return llenar_tabla_cliente(this)" list="lista_personas_naturales2">
                                             </div>              
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <table class="table table-striped table-bordered" id="tabla_cliente_cpersonal">
+                            <table class="table table-striped table-bordered" id="tabla_cliente_juridico">
                                 <caption>CLIENTE</caption>
                                 <thead>
                                 <th>Codigo</th>
@@ -210,7 +210,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
 </form>
 
 
-<datalist id="lista_personas_naturales">
+<datalist id="lista_personas_naturales2">
     <?php
     include_once '../app/Conexion.php';
     include_once '../modelos/persona_juridica.php';
@@ -222,7 +222,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
 
 
     foreach ($listado as $fila) {
-        echo '<option value="' . $fila->getId_persona_juridica() . '" label="' . $fila->getId_nombre() . '" > ';
+        echo '<option value="' . $fila->getId_nombre()  . '" label="' . $fila->getId_persona_juridica() . '" > ';
               
     }
     ?>
@@ -231,13 +231,13 @@ include_once '../plantilla/barra_lateral_usuario.php';
 <script>
     function llenar_tabla_cliente(valor) {
         var depto = valor.value;
-        var depto = $("#lista_personas_naturales option[value='" + $('#buscar_cliente').val() + "']").attr('label');//alert(depto);
-        $("#lista_personas_naturales").load(" #lista_personas_naturales");//para actuaizar la datalist cuando registra 
+        var depto = $("#lista_personas_naturales2 option[value='" + $('#buscar_cliente').val() + "']").attr('label');//alert(depto);
+        $("#lista_personas_naturales2").load(" #lista_personas_naturales");//para actuaizar la datalist cuando registra 
 //var numero=valor.id.substr(7)
 //alert(valor.id);
-        if (depto != "") {//alert("paso"+depto);
+        if (depto != "") {//alert("paso "+depto);
             $.post("../cuenta_cobrar/llenar_tabla_juridica.php", {libro: depto}, function (mensaje) {
-                $('#lista_personas_naturales').html(mensaje).fadeIn();
+                $('#lista_personas_naturales2').html(mensaje).fadeIn();
 
             });
         }
