@@ -379,7 +379,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
 //var numero=valor.id.substr(7)
 //alert(valor.id);
         if (depto != "") {//alert("paso"+depto);
-            $.post("../cuenta_cobrar/llenar_tabla_cliente.php", {libro: depto}, function (mensaje) {
+            $.post("../cuenta_cobrar/llenar_tabla_cliente.php", {libro: depto, idtabla:"tabla_cliente_cpersonal"}, function (mensaje) {
                 $('#lista_personas_naturales').html(mensaje).fadeIn();
 
             });

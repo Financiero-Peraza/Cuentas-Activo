@@ -18,14 +18,14 @@ function llenar_tabla_clientenulll(valor) {
 
 
 //-----------------------  FIN FUNCIONES PARA CREDITO PERSONAL --------------------------------﻿
-  function addfilas(tableID) {
+  function addfilas(tableID,inte) {
 //        var tasa = document.getElementById("tasa_per").value / 100 / 12;
 //        var monto = document.getElementById("monto_per").value;
 //        var meses = document.getElementById("mese_per").value;
        
         var monto = document.getElementById("monto_per").value;
         var meses = document.getElementById("mese_per").value;
-        var inte = document.getElementById("tasa_per").value
+       // var inte = document.getElementById("tasa_per").value
         var p = inte;  
         var capi = 0;
         var cargo = 0.00;

@@ -5,16 +5,17 @@ include_once '../repositorios/repositorio_expediente_natural.php';
 Conexion::abrir_conexion();
 
 $listado = repositorio_expediente_natural::obtener_persona_natural(Conexion::obtener_conexion(), $_POST['libro']);
- 
+$id = $_POST['idtabla'];
 //$numero=$_POST['numero'];
 
 foreach ($listado as $fila) {
     ?>
 <script type="text/javascript">
+      var idta = "<?php echo $id; ?>"
      var codigo="<?php echo $fila['id']; ?>";    
    var pass=doSearch(codigo);
    if(pass){
-        
+       
         var nombre="<?php echo  $fila['nombre']; ?>";
         var dui="<?php echo  $fila['dui']; ?>" ;
         var nit="<?php echo  $fila['nit']; ?>" ;
@@ -23,7 +24,7 @@ foreach ($listado as $fila) {
         var linea="";
         linea=linea.concat(
             "<tr>",
-            '<td><input type="button" class="borrar_personatabla_cliente_cpersonal btn-sm btn-danger" value="-"/>&nbsp;&nbsp; <input type="hidden" id="codCliente_cpersonal" name="codCliente_cpersonal" value="'+codigo+'"> '+codigo+"</td>",
+            '<td><input type="hidden" id="codCliente_cpersonal" name="codCliente_cpersonal" value="'+codigo+'"> '+codigo+"</td>",
             "<td>"+nombre+"</td>",
             "<td>"+dui+"</td>",
             "<td>"+nit+"</td>",
@@ -31,8 +32,9 @@ foreach ($listado as $fila) {
             "<td>"+dir+"</td>",
             "</tr>"
             );
+  
     $("#tabla_cliente_cpersonal tbody").empty()//elino el anterior
-    $("table#tabla_cliente_cpersonal tbody").append(linea);
+    $("table#"+idta+" tbody").append(linea);
    
     }else{
          swal("Importane!",  codigo+" ya fue ingresado", "warning")
@@ -44,7 +46,7 @@ foreach ($listado as $fila) {
     function doSearch(codigo)
 		{
                         var pso="true";
-			var tableReg = document.getElementById('tabla_cliente_cpersonal');
+			var tableReg = document.getElementById(idta);
 			var searchText = codigo;
 			var cellsOfRow="";
 			var found=false;

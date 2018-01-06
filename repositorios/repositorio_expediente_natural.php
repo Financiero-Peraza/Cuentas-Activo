@@ -52,6 +52,45 @@ class repositorio_expediente_natural {
         }
         return $persona_insertado;
     }
+    
+      public static function insertar_bien($conexion, $bien) {
+        $bien_insertado = false;
+        $bien = new bien_hipotecario();
+        if (isset($conexion)) {
+            try {
+
+                $dui = $bien->getDui();
+                $nit = $bien->getNit();
+                $nombre = $bien->getNombe();
+                $apellido = $bien->getApellido();
+                $direccion = $bien->getDireccion();
+                $telefono = $bien->getTelefono();
+                //$correo = $bien->getCorreo();
+
+
+                $sql = 'INSERT INTO bien_natural (nombre, apellido, direccion, dui, nit,  telefono)'
+                        . ' values (:nombre,:apellido, :direccion, :dui, :nit, :telefono)';
+                ///estos son alias para que PDO pueda trabajar 
+                $sentencia = $conexion->prepare($sql);
+
+                $sentencia->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+                $sentencia->bindParam(':apellido', $apellido, PDO::PARAM_STR);
+                $sentencia->bindParam(':direccion', $direccion, PDO::PARAM_STR);
+                $sentencia->bindParam(':dui', $dui, PDO::PARAM_STR);
+                $sentencia->bindParam(':nit', $nit, PDO::PARAM_STR);
+                $sentencia->bindParam(':telefono', $telefono, PDO::PARAM_STR);
+
+
+                $bien_insertado = $sentencia->execute();
+//             $accion = 'Se registro al siguiente bien de mantenimiento: ' . $nombre . ", con direccion ". $direccion . ", telefono ". $telefono.", y correo ".$correo ;
+//              self::insertar_bitacora($conexion, $accion);
+            } catch (PDOException $ex) {
+                echo '<script>swal("No se puedo realizar el registro", "Revise los datos ingresados  ", "warning");</script>';
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return $persona_insertado;
+    }
 
     public static function obtener_persona_natural($conexion, $codigo) {
         $resultado = "";
