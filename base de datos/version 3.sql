@@ -254,6 +254,8 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`pago` (
   `id_prestamo` INT NOT NULL ,
   `monto` FLOAT NULL ,
   `fecha` DATE NULL ,
+`mora` float DEFAULT NULL,
+  `interes` float DEFAULT NULL,
   PRIMARY KEY (`id_pago`) ,
   INDEX `fk_pago_prestamo1_idx` (`id_prestamo` ASC) ,
   CONSTRAINT `fk_pago_prestamo1`
