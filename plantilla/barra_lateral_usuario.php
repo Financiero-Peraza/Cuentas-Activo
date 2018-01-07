@@ -3,15 +3,16 @@
     <!-- User Info -->
     <div class="user-info">
         <div class="image">
-            
+            <img src="../images/asesor.png" width="48" height="48" alt="User" />
         </div>
         <div class="info-container">
-            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
-            <div class="email"></div>
+            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Asesor</div>
+            <div class="email">opciones</div>
             <div class="btn-group user-helper-dropdown">
-                <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
+                <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down </i>
                 <ul class="dropdown-menu pull-right">
 
+                    <li><a href="../index.php"><i class="material-icons">input</i>Salir</a></li>
                 </ul>
             </div>
         </div>
@@ -50,7 +51,7 @@
                     <li>
                         <a href="../cuenta_cobrar/credito_personal.php">Personal</a>
                     </li>
-                  
+
                     <li>
                         <a href="../cuenta_cobrar/credito_agropecuario.php">Agropecuario</a>
                     </li>
@@ -130,15 +131,15 @@
     <!-- Footer -->
     <div class="legal">
         <div class="copyright">
-           © 2017 <a href="#">UES FMP.</a>
+            © 2017 <a href="#">UES FMP.</a>
         </div>
-        
+
     </div>
     <!-- #Footer -->
 </aside>
 <!-- #END# Left Sidebar -->
-   <script type="text/javascript">
-    $(document).ready(function () {     
+<script type="text/javascript">
+    $(document).ready(function () {
 
 
         $('.formNatural').submit(function () {
@@ -159,12 +160,12 @@
                         title: "Exito",
                         text: "Autor Registrado",
                         type: "success"},
-                            function () {
-                                document.getElementById('credito_personal').reset();
+                    function () {
+                        document.getElementById('credito_personal').reset();
 
-                                recargarCombos();
+                        recargarCombos();
 
-                            }
+                    }
 
                     );
 
@@ -177,8 +178,8 @@
         })
 
 
-       
+
 
     });
-    
+
 </script>

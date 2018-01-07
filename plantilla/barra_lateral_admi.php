@@ -3,7 +3,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="../images/user-img-background.jpg" width="48" height="48" alt="User" />
+                    <img src="../images/user.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administrador</div>
@@ -11,9 +11,8 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down </i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="#"><i class="material-icons">create</i>Editar password</a></li>
-                            <li role="seperator" class="divider"></li>
-                            <li><a href="#"><i class="material-icons">input</i>Salir</a></li>
+                             
+                            <li><a href="../index.php"><i class="material-icons">input</i>Salir</a></li>
                         </ul>
                     </div>
                 </div>

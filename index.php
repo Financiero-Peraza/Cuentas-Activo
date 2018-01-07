@@ -63,20 +63,20 @@
                     closeOnConfirm: false
                 },
                 function () {
-                    location.href="./home/home_administrador.php";
+                    location.href="./home/home_usuario.php";
                     
                 });</script>';
             } else if ($respuesta == '2') {
 
                 echo '<script>swal({
                     title: "Exito",
-                     text: "Datos incorrectos",
-                    type: "error",
+                     text: "Sesión iniciada correctamente",
+                    type: "success",
                     confirmButtonText: "ok",
                     closeOnConfirm: false
                 },
                 function () {
-                    location.href="./home/home_usuario.php";
+                    location.href="./home/home_administrador.php";
                     
                 });</script>';
             } else {
@@ -103,7 +103,7 @@
                 </div>
                 <div class="card">
                     <div class="body">
-                        <form id="FORMULARIO" method="get" name="" autocomplete="off">
+                        <form id="FORMULARIO" method="post" name="" autocomplete="off">
                             <div class="msg">Inicia tu sesión para continuar</div>
                             <div class="input-group">
                                 <span class="input-group-addon">
