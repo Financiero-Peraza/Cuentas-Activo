@@ -436,7 +436,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
         document.getElementById('pils-tiempo-txt').innerHTML = meses_persona + " meses";
         document.getElementById('pils-tasa-txt').innerHTML = document.getElementById("tasa_per").value + "%";
         // $( '#pils-cuota-txt' ).text( '$' + numberWithCommas( cuota ) );
-        addfilas("plan_pago_personal");
+        addfilas("plan_pago_personal" ,document.getElementById("tasa_per").value);
     }
 
     function validarTablas_cper() {
