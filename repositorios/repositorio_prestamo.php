@@ -20,7 +20,6 @@ class repositorio_prestamo {
             try {
 
                 $user = $prestamo->getId_asesor();
-                $plan = $prestamo->getId_plan();
                 $nombre = $prestamo->getPrestamo_original();
                 $fecha = $prestamo->getFecha();
                 $t = $prestamo->getTiempo();
@@ -28,8 +27,8 @@ class repositorio_prestamo {
 
 
 
-                $sql = 'INSERT INTO prestamo (id_plan,  id_asesor, prestamo_original, estado, proximo_pago, saldo_actual, fecha, tiempo,tasa ) '
-                        . " values (:plan, :user, :nombre, '1', DATE_ADD( CURDATE( ), INTERVAL 1 MONTH ), :nombre, :fecha, :t, :tasa)";
+                $sql = 'INSERT INTO prestamo (  id_asesor, prestamo_original, estado, proximo_pago, saldo_actual, fecha, tiempo,tasa_interes ) '
+                        . " values ( :user, :nombre, '1', DATE_ADD( CURDATE( ), INTERVAL 1 MONTH ), :nombre, :fecha, :t, :tasa)";
                 ///estos son alias para que PDO pueda trabajar 
                 $sentencia = $conexion->prepare($sql);
 

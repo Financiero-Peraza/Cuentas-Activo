@@ -29,8 +29,8 @@ class repositorio_expediente_natural {
                 //$correo = $persona->getCorreo();
 
 
-                $sql = 'INSERT INTO persona_natural (nombre, apellido, direccion, dui, nit,  telefono)'
-                        . ' values (:nombre,:apellido, :direccion, :dui, :nit, :telefono)';
+                $sql = 'INSERT INTO persona_natural (nombre, apellido, direccion, dui, nit,  telefono, monto)'
+                        . ' values (:nombre,:apellido, :direccion, :dui, :nit, :telefono, "0")';
                 ///estos son alias para que PDO pueda trabajar 
                 $sentencia = $conexion->prepare($sql);
 
@@ -127,21 +127,20 @@ persona_natural.id_persona_natural AS idper,
 persona_natural.dui AS dui,
 persona_natural.nit AS nit,
 prestamo.id_prestamo AS idp,
-prestamo.prestamo_original as monto,
-prestamo.saldo_actual as sact,
-prestamo.mora_acumulada as mora,
-prestamo.intereses_acumulados as intacu,
-plan_pago.tasa AS tasa,
+prestamo.prestamo_original AS monto,
+prestamo.saldo_actual AS sact,
+prestamo.mora_acumulada AS mora,
+prestamo.intereses_acumulados AS intacu,
 (CONCAT(usuario.nombre,' ',usuario.apellido)) AS nombreuser,
 usuario.id_usuario AS idu,
-prestamo.tiempo as tiempo,
-prestamo.proximo_pago as pp,
-prestamo.fecha as fech
+prestamo.tiempo AS tiempo,
+prestamo.proximo_pago AS pp,
+prestamo.fecha AS fech,
+prestamo.tasa_interes as tasa
 FROM
 persona_natural
 INNER JOIN expediente_natural ON expediente_natural.persona_natural = persona_natural.id_persona_natural
 INNER JOIN prestamo ON expediente_natural.id_prestamo = prestamo.id_prestamo
-INNER JOIN plan_pago ON prestamo.id_plan = plan_pago.id_plan
 INNER JOIN usuario ON prestamo.id_asesor = usuario.id_usuario
 WHERE
 persona_natural.id_persona_natural = $codigo ";
@@ -162,7 +161,9 @@ persona_natural.id_persona_natural = $codigo ";
                 (CONCAT(persona_natural.nombre,' ',persona_natural.apellido))  as nombre,
                 persona_natural.apellido
                 FROM
-                persona_natural";
+                persona_natural
+                WHERE
+persona_natural.monto = 0";
                 $resultado = $conexion->query($sql);
             } catch (PDOException $ex) {
                 print 'ERROR: ' . $ex->getMessage();
@@ -180,7 +181,9 @@ persona_natural.id_persona_natural = $codigo ";
                 (CONCAT(persona_natural.nombre,' ',persona_natural.apellido))  as nombre,
                 persona_natural.apellido
                 FROM
-                persona_natural";
+                persona_natural
+                  WHERE
+persona_natural.monto = 1";
                 $resultado = $conexion->query($sql);
             } catch (PDOException $ex) {
                 print 'ERROR: ' . $ex->getMessage();
@@ -200,7 +203,10 @@ persona_natural.id_persona_natural = $codigo ";
                 $dui = $expediente->getId_prestamo();
                 $nit = $expediente->getPersona_natural();
 
-
+                 $sql = "UPDATE persona_natural SET monto='1' "
+                         . "WHERE (id_persona_natural='$nit') LIMIT 1";
+                 $sentencia = $conexion->prepare($sql);
+                 $expediente_insertado = $sentencia->execute();
 
                 $sql = 'INSERT INTO expediente_natural (id_prestamo,persona_natural)'
                         . ' values ( :dui, :nit)';

@@ -491,7 +491,7 @@ if (isset($_REQUEST["pas_cp"])) {
 
 
     $prestamo = new presamo();
-    $prestamo->setId_plan("1");
+   // $prestamo->setId_plan("1");
     $prestamo->setId_asesor("1");
     $prestamo->setPrestamo_original($_REQUEST["monto_per"]);
     $prestamo->setId_plan("1");    
@@ -499,7 +499,7 @@ if (isset($_REQUEST["pas_cp"])) {
     $devolucion = date_format(date_create($devolucion), 'Y-m-d');
     $prestamo->setFecha($devolucion);
     $prestamo->setTiempo($_REQUEST["mese_per"]);
-
+     $prestamo->setTasa($_REQUEST["tasa_per"]);
     
 
 

@@ -199,7 +199,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
     include_once '../modelos/Libros.php';
     include_once '../repositorios/repositorio_expediente_natural.php';
     Conexion::abrir_conexion();
-    $listado = repositorio_expediente_natural::lista_persona_natural(Conexion::obtener_conexion());
+    $listado = repositorio_expediente_natural::lista_clientes(Conexion::obtener_conexion());
 
 
     foreach ($listado as $fila) {
