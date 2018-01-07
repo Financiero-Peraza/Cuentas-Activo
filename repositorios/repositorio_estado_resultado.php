@@ -67,7 +67,7 @@ class repositorio_estado_resultado {
     }
     
     public static function lista_estado($conexion, $codigo) {
-        $lista = array();
+        
 
         if (isset($conexion)) {
             try {
@@ -94,7 +94,7 @@ class repositorio_estado_resultado {
                         $estado->setImpuestos($fila['impuestos']);
                         $estado->setUtilidad_neta($fila['utilidad_neta']);
                         
-                        $lista[] = $estado;
+                        $lista = $estado;
                     }
                 }
             } catch (PDOException $exc) {
