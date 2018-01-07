@@ -28,12 +28,15 @@ if (isset($_REQUEST['nameEnviar'])) {
     include_once '../app/Conexion.php';
     
     $prestamo = new presamo();
+    $prestamo->setId_asesor("1");
     $prestamo->setPrestamo_original($_REQUEST['monto_per']);
     $prestamo->setTiempo($_REQUEST['mese_per']);
     $prestamo->setTasa($_REQUEST['tasa_per']);
+    $devolucion = date_format(date_create($devolucion), 'Y-m-d');
+        $prestamo->setFecha($devolucion);
     Conexion::abrir_conexion();
     
-    if (repositorio_prestamo::insertar_prestamo_juridico(Conexion::obtener_conexion(), $prestamo)) {
+    if (repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo)) {
          $id_prestamo = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());
          $id_persona = $_REQUEST['codCliente_cpersonal'];
          echo $id_prestamo;
@@ -135,9 +138,9 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">NUMERO DE MESES</span>
-                                                <select class="form-control show-tick" required="" id="mese_per" name="mese_per">
-                                                    <option value="">SELECCIONE EL NUMERO DE MESES</option>
+                                                <span class="input-group-addon" id="basic-addon1">PLAZO</span>
+                                                <select class="form-control show-tick" required="" id="mese_per" name="mese_per" onchange="interes_hp(this)">
+                                                    <option value="" disabled="" selected="">SELECCIONE EL NUMERO DE MESES</option>
                                                     <?php
                                                     $n = 12;
                                                     for ($i = 0; $i <= 7; $i++) {//echo '<script language="javascript">alert("'.$n.'");</script>'; 
@@ -150,15 +153,19 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">TASA DE INTERES</span>
-                                                <input type="number" required="" min="3" max="20" class="form-control text-center" id="tasa_per" name="tasa_per" placeholder="TASA">
-                                            </div>
+                      <div class="col-md-3">
+                                            <div class="row">
+                                                 <span class="input-group-addon" id="basic-addon1">TASA DE INTERES</span>
+                                                <div class="col-md-6">
+                                                    <div class="form-line">
+                                                       
+                                                        <input type="number" required="" min="1" max="20" class="form-control text-center" readonly="" id="tasa_per" name="tasa_per" placeholder="TASA">
+                                                    </div>
 
+                                                </div>
+                                                <div class="col-md-6"><label style="font-size: 18">%</label></div>   
+                                            </div>
                                         </div>
-                                    </div>
                                     <div class="col-md-3">
                                         <div class="text-center">
 
@@ -210,12 +217,12 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             <tbody>
                                                 <tr>
                                                     <td>N </td>
-                                                    <td>Capital</td>
-                                                    <td>Interes</td>
-                                                    <td>Cuota</td>
+                                                    <td>Capital ($)</td>
+                                                    <td>Interes ($)</td>
+                                                    <td>Cuota ($)</td>
 <!--                                                    <td>CARGOS</td>
                                                     <td>TORAL</td>-->
-                                                    <td>Saldo</td>
+                                                    <td>Saldo ($)</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -323,7 +330,7 @@ if (isset($_REQUEST['nameEnviar'])) {
         document.getElementById('pils-tiempo-txt').innerHTML = meses_persona + " meses";
         document.getElementById('pils-tasa-txt').innerHTML = document.getElementById("tasa_per").value + "%";
         // $( '#pils-cuota-txt' ).text( '$' + numberWithCommas( cuota ) );
-        addfilas("plan_pago_personal");
+        addfilas("plan_pago_personal",document.getElementById("tasa_per").value);
     }
 
     function validarTablas_cper() {
@@ -340,10 +347,37 @@ if (isset($_REQUEST['nameEnviar'])) {
             }
 
         }
-
-
-
         return okk;
+    }
+    
+        function interes_hp(valor) {
+        valor = valor.value; //alert("aso "+valor);
+            switch (valor) {
+                case '12':
+                    document.getElementById('tasa_per').value = 14;
+                    break;
+                case '24':
+                    document.getElementById('tasa_per').value = 13;
+                    break;
+                case '36':
+                    document.getElementById('tasa_per').value = 12;
+                    break;
+                case '48':
+                    document.getElementById('tasa_per').value = 8;
+                    break;
+                case '60':
+                    document.getElementById('tasa_per').value = 8;
+                    break;
+                case '72':
+                    document.getElementById('tasa_per').value = 7;
+                    break;
+                case '84':
+                    document.getElementById('tasa_per').value = 6;
+                case '96':
+                    document.getElementById('tasa_per').value = 5;
+                    break;
+            }
+       
     }
 </script>
 <?php

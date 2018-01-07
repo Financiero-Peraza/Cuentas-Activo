@@ -53,12 +53,6 @@
                     </li>
 
                     <li>
-                        <a href="../cuenta_cobrar/credito_agropecuario.php">Agropecuario</a>
-                    </li>
-                    <li>
-                        <a href="../cuenta_cobrar/credito_solidario.php">Solidario</a>
-                    </li>
-                    <li>
                         <a href="../cuenta_cobrar/credito_juridico.php">Empresaria</a>
                     </li>
                 </ul>

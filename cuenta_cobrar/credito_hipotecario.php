@@ -146,6 +146,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">MONTO SOLICITADO($)</span>
                                                 <input type="number" required="" min="1500" max="40000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="MONTO SOLICITADO($)... MINIMO $1,500, MAXIMO $40,000">
                                             </div>
                                         </div>
