@@ -9,18 +9,75 @@ class balance_general {
  private $valor_negociable;
  private $cuenta_por_cobrar;
  private $inventarios;
- private $terrenos;
+  private $terrenos;
  private $edificio_equipo;
  private $depreciacion;
+ private $total_activo_corriente;
+ private $total_activo_noCorriente;
+ private $total_activo;
  private $cuenta_por_pagar;
  private $documento_por_pagar ;
+ private $total_pasivo_corriente;
  private $deuda_largop;
  private $accioneC;
  private $ganancias_retenidas;
+ private $total_pasivo_patrimonio;
          
  function __construct() {
      
  }
+ function getTotal_pasivo_corriente() {
+     return $this->total_pasivo_corriente;
+ }
+
+ function getTotal_pasivo_patrimonio() {
+     return $this->total_pasivo_patrimonio;
+ }
+
+ function setTotal_pasivo_corriente($total_pasivo_corriente) {
+     $this->total_pasivo_corriente = $total_pasivo_corriente;
+ }
+
+ function setTotal_pasivo_patrimonio($total_pasivo_patrimonio) {
+     $this->total_pasivo_patrimonio = $total_pasivo_patrimonio;
+ }
+
+  
+ 
+ function getTotal_activo_corriente() {
+     return $this->total_activo_corriente;
+ }
+
+ function getTotal_activo_noCorriente() {
+     return $this->total_activo_noCorriente;
+ }
+
+ function getTotal_activo() {
+     return $this->total_activo;
+ }
+
+ function getTotal_pasivo() {
+     return $this->total_pasivo;
+ }
+
+ function setTotal_activo_corriente($total_activo_corriente) {
+     $this->total_activo_corriente = $total_activo_corriente;
+ }
+
+ function setTotal_activo_noCorriente($total_activo_noCorriente) {
+     $this->total_activo_noCorriente = $total_activo_noCorriente;
+ }
+
+ function setTotal_activo($total_activo) {
+     $this->total_activo = $total_activo;
+ }
+
+ function setTotal_pasivo($total_pasivo) {
+     $this->total_pasivo = $total_pasivo;
+ }
+
+  
+ 
  function getId_balance() {
      return $this->id_balance;
  }

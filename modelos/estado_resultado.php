@@ -7,20 +7,58 @@ private $id_persona_juridica;
 private $periodo;
 private $prestable;
 private $ingreso_venta;
-private $valor_negociable;
 private $costo_venta;
 private $utilidad_bruta;
-private $gasto_operativo;
+
 private $gasto_venta;
 private $gasto_administrativo;
 private $gasto_arrendamiento;
 private $gasto_depreciacion;
-private $gasto_interes;
+private $total_operativo;
 private $utilidad_operativa;
+private $gasto_interes;
+private $utilidad_antes_impuestos;
+private $impuestos;
+private $valor_negociable;
+private $utilidad_neta;
 
 function __construct() {
     
 }
+function getTotal_operativo() {
+    return $this->total_operativo;
+}
+
+function getUtilidad_antes_impuestos() {
+    return $this->utilidad_antes_impuestos;
+}
+
+function getImpuestos() {
+    return $this->impuestos;
+}
+
+function getUtilidad_neta() {
+    return $this->utilidad_neta;
+}
+
+function setTotal_operativo($total_operativo) {
+    $this->total_operativo = $total_operativo;
+}
+
+function setUtilidad_antes_impuestos($utilidad_antes_impuestos) {
+    $this->utilidad_antes_impuestos = $utilidad_antes_impuestos;
+}
+
+function setImpuestos($impuestos) {
+    $this->impuestos = $impuestos;
+}
+
+function setUtilidad_neta($utilidad_neta) {
+    $this->utilidad_neta = $utilidad_neta;
+}
+
+
+
 function getUtilidad_operativa() {
     return $this->utilidad_operativa;
 }
