@@ -36,6 +36,16 @@ if (isset($_REQUEST['nameEnviar'])) {
     if (repositorio_prestamo::insertar_prestamo_juridico(Conexion::obtener_conexion(), $prestamo)) {
          $id_prestamo = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());
          $id_persona = $_REQUEST['codCliente_cpersonal'];
+         echo $id_prestamo;
+         echo $id_persona;
+         
+         $expediente = new expediente_juridico();
+         $expediente->setId_persona_juridica($id_persona);
+         $expediente->setId_prestamo($id_prestamo);
+         
+         if (repositorio_expediente_juridico::insertar_expediente_juridico(Conexion::obtener_conexion(), $expediente)) {
+             echo 'guardo expediente juridico';
+         }
          
          
          
@@ -116,7 +126,8 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="number" required="" min="1500" max="40000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="MONTO SOLICITADO($)...">
+                                                <span class="input-group-addon" id="basic-addon1">MONTO SOLICITADO($)</span>
+                                                <input type="number" required="" min="1500" max="40000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="min: 1,500 max: 40,000">
                                             </div>
                                         </div>
                                     </div>
@@ -124,6 +135,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">NUMERO DE MESES</span>
                                                 <select class="form-control show-tick" required="" id="mese_per" name="mese_per">
                                                     <option value="">SELECCIONE EL NUMERO DE MESES</option>
                                                     <?php
@@ -141,6 +153,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">TASA DE INTERES</span>
                                                 <input type="number" required="" min="3" max="20" class="form-control text-center" id="tasa_per" name="tasa_per" placeholder="TASA">
                                             </div>
 
