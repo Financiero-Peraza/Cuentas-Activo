@@ -1,4 +1,7 @@
-
+<script>
+    
+    
+</script>
 
 
 <?php
@@ -7,11 +10,12 @@ include_once '../plantilla/barraSuperior.php';
 include_once '../plantilla/barra_lateral_usuario.php';
 ?>
 
-<form action="newhp.php" method="post" name="credito_hipotecario" id="credito_hipotecario" class="credito_hipotecario"  enctype="multipart/form-data">
-    <input type="hidden" id="pas_hp" name="pas_cp"/>
-    <input type="radio" id="uno" checked="" style="visibility: hidden"/>
+
     <section class="content">
         <!--    INICIO DE DATOS-->
+        <form action="newhp.php" method="post" name="credito_hipotecario" onsubmit="enviarhp()" id="credito_hipotecario" class="credito_hipotecarioo"  enctype="multipart/form-data">
+    <input type="hidden" id="pas_hp" name="pas_cp"/>
+    <input type="radio" id="uno" checked="" style="visibility: hidden"/>
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -88,22 +92,16 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                 </div>
 
 
-                                <div class="row clearfix">
-                                    
-                                                <div class="file-field">
+                                  <div class="file-field input-field">
 
 
-                                                    <div class="btn ">
-                                                        <span><i class="fa fa-address-book" aria-hidden="true"></i>ANEXO</span>
-                                                        <input type="file" accept=".pdf" required name="anexo1" >
-                                                    </div>
-                                                    <div class="file-path-wrapper">
-                                                        <input type="text" id="anexo" name="anexo" class="file-path validate" >
-                                                    </div>
-                                            
+                                    <div class="btn">
+                                        <span><i class="fa fa-address-book" aria-hidden="true"></i>Biografia</span>
+                                        <input type="file" accept=".pdf" required name="bio1">
                                     </div>
-
-
+                                    <div class="file-path-wrapper">
+                                        <input type="text" id="bio" name="bio" class="form-control file-path validate">
+                                    </div>
                                 </div>
 
 
@@ -225,7 +223,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
 
 
                                 <div class="text-center">
-                                    <button type="submit" form="credito_hipotecario" formenctype="multipart/form-data" class="btn btn-primary m-t-15 waves-effect">GUARDAR</button>
+                                    <button type="submit" form="credito_hipotecario"  class="btn btn-primary m-t-15 waves-effect">GUARDAR</button>
                                     <button type="reset" form="credito_personal" class="btn btn-primary m-t-15 waves-effect">CANCELAR</button>
                                 </div>
 
@@ -236,12 +234,12 @@ include_once '../plantilla/barra_lateral_usuario.php';
             </div>
         </div>
         <!--FIN DE DATO DE CREDITO-->
+</form>
 
     </section>
 <!--    <input type="hidden"  name="nombre" id="nombre"  />
     <input type="file" style="visibility: hidden"  name="archivo" id="archivo"/>-->
         
-</form>
 
 
 <datalist id="lista_personas_naturales_hp">
@@ -304,7 +302,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
             swal("Ooops", "Tabla de cliente vacia", "warning");
         }
 
-        return okk;
+       enviarhp();
     }
     function interes_hp(valor) {
         valor=valor.value; //alert("aso "+valor);
@@ -345,7 +343,39 @@ function asignar(valor){
      
 }
 
- 
+ function enviarhp(){
+     $('.credito_hipotecarioo').submit(function () {
+     alert("paso")
+     var formData = new FormData(document.getElementById('credito_hipotecario'))
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function (resp) {
+                if (resp == 1) {
+                    swal({
+                        title: "Exito",
+                        text: "Autor Registrado",
+                        type: "success"},
+                            function () {
+                                document.getElementById('credito_hipotecario').reset();
+
+                            }
+
+                    );
+
+                } else {
+                    swal("Oops", resp, "error")
+
+                }
+            })
+            return false;
+            })
+ }
         
 
 </script>

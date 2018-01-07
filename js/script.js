@@ -210,4 +210,39 @@ function llenar_tabla_clientenulll(valor) {
             }
         }
     }
-    window.addEventListener("load", false);
+    //window.addEventListener("load", false);
+    
+//    $(document).ready(function () {
+//   $('.credito_hipotecarioo').submit(function () {
+//            //var codigo=$('#codigol').val();
+//            
+//            var formData = new FormData(document.getElementById('credito_hipotecario'))
+//            $.ajax({
+//                url: $(this).attr('action'),
+//                type: 'POST',
+//                dataType: "html",
+//                data: formData,
+//                cache: false,
+//                contentType: false,
+//                processData: false
+//            }).done(function (resp) {
+//                if (resp == 1) {
+//                    swal({
+//                        title: "Exito",
+//                        text: "Autor Registrado",
+//                        type: "success"},
+//                            function () {
+//                                document.getElementById('credito_hipotecario').reset();
+//
+//                            }
+//
+//                    );
+//
+//                } else {
+//                    swal("Oops", resp, "error")
+//
+//                }
+//            })
+//            return false;
+//        })
+//    });

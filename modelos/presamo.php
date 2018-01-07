@@ -14,7 +14,17 @@ class presamo {
     private $epreoximo_pago;
     private $fecha;
     private $tiempo;
-    function __construct() {
+    private $tasa; 
+    
+    function getTasa() {
+        return $this->tasa;
+    }
+
+    function setTasa($tasa) {
+        $this->tasa = $tasa;
+    }
+
+        function __construct() {
         
     }
     

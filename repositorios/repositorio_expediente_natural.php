@@ -55,30 +55,28 @@ class repositorio_expediente_natural {
     
       public static function insertar_bien($conexion, $bien) {
         $bien_insertado = false;
-        $bien = new bien_hipotecario();
+        //$bien = new bien_hipotecario();
         if (isset($conexion)) {
             try {
 
-                $dui = $bien->getDui();
-                $nit = $bien->getNit();
-                $nombre = $bien->getNombe();
-                $apellido = $bien->getApellido();
-                $direccion = $bien->getDireccion();
-                $telefono = $bien->getTelefono();
+                $des = $bien->getDescripcion();
+                $ubi = $bien->getUbicacion();
+                $otro = $bien->getOtros_datos();
+                $anexo = $bien->getAnexo();
+                $idp = $bien->getId_persona_natural();
                 //$correo = $bien->getCorreo();
 
 
-                $sql = 'INSERT INTO bien_natural (nombre, apellido, direccion, dui, nit,  telefono)'
-                        . ' values (:nombre,:apellido, :direccion, :dui, :nit, :telefono)';
+                $sql = 'INSERT INTO bien_hipotecario (id_persona_natural, descripcion, ubicacion, otros_datos, anexo)'
+                        . ' values (:idp,:des, :ubi, :otro, :anexo)';
                 ///estos son alias para que PDO pueda trabajar 
                 $sentencia = $conexion->prepare($sql);
 
-                $sentencia->bindParam(':nombre', $nombre, PDO::PARAM_STR);
-                $sentencia->bindParam(':apellido', $apellido, PDO::PARAM_STR);
-                $sentencia->bindParam(':direccion', $direccion, PDO::PARAM_STR);
-                $sentencia->bindParam(':dui', $dui, PDO::PARAM_STR);
-                $sentencia->bindParam(':nit', $nit, PDO::PARAM_STR);
-                $sentencia->bindParam(':telefono', $telefono, PDO::PARAM_STR);
+                $sentencia->bindParam(':idp', $idp, PDO::PARAM_STR);
+                $sentencia->bindParam(':otro', $otro, PDO::PARAM_STR);
+                $sentencia->bindParam(':ubi', $ubi, PDO::PARAM_STR);
+                $sentencia->bindParam(':des', $des, PDO::PARAM_STR);
+                $sentencia->bindParam(':anexo', $anexo, PDO::PARAM_STR);
 
 
                 $bien_insertado = $sentencia->execute();
@@ -89,7 +87,7 @@ class repositorio_expediente_natural {
                 print 'ERROR: ' . $ex->getMessage();
             }
         }
-        return $persona_insertado;
+        return  $bien_insertado;
     }
 
     public static function obtener_persona_natural($conexion, $codigo) {
