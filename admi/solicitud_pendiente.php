@@ -15,7 +15,7 @@ include_once '../repositorios/repositorio_prestamo.php';
 
 Conexion::abrir_conexion();
 
-$lista_prestamo = repositorio_prestamo::lista_prestamo_
+$lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_juridica(Conexion::obtener_conexion());
 ?>    
 <section class="content">
     <div class="container-fluid">
@@ -65,7 +65,12 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_
 
 <script>
 function abrir_expediente(id_juridico){
-    location.href="./ver_expediente.php?id_juridico=" +id_juridico, "_parent";
+    var url="./ver_expediente.php?id_juridico=" +id_juridico;
+    
+    var a = document.createElement("a");
+		a.target = "_blank";
+		a.href = url;
+		a.click();
 }
 </script>
 

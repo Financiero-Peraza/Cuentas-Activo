@@ -12,12 +12,23 @@ private $margen_utilidad_neta ;
 private $rendimiento_activo ;
 private $rendimiento_patrimonio ;
 private $periodo ;
+private $id;
 
 
 
 function __construct() {
     
 }
+function getId() {
+    return $this->id;
+}
+
+function setId($id) {
+    $this->id = $id;
+}
+
+
+
 function getPeriodo() {
     return $this->periodo;
 }

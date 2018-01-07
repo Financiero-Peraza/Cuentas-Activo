@@ -29,10 +29,16 @@ class repositorio_expediente_juridico {
     }
     
     public static function  calculo_ratios ($balance, $estado){
-    
-        $ratio = new ratios();
+            $ratio = new ratios();
                 
-        $ratio->setPeriodo($balance->getPeriodo());
+            //$estado = new estado_resultado();
+        $ratio->setPeriodo($estado->getPeriodo());
+        $ratio->setId($estado->getId_persona_juridica());
+        
+        echo 'periodo y id ';
+        echo $estado->getPeriodo(); 
+        echo $estado->getId_persona_juridica();
+        
         $ratio->setLiquidez_corriente(  round  ($balance->getTotal_activo_corriente() / $balance->getTotal_pasivo_corriente(),2) );
         $ratio->setRazon_rapida(   round(  ($balance->getTotal_activo_corriente() -$balance->getInventarios()) / $balance->getTotal_pasivo_corriente(),2 ));
         $ratio->setRotacion_inventarios(  round ( $estado->getCosto_venta()/$balance->getInventarios(),2 ));
@@ -47,7 +53,7 @@ class repositorio_expediente_juridico {
         return $ratio;
     }
 
-    public static function lista_pagos_previos($conexion) {
+    public static function lista_pagos_previos($conexion,$codigo) {
         $lista = array();
 
         if (isset($conexion)) {
@@ -65,7 +71,7 @@ class repositorio_expediente_juridico {
                         INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
                         INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
                         WHERE
-                        prestamo.id_prestamo = '3' and prestamo.estado != 'PENDIENTE'";
+                        prestamo.id_prestamo = '".$codigo."' and prestamo.estado != 'PENDIENTE'";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();

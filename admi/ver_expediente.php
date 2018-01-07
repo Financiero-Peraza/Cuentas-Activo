@@ -129,6 +129,17 @@ for ($i = 0; $i < count($lista_balance); $i++) {
                             <td>Rendimiento sobre patrimonio</td>
                             <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getRendimiento_patrimonio() . "%"; ?></td><?php } ?>
                         </tr>
+                         <tr>
+                             <td class="">Ver Estados</td>
+                            <?php foreach ($ratio as $lista) { ?>
+                            
+                             <td class="">
+                                 <button class="btn btn-primary" onclick="abrir_estados('<?php echo $lista->getId(); ?>','<?php echo $lista->getPeriodo();?>')"> 
+                                        <i class="Medium material-icons prefix">visibility</i> 
+                                    </button>
+                                </td>
+                                <?php } ?>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -148,7 +159,7 @@ for ($i = 0; $i < count($lista_balance); $i++) {
                 <table class="table table-striped table-bordered" id="tabla_cliente_juridico">
 
                     <thead>
-                    <th>Codigo</th>
+                    <th class="text-center">Codigo</th>
                     <th class="text-center">Asesor</th>
                     <th class="text-center">Monto de prestamo</th>
                     <th class="text-center">Estado de Prestamo</th>
@@ -163,7 +174,7 @@ for ($i = 0; $i < count($lista_balance); $i++) {
                                 <th class="text-center"><?php echo $lista['1']; ?></th>
                                 <th class="text-center"><?php echo $lista['2']; ?></th>
                                 <td class="text-center">
-                                    <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['7']; ?>')"> 
+                                    <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['3']; ?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>
@@ -176,6 +187,28 @@ for ($i = 0; $i < count($lista_balance); $i++) {
         </div>
     </div>
 </section>
+<script>
+function abrir_expediente(id_prestamo){
+    var url = "./ver_pagos.php?id_prestamo=" +id_prestamo;
+    
+    var a = document.createElement("a");
+		a.target = "_blank";
+		a.href = url;
+		a.click();
+}
+function abrir_estados(id_persona,periodo){
+    var url = "./ver_Estados.php?id_prestamo=" +id_persona + "&periodo="+periodo;
+    
+    var a = document.createElement("a");
+		a.target = "_blank";
+		a.href = url;
+		a.click();
+}
+
+
+</script>
+
 <?php
+
 include_once '../plantilla/pie.php';
 ?>
