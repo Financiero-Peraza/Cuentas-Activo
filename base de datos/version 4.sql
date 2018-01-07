@@ -182,6 +182,11 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`usuario` (
   PRIMARY KEY (`id_usuario`) )
 ENGINE = InnoDB;
 
+INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `zona`, `dui`, `pass`, `nivel`) VALUES
+(1, 'asesor1', 'Martinez Perez', 'Paracentral', '12345678-9', '1111', '1'),
+(2, 'asesor2', 'Mejia Navarrete', 'Oriente', '98765432-1', '2222', '1'),
+(3, 'admin01', 'admin01', 'NINGUNA', '22323232-2', 'admin01', '2');
+
 
 -- -----------------------------------------------------
 -- Table `instituciones_financieras`.`prestamo`
