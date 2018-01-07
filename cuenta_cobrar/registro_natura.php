@@ -39,7 +39,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="form-group">
                                         <div class="form-line">
                                             <span class="input-group-addon" id="basic-addon1">Dui</span>
-                                            <input type="text" class="form-control text-center" name="dui_natural" placeholder="DUI..." required="">
+                                            <input type="text" class="form-control text-center" name="dui_natural"  id="Dui_fia_per" placeholder="DUI..." required="">
                                         </div>
                                     </div>
                                 </div> 
@@ -47,7 +47,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="form-group">
                                         <div class="form-line">
                                             <span class="input-group-addon" id="basic-addon1">Nit</span>
-                                            <input type="text" class="form-control text-center" name="nit_natural" placeholder="NIT..." required="">
+                                            <input type="text" class="form-control text-center" name="nit_natural" id="Nit_fia_per" placeholder="NIT..." required="">
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="form-group">
                                         <div class="form-line">
                                             <span class="input-group-addon" id="basic-addon1">Telefono</span>
-                                            <input type="text" class="form-control text-center" name="telefono_natural" placeholder="TELEFONO..." required="">
+                                            <input type="text" class="form-control text-center" name="telefono_natural" id="ref_Telefono" placeholder="TELEFONO..." required="">
                                         </div>
                                     </div>
                                 </div> 

@@ -110,7 +110,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <label>HUBICACION</label> 
+                                                    <label>UBICACION</label> 
                                                     <input type="text"class="form-control text-center"  id="hubica" name="hubica" placeholder="HUBICACION...">
                                                 </div>
                                             </div>

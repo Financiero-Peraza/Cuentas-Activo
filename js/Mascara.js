@@ -1,5 +1,28 @@
         $(document).ready(function() {
-
+///////////////////////////////////////////////////////////////////los mios
+            $("#Telefono_fia_per").inputmask({
+                mask: ["9999-9999", "", ],
+                keepStatic: true
+            });
+            $("#ref_Telefono").inputmask({
+                mask: ["9999-9999", "", ],
+                keepStatic: true
+            });
+            
+             $("#Dui_fia_per").inputmask({
+                mask: ["99999999-9", "", ],
+                keepStatic: true
+            });
+            
+            
+            
+            $("#Nit_fia_per").inputmask({
+                mask: ["9999-999999-999-9", "", ],
+                keepStatic: true
+            });
+            
+            
+////////////////////////////////////////////////los que venian por defecto
             $("#telefone").inputmask({
                 mask: ["(99) 9999-9999", "(99) 99999-9999", ],
                 keepStatic: true

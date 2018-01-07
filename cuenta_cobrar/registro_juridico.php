@@ -103,7 +103,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <span class="input-group-addon" id="basic-addon1">DUI REPRESENTANTE JURIDICO</span>
-                                                    <input type="text" class="form-control text-center" name="nameDuiJuridico" placeholder="DUI DEL REPRESENTANTE JURIDICO" required="">
+                                                    <input type="text" class="form-control text-center" name="nameDuiJuridico" id="Dui_fia_per" placeholder="DUI DEL REPRESENTANTE JURIDICO" required="">
                                                 </div>
                                             </div>
                                         </div>
@@ -111,7 +111,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <span class="input-group-addon" id="basic-addon1">NIT REPRESENTANTE JURIDICO</span>
-                                                    <input type="text" class="form-control text-center" name="nameNitJuridico" placeholder="NIT DEL REPRESENTANTE JURIDICO" required="">
+                                                    <input type="text" class="form-control text-center" name="nameNitJuridico" id="Nit_fia_per" placeholder="NIT DEL REPRESENTANTE JURIDICO" required="">
                                                 </div>
                                             </div>
                                         </div>
