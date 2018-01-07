@@ -80,6 +80,8 @@ $lista = array();
                     foreach ($resultado as $fila) {
                         $estado = new estado_resultado();
                         
+                        $estado->setId_persona_juridica($fila['id_persona_juridica']);
+                        
                         $estado->setIngreso_venta($fila['ingreso_ventas']);
                         $estado->setCosto_venta($fila['costo_venta']);
                         $estado->setUtilidad_bruta($fila['utilidad_bruta']);

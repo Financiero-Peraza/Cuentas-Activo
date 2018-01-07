@@ -158,32 +158,27 @@ prestamo.id_prestamo = '$id'";
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
 
-//                if (count($resultado)) {
-//                    foreach ($resultado as $fila) {
-//                        $prestamo = new presamo();
-//
-//                        $prestamo->setId_prestamo($fila['id_prestamo']);
-//                        $prestamo->setId_asesor($fila['id_asesor']);
-//                        $prestamo->setPrestamo_original($fila['prestamo_original']);
-//                        $prestamo->setSaldo_actual($fila['saldo_actual']);
-//                        $prestamo->setMora_acumulada($fila['mora_acumulada']);
-//                        $prestamo->setIntereses_acumulados($fila['intereses_acumulados']);
-//                        $prestamo->setEstado($fila['estado']);
-//                        $prestamo->setFecha($fila['fecha']);
-//                        $prestamo->setTiempo($fila['tiempo']);
-//                        $prestamo->setTasa_interes($fila['tasa_interes']);
-//                        $prestamo->setTipo_credito($fila['tipo_credito']);
-//                                               
-//
-//                        $lista[] = $prestamo;
-//                    }
-//                }
+                
             } catch (PDOException $exc) {
                 print('ERROR' . $exc->getMessage());
             }
         }
 
         return $resultado;
+    }
+    
+    public static function aprobar_prestamo($conexion, $id) {
+         $respuesta = false;
+        if (isset($conexion)) {
+            try {
+                $sql = "UPDATE prestamo SET estado = 'APROBADO' where id_prestamo = '$id'" ;
+                $sentencia = $conexion->prepare($sql);
+                $respuesta = $sentencia->execute();
+            } catch (PDOException $exc) {
+                echo $exc->getTraceAsString();
+            }
+        }
+        return $respuesta;
     }
 }
 

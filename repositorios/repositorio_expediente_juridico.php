@@ -29,15 +29,11 @@ class repositorio_expediente_juridico {
     }
     
     public static function  calculo_ratios ($balance, $estado){
-            $ratio = new ratios();
+    //$estado = new estado_resultado();
+        $ratio = new ratios();
                 
-            //$estado = new estado_resultado();
-        $ratio->setPeriodo($estado->getPeriodo());
+        $ratio->setPeriodo($balance->getPeriodo());
         $ratio->setId($estado->getId_persona_juridica());
-        
-        echo 'periodo y id ';
-        echo $estado->getPeriodo(); 
-        echo $estado->getId_persona_juridica();
         
         $ratio->setLiquidez_corriente(  round  ($balance->getTotal_activo_corriente() / $balance->getTotal_pasivo_corriente(),2) );
         $ratio->setRazon_rapida(   round(  ($balance->getTotal_activo_corriente() -$balance->getInventarios()) / $balance->getTotal_pasivo_corriente(),2 ));

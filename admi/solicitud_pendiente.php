@@ -12,11 +12,23 @@ include_once '../app/Conexion.php';
 include_once '../repositorios/repositorio_expediente_juridico.php';
 include_once '../modelos/presamo.php';
 include_once '../repositorios/repositorio_prestamo.php';
-
 Conexion::abrir_conexion();
+if (isset($_REQUEST['id_prestamo'])) {
+
+    if (repositorio_prestamo::aprobar_prestamo(Conexion::obtener_conexion(), $_REQUEST['id_prestamo'])) {
+        echo "<script>
+        alert('prestamo actualizado');
+        location.href='solicitud_pendiente.php';
+        </script>";
+    }
+    
+}else{
+
 
 $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_juridica(Conexion::obtener_conexion());
 ?>    
+
+
 <section class="content">
     <div class="container-fluid">
         <div class="panel" name="libros">
@@ -30,6 +42,7 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_juridica(Conexi
             <div class="panel-body">
                 <table padding="20px" class="table table-striped" id="data-table-simple">
                     <thead class="">
+                    <th class="text-center">Aprobar</th>
                     <th class="text-center">Asesor</th>
                     <th class="text-center">Solicitante</th>
                     <th class="text-center">Tipo Prestamo</th>
@@ -42,6 +55,11 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_juridica(Conexi
                     <tbody>
                         <?php foreach ($lista_prestamo as $lista) { ?>
                             <tr>
+                                <td class="text-center">
+                                    <button class="btn btn-success" onclick="aprobar_credito('<?php echo $lista['8'];?>')"> 
+                                        <i class="Medium material-icons prefix">check_circle</i> 
+                                    </button>
+                                </td>
                                 <th class="text-center"><?php echo $lista['4'];?></th>
                                 <th class="text-center"><?php echo $lista['2'];?></th>
                                 <th class="text-center"><?php echo $lista['1'];?></th>
@@ -49,7 +67,7 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_juridica(Conexi
                                 <th class="text-center"><?php echo "$". $lista['3'];?></th>
                                 <th class="text-center"><?php echo $lista['6'];?></th>
                                  <td class="text-center">
-                                     <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['7'];?>')"> 
+                                     <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['8'];?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>
@@ -72,8 +90,14 @@ function abrir_expediente(id_juridico){
 		a.href = url;
 		a.click();
 }
+
+function aprobar_credito(id_prestamo){
+    location.href="solicitud_pendiente.php?id_prestamo=" +id_prestamo, "_parent";
+}
+
 </script>
 
 <?php
+}
 include_once '../plantilla/pie.php';
 ?>

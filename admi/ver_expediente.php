@@ -197,7 +197,7 @@ function abrir_expediente(id_prestamo){
 		a.click();
 }
 function abrir_estados(id_persona,periodo){
-    var url = "./ver_Estados.php?id_prestamo=" +id_persona + "&periodo="+periodo;
+    var url = "./ver_Estados.php?id_persona=" +id_persona + "&periodo="+periodo;
     
     var a = document.createElement("a");
 		a.target = "_blank";
