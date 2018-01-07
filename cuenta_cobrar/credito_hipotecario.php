@@ -71,8 +71,8 @@ include_once '../plantilla/barra_lateral_usuario.php';
         </div>
         <!--    FIN DE DATOS-->       
 
-        <!--INICIO REFERENCIA-->
-        <div class="container-fluid">
+        <!--INICIO BIEN-->
+        <div class="container-fluid" id="containeBien">
             <!-- Basic Validation -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -129,7 +129,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                 </div>
             </div>
         </div>
-        <!--FIN DE REFERENCIA-->
+        <!--FIN DE BIEN-->
 
         <!--INICIO DATO DE CREDITO-->
         <div class="container-fluid">
@@ -154,7 +154,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <select class="form-control show-tick" required="" id="mese_per" name="mese_per" onchange="interes_hp(this)">
+                                                <select class="form-control show-tick" required="" id="mese_p" name="mese_p" onchange="interes_hp2(this)">
                                                     <option value="">SELECCIONE EL NUMERO DE MESES</option>
                                                     <?php
                                                     $n = 12;
@@ -322,7 +322,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
 
         return okk;
     }
-    function interes_hp(valor) {
+    function interes_hp2(valor) {
         valor=valor.value; //alert("aso "+valor);
         switch (valor) {
             case '12':

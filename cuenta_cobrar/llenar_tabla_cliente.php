@@ -12,7 +12,8 @@ foreach ($listado as $fila) {
     ?>
 <script type="text/javascript">
       var idta = "<?php echo $id; ?>"
-     var codigo="<?php echo $fila['id']; ?>";    
+     var codigo="<?php echo $fila['id']; ?>";  
+     var n="<?php echo $_POST['n']; ?>";  
    var pass=doSearch(codigo);
    if(pass){
        
@@ -32,8 +33,9 @@ foreach ($listado as $fila) {
             "<td>"+dir+"</td>",
             "</tr>"
             );
-  
+  if(n==1)
     $("#tabla_cliente_cpersonal tbody").empty()//elino el anterior
+
     $("table#"+idta+" tbody").append(linea);
    
     }else{

@@ -50,9 +50,7 @@
                     <li>
                         <a href="../cuenta_cobrar/credito_personal.php">Personal</a>
                     </li>
-                    <li>
-                        <a href="../cuenta_cobrar/credito_hipotecario.php">Hipotecario</a>
-                    </li>
+                  
                     <li>
                         <a href="../cuenta_cobrar/credito_agropecuario.php">Agropecuario</a>
                     </li>
@@ -139,6 +137,48 @@
     <!-- #Footer -->
 </aside>
 <!-- #END# Left Sidebar -->
-<script>
+   <script type="text/javascript">
+    $(document).ready(function () {     
 
+
+        $('.formNatural').submit(function () {
+            //var codigo=$('#codigol').val();
+            //alert(codigo);
+            var formData = new FormData(document.getElementById('credito_personal'))
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function (resp) {
+                if (resp == 1) {
+                    swal({
+                        title: "Exito",
+                        text: "Autor Registrado",
+                        type: "success"},
+                            function () {
+                                document.getElementById('credito_personal').reset();
+
+                                recargarCombos();
+
+                            }
+
+                    );
+
+                } else {
+                    swal("Oops", resp, "error")
+
+                }
+            })
+            return false;
+        })
+
+
+       
+
+    });
+    
 </script>
