@@ -15,7 +15,17 @@ class presamo {
     private $fecha;
     private $tiempo;
     private $tasa; 
+    private $tasa_interes; 
     
+    function getTasa_interes() {
+        return $this->tasa_interes;
+    }
+
+    function setTasa_interes($tasa_interes) {
+        $this->tasa_interes = $tasa_interes;
+    }
+
+        
     function getTasa() {
         return $this->tasa;
     }

@@ -19,9 +19,37 @@
 include_once '../plantilla/cabecera.php';
 include_once '../plantilla/barraSuperior.php';
 include_once '../plantilla/barra_lateral_usuario.php';
+
+if (isset($_REQUEST['nameEnviar'])) {
+    include_once '../modelos/presamo.php';
+    include_once '../modelos/expediente_juridico.php';
+    include_once '../repositorios/repositorio_prestamo.php';
+    include_once '../repositorios/repositorio_expediente_juridico.php';
+    include_once '../app/Conexion.php';
+    
+    $prestamo = new presamo();
+    $prestamo->setPrestamo_original($_REQUEST['monto_per']);
+    $prestamo->setTiempo($_REQUEST['mese_per']);
+    $prestamo->setTasa($_REQUEST['tasa_per']);
+    Conexion::abrir_conexion();
+    
+    if (repositorio_prestamo::insertar_prestamo_juridico(Conexion::obtener_conexion(), $prestamo)) {
+         $id_prestamo = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());
+         $id_persona = $_REQUEST['codCliente_cpersonal'];
+         
+         
+         
+    }
+    
+    
+    
+        
+    
+}else {
+
 ?>
 
-<form action="" method="post" name="credito_personal" id="credito_personal" onsubmit="return validarTablas_cper()">
+<form action="credito_juridico.php" method="get" name="credito_personal" id="credito_personal" >
     <input type="hidden" id="pas_cp" name="pas_cp"/>
     <input type="radio" id="uno" checked="" style="visibility: hidden"/>
     <section class="content">
@@ -54,8 +82,8 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                 <th>Codigo</th>
                                 <th>Nombre de la empresa</th>
                                 <th>Numero de empresa</th>
-                                <th>Dui de la empresa</th>
-                                <th>Nit de la empresa</th>
+                                <th>Dui de Representante</th>
+                                <th>Nit de Representante</th>
                                
                                 </thead>
                                 <tbody>
@@ -88,7 +116,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="number" required="" min="1500" max="40000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="MONTO SOLICITADO($)... MINIMO $1,500, MAXIMO $40,000">
+                                                <input type="number" required="" min="1500" max="40000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="MONTO SOLICITADO($)...">
                                             </div>
                                         </div>
                                     </div>
@@ -183,8 +211,8 @@ include_once '../plantilla/barra_lateral_usuario.php';
 
 
                                 <div class="text-center">
-                                    <button type="submit" form="credito_personal" class="btn btn-primary m-t-15 waves-effect">GUARDAR</button>
-                                    <button type="reset" form="credito_personal" class="btn btn-primary m-t-15 waves-effect">CANCELAR</button>
+                                    <button type="submit" name="nameEnviar" value="ok" class="btn btn-primary m-t-15 waves-effect">GUARDAR</button>
+                                    <button type="reset"  class="btn btn-primary m-t-15 waves-effect">CANCELAR</button>
                                 </div>
 
                             </div>
@@ -306,113 +334,6 @@ include_once '../plantilla/barra_lateral_usuario.php';
     }
 </script>
 <?php
-include_once '../plantilla/pie.php';
-if (isset($_REQUEST["pas_cp"])) {
-
-    include_once '../app/Conexion.php';
-    include_once '../modelos/fiador.php';
-    include_once '../modelos/referencias.php';
-    include_once '../modelos/presamo.php';
-    include_once '../modelos/expediente_natural.php';
-    include_once '../repositorios/repositorio_fiador.php';
-    include_once '../repositorios/repositorio_referencias.php';
-    include_once '../repositorios/repositorio_prestamo.php';
-    include_once '../repositorios/repositorio_expediente_natural.php';
-
-
-
-    Conexion::abrir_conexion();
-//echo '<script language="javascript">alert("juas");</script>'; 
-
-    $fiador = new fiador();
-    $fiador->setNombre($_REQUEST["Nombre_fia_per"]);
-    $fiador->setApellido($_REQUEST["Apellido_fia_per"]);
-    $fiador->setCorreo($_REQUEST["Email_fia_per"]);
-    $fiador->setDireccion($_REQUEST["Direccion_fia_per"]);
-    $fiador->setDui($_REQUEST["Dui_fia_per"]);
-    $fiador->setNit($_REQUEST["Nit_fia_per"]);
-    $fiador->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
-    $fiador->setId_telefono($_REQUEST["Telefono_fia_per"]);
-    $fiador->setLugar_trabajo($_REQUEST["Trabajo_fia_per"]);
-
-
-    $prestamo = new presamo();
-    $prestamo->setId_plan("1");
-    $prestamo->setId_asesor("1");
-    $prestamo->setPrestamo_original($_REQUEST["monto_per"]);
-    $prestamo->setId_plan("1");    
-    $devolucion = date("d-m-Y");
-    $devolucion = date_format(date_create($devolucion), 'Y-m-d');
-    $prestamo->setFecha($devolucion);
-    $prestamo->setTiempo($_REQUEST["mese_per"]);
-
-    
-
-
-    $referencias = new referencias();
-    $nombres = $_REQUEST["Nombre_fia_per"];
-    $apellidos = $_REQUEST["ape_ref"];
-    $tels = $_REQUEST["tel_ref"];
-    $l = count($_REQUEST["nombre_ref"]);
-    if (
-            repositorio_fiador::insertar_fiador(Conexion::obtener_conexion(), $fiador) &&
-            repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo) 
-            
-    ) { 
-        $prestamo1 = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());
-    $expediente = new expediente_natural();
-    $expediente->setId_prestamo($prestamo1);
-   $expediente->setPersona_natural($_REQUEST["codCliente_cpersonal"]);
-   repositorio_expediente_natural::insertar_expediente(Conexion::obtener_conexion(), $expediente);
-        for ($i = 0; $i < $l; $i++) {
-            $referencias->setNombre($nombres[$i]);
-            $referencias->setApellido($apellidos[$i]);
-            $referencias->setTelefono($tels[$i]);
-            $referencias->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
-            if (repositorio_referencias::insertar_referencia(Conexion::obtener_conexion(), $referencias)) {
-                echo "<script type='text/javascript'>";
-        echo 'swal({
-                    title: "Exito",
-                    text: "Credito registrado",
-                    type: "success"},
-                    function(){
-                    }
-                    );';
-        echo "</script>";
-            } else {
-                echo "<script type='text/javascript'>";
-                echo 'swal({
-                    title: "Ooops",
-                    text: "Credito no Registrado",
-                    type: "error"},
-                    function(){
-                    }
-                    );';
-//echo "alert('datos no atualizados')";
-//echo "location.href='inicio_b.php'";
-                echo "</script>";
-            }
-        }
-
-        //
-        //Conexion::cerrar_conexion();
-    } else {
-        echo "<script type='text/javascript'>";
-        echo 'swal({
-                    title: "Ooops",
-                    text: "Credito  no Registrado",
-                    type: "error"},
-                    function(){
-                       
-                       
-                     
-                        
-                    }
-
-                    );';
-//echo "alert('datos no atualizados')";
-//echo "location.href='inicio_b.php'";
-        echo "</script>";
-    }
 }
+include_once '../plantilla/pie.php';
 ?>
