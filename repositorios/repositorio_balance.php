@@ -56,7 +56,7 @@ class repositorio_balance {
 
 
                 $resultado = $sentencia->execute();
-                echo 'balance guardada';
+                
             } catch (PDOException $ex) {
                 echo 'balance no guardado';
                 print 'ERROR: ' . $ex->getMessage();

@@ -10,22 +10,12 @@ include_once '../repositorios/repositorio_balance.php';
 include_once '../repositorios/repositorio_estado_resultado.php';
 include_once '../app/Conexion.php';
 include_once '../repositorios/repositorio_expediente_juridico.php';
-;
+include_once '../modelos/presamo.php';
+include_once '../repositorios/repositorio_prestamo.php';
 
 Conexion::abrir_conexion();
 
-$lista_balance = repositorio_balance::lista_balance(Conexion::obtener_conexion(), '5');
-$lista_estado = repositorio_estado_resultado::lista_estado(Conexion::obtener_conexion(), '5');
-
-$ratio = array();
-
-for ($i = 0; $i < count($lista_balance); $i++) {
-
-    $balance = $lista_balance[$i];
-    $estado = $lista_estado[$i];
-
-    $ratio[] = repositorio_expediente_juridico::calculo_ratios($balance, $estado);
-}
+$lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_juridica(Conexion::obtener_conexion());
 ?>    
 <section class="content">
     <div class="container-fluid">
@@ -33,60 +23,39 @@ for ($i = 0; $i < count($lista_balance); $i++) {
             <div class="panel-heading text-center">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>Ratios</h3>
+                        <h3>Solicitudes de Creditos empresariales</h3>
                     </div>
-
-
                 </div>
             </div>
             <div class="panel-body">
-
                 <table padding="20px" class="table table-striped" id="data-table-simple">
                     <thead class="">
-                    <th class="">Razon</th>
-                        <?php foreach ($ratio as $lista) { ?><th class="">Periodo <?php echo $lista->getPeriodo();?></th><?php } ?>
+                    <th class="text-center">Asesor</th>
+                    <th class="text-center">Solicitante</th>
+                    <th class="text-center">Tipo Prestamo</th>
+                    <th class="text-center">Sector de Empresa</th>
+                    <th class="text-center">Monto solicitado($)</th>
+                    <th class="text-center">Tiempo(Meses)</th>
+                    <th class="text-center">Expediente</th>
+
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Liquidez Corriente</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getLiquidez_corriente(); ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Razon Rapida</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getRazon_rapida(); ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Rotacion de Inventarios</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getRotacion_inventarios(). " veces" ; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Periodo Promedio de Cobro</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getPeriodo_cobro(). " dias";  ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Indice de Endeudamiento</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getIndice_endeudamiento() . "%"; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Razon de cargo de interes fijo</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getCargo_interes_fijo(); ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Margen de Utilidad Bruta</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getMargen_utilidad_bruta() ."%" ; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Margen de Utilidad Neta</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getMargen_utilidad_neta()."%"; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Rendimiento sobre activos totales</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getRendimiento_activo()."%"; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Rendimiento sobre patrimonio</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getRendimiento_patrimonio()."%"; ?></td><?php } ?>
-                        </tr>
+                        <?php foreach ($lista_prestamo as $lista) { ?>
+                            <tr>
+                                <th class="text-center"><?php echo $lista['4'];?></th>
+                                <th class="text-center"><?php echo $lista['2'];?></th>
+                                <th class="text-center"><?php echo $lista['1'];?></th>
+                                <th class="text-center">Servicio</th>
+                                <th class="text-center"><?php echo "$". $lista['3'];?></th>
+                                <th class="text-center"><?php echo $lista['6'];?></th>
+                                 <td class="text-center">
+                                     <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['7'];?>')"> 
+                                        <i class="Medium material-icons prefix">visibility</i> 
+                                    </button>
+                                </td>
+                            </tr>
+                            
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -94,6 +63,11 @@ for ($i = 0; $i < count($lista_balance); $i++) {
     </div>
 </section>
 
+<script>
+function abrir_expediente(id_juridico){
+    location.href="./ver_ratios.php?id_juridico=" +id_juridico, "_parent";
+}
+</script>
 
 <?php
 include_once '../plantilla/pie.php';

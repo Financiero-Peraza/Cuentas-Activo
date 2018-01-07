@@ -19,7 +19,7 @@ class repositorio_juridico {
                 $sentencia = $conexion->prepare($sql);
 
                 $resultado = $sentencia->execute();
-                echo 'persona guardada';
+                
             } catch (PDOException $ex) {
                 echo 'persona no guardado';
                 print 'ERROR: ' . $ex->getMessage();

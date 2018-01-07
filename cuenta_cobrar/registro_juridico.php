@@ -59,13 +59,16 @@ if (isset($_REQUEST['nameEnviar'])) {
         $estado->setGasto_interes($_REQUEST['nameGastoInteres']);
                 
         repositorio_estado_resultado::insertar_estado_resultado(Conexion::obtener_conexion(), $estado);
-        
-        
-        
+         
+        echo '<script>
+    location.href="./registro_juridico.php";
+
+</script>';
     }
     
 } else {
     ?>
+
 <form action="registro_juridico.php" method="GET">
         <!--    INICIO DE DATOS-->
         <section class="content">

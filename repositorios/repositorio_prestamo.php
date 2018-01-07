@@ -132,6 +132,58 @@ prestamo.id_prestamo = '$id'";
         return $prestamo_insertado;
     }
    
+    public static function lista_prestamo_pendiente_juridica($conexion) {
+        $lista = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        usuario.nombre,
+                        prestamo.tipo_credito,
+                        persona_juridica.nombre,
+                        prestamo.prestamo_original,
+                        usuario.apellido,
+                        persona_juridica.categoria,
+                        prestamo.tiempo,
+                        persona_juridica.id_persona_juridica,
+                        prestamo.id_prestamo
+                        FROM
+                        prestamo
+                        INNER JOIN usuario ON prestamo.id_asesor = usuario.id_usuario
+                        INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
+                        WHERE prestamo.estado = 'PENDIENTE'";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+//                if (count($resultado)) {
+//                    foreach ($resultado as $fila) {
+//                        $prestamo = new presamo();
+//
+//                        $prestamo->setId_prestamo($fila['id_prestamo']);
+//                        $prestamo->setId_asesor($fila['id_asesor']);
+//                        $prestamo->setPrestamo_original($fila['prestamo_original']);
+//                        $prestamo->setSaldo_actual($fila['saldo_actual']);
+//                        $prestamo->setMora_acumulada($fila['mora_acumulada']);
+//                        $prestamo->setIntereses_acumulados($fila['intereses_acumulados']);
+//                        $prestamo->setEstado($fila['estado']);
+//                        $prestamo->setFecha($fila['fecha']);
+//                        $prestamo->setTiempo($fila['tiempo']);
+//                        $prestamo->setTasa_interes($fila['tasa_interes']);
+//                        $prestamo->setTipo_credito($fila['tipo_credito']);
+//                                               
+//
+//                        $lista[] = $prestamo;
+//                    }
+//                }
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
 }
 
 ?>

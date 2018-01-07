@@ -16,11 +16,20 @@ class presamo {
     private $tiempo;
     private $tasa; 
     private $tasa_interes; 
+    private $tipo_credito; 
     
     function getTasa_interes() {
         return $this->tasa_interes;
     }
+    function getTipo_credito() {
+        return $this->tipo_credito;
+    }
 
+    function setTipo_credito($tipo_credito) {
+        $this->tipo_credito = $tipo_credito;
+    }
+
+    
     function setTasa_interes($tasa_interes) {
         $this->tasa_interes = $tasa_interes;
     }

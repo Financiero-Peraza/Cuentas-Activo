@@ -52,9 +52,9 @@ class repositorio_estado_resultado {
                 $sentencia->bindParam(':impuestos', $imputestos, PDO::PARAM_STR);
                 $sentencia->bindParam(':utilidad_neta', $utilidad_neta, PDO::PARAM_STR);
 
-
                 $resultado = $sentencia->execute();
-                echo ' estado guardada';
+                
+                
             } catch (PDOException $ex) {
                 echo 'balance no guardado';
                 print 'ERROR: ' . $ex->getMessage();
