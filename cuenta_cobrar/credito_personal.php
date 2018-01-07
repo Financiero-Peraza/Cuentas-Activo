@@ -21,7 +21,7 @@ include_once '../plantilla/barraSuperior.php';
 include_once '../plantilla/barra_lateral_usuario.php';
 ?>
 
-<form action="" method="post" name="credito_personal" id="credito_personal" onsubmit="return validarTablas_cper()" enctype="multipart/form-data" >
+<form action="" method="post" class="formNatural" name="credito_personal" id="credito_personal" onsubmit="return validarTablas_cper()" enctype="multipart/form-data" >
     <input type="hidden" id="pas_cp" name="pas_cp"/>
     <input type="hidden" id="n" name="n" value="1"/>
     <input type="radio" id="uno" checked="" style="display: none"/>
@@ -131,7 +131,6 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                    <div class="col-md-6">
                                 <div class="file-field input-field">
 
-<<<<<<< HEAD
 
                                     <div class="btn">
                                         <span><i class="fa fa-address-book" aria-hidden="true"></i>Biografia</span>
@@ -172,63 +171,27 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                                 <div class="form-line">
                                                     <input type="text"class="form-control text-center" required="" minlength="3" id="Nombre_fia_per" name="Nombre_fia_per" placeholder="NOMBRE...">
                                                 </div>
-=======
-            <!-- Basic Validation -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-fiador">
-                                <h2 class="text-center">DATOS DE FIADOR</h2>
-                            </a></div>
-                        <div id="collapse-fiador" class="panel-collapse collapse">
-                            <div class="body">
-                                <div class="row clearfix">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">NOMBRE</span>
-                                                <input type="text"class="form-control text-center" required="" minlength="3" id="Nombre_fia_per" name="Nombre_fia_per" placeholder="NOMBRE...">
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
                                             </div>
                                         </div>
 
-<<<<<<< HEAD
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <input type="text" class="form-control text-center" required="" minlength="3" id="Apellido_fia_per" name="Apellido_fia_per" placeholder="APELLIDO...">
                                                 </div>
-=======
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">APELLIDO</span>
-                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Apellido_fia_per" name="Apellido_fia_per" placeholder="APELLIDO...">
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
                                             </div>
                                         </div>
                                     </div>
 
-<<<<<<< HEAD
                                     <div class="row clearfix">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <input type="text" class="form-control text-center" required="" minlength="3" id="Direccion_fia_per" name="Direccion_fia_per" placeholder="DIRECCION...">
                                                 </div>
-=======
-                                <div class="row clearfix">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">DIRECCION</span>
-                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Direccion_fia_per" name="Direccion_fia_per" placeholder="DIRECCION...">
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
                                             </div>
                                         </div>
 
-<<<<<<< HEAD
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -266,49 +229,6 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                                 <div class="form-line">
                                                     <input type="text" class="form-control text-center" required="" minlength="3" id="Trabajo_fia_per" name="Trabajo_fia_per" placeholder="LUGAR DE TRABAJO...">
                                                 </div>
-=======
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">TELEFONO</span>
-                                                <input type="tel" class="form-control text-center" required="" minlength="3" id="Telefono_fia_per" name="Telefono_fia_per" placeholder="TELEFONO...">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">DUI</span>
-                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Dui_fia_per" name="Dui_fia_per" placeholder="DUI...">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">NIT</span>
-                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Nit_fia_per" name="Nit_fia_per" placeholder="NIT...">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">EMAIL</span>
-                                                <input type="email" class="form-control text-center" required="" minlength="3" id="Email_fia_per" name="Email_fia_per" placeholder="EMAIL...">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">LUGAR DE TRABAJO</span>
-                                                <input type="text" class="form-control text-center" required="" minlength="3" id="Trabajo_fia_per" name="Trabajo_fia_per" placeholder="LUGAR DE TRABAJO...">
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
                                             </div>
                                         </div>
                                     </div>
@@ -318,7 +238,6 @@ include_once '../plantilla/barra_lateral_usuario.php';
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
             <!--FIN DE FIADOR-->
 
             <!--INICIO REFERENCIA-->
@@ -338,79 +257,32 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                                 <div class="form-line">
                                                     <input type="text"class="form-control text-center" id="ref_Nombre" name="ref_Nombre" placeholder="NOMBRE...">
                                                 </div>
-=======
-        </div>
-        <!--FIN DE FIADOR-->
-
-        <!--INICIO REFERENCIA-->
-        <div class="container-fluid">
-            <!-- Basic Validation -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-referencias">
-                                <h2 class="text-center">DATOS DE REFERENCIA</h2>
-                            </a> </div>
-                        <div id="collapse-referencias" class="panel-collapse collapse">
-                            <div class="body">
-                                <div class="row clearfix">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">NOMBRE</span>
-                                                <input type="text"class="form-control text-center" id="ref_Nombre" name="ref_Nombre" placeholder="NOMBRE...">
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
                                             </div>
                                         </div>
 
-<<<<<<< HEAD
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <input type="text" class="form-control text-center" id="ref_Apellido" name="ref_Apellido" placeholder="APELLIDO...">
                                                 </div>
-=======
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">APELLIDO</span>
-                                                <input type="text" class="form-control text-center" id="ref_Apellido" name="ref_Apellido" placeholder="APELLIDO...">
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
                                             </div>
                                         </div>
                                     </div>
 
-<<<<<<< HEAD
                                     <div class="row clearfix">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <input type="text" class="form-control text-center" id="ref_Direccion" name="ref_Direccion" placeholder="DIRECCION...">
                                                 </div>
-=======
-                                <div class="row clearfix">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">DIRECCION</span>
-                                                <input type="text" class="form-control text-center" id="ref_Direccion" name="ref_Direccion" placeholder="DIRECCION...">
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
                                             </div>
                                         </div>
 
-<<<<<<< HEAD
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <input type="tel" class="form-control text-center" id="ref_Telefono" name="ref_Telefono" placeholder="TELEFONO...">
                                                 </div>
-=======
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">TELEFONO</span>
-                                                <input type="tel" class="form-control text-center" id="ref_Telefono" name="ref_Telefono" placeholder="TELEFONO...">
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
                                             </div>
                                         </div>
                                     </div>
@@ -426,7 +298,6 @@ include_once '../plantilla/barra_lateral_usuario.php';
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
             <!--FIN DE REFERENCIA-->
 
             <!--INICIO DATO DE CREDITO-->
@@ -446,32 +317,9 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                                 <div class="form-line">
                                                     <input type="number" required="" min="1500" max="40000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="MONTO SOLICITADO($)... MINIMO $1,500, MAXIMO $40,000">
                                                 </div>
-=======
-        </div>
-        <!--FIN DE REFERENCIA-->
-
-        <!--INICIO DATO DE CREDITO-->
-        <div class="container-fluid">
-            <!-- Basic Validation -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-credito">
-                                <h2 class="text-center">DATOS DE CREDITO</h2>
-                            </a></div>
-                        <div id="collapse-credito" class="panel-collapse collapse in">
-                            <div class="body">
-                                <div class="row clearfix">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">MONTO SOLICITADO($)</span>
-                                                <input type="number" required="" min="1500" max="40000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="MONTO SOLICITADO($)... MINIMO $1,500, MAXIMO $40,000">
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
                                             </div>
                                         </div>
 
-<<<<<<< HEAD
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -486,38 +334,13 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                                         ?>
                                                     </select>
                                                 </div>
-=======
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="input-group-addon" id="basic-addon1">NUMERO DE MESES</span>
-                                            <div class="form-line">
-                                                <select class="form-control show-tick" required="" id="mese_per" name="mese_per">
-                                                    <option value="">SELECCIONE EL NUMERO DE MESES</option>
-                                                    <?php
-                                                    $n = 12;
-                                                    for ($i = 0; $i <= 7; $i++) {//echo '<script language="javascript">alert("'.$n.'");</script>'; 
-                                                        echo '<option value="' . $n . '">' . $n . ' meses</option>';
-                                                        $n = $n + 12;
-                                                    }
-                                                    ?>
-                                                </select>
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
                                             </div>
                                         </div>
 
-<<<<<<< HEAD
                                         <div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-line">
-=======
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">TASA DE INTERES</span>
-                                                <input type="number" required="" min="3" max="20" class="form-control text-center" id="tasa_per" name="tasa_per" placeholder="TASA">
-                                            </div>
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
 
                                                         <input type="number" required="" min="1" max="20" class="form-control text-center" readonly="" id="tasa_per" name="tasa_per" placeholder="TASA">
                                                     </div>
@@ -845,7 +668,6 @@ if (isset($_REQUEST["pas_cp"])) {
 
     Conexion::abrir_conexion();
 //echo '<script language="javascript">alert("juas");</script>'; 
-<<<<<<< HEAD
     if ($op == 1) {
         $fiador = new fiador();
         $fiador->setNombre($_REQUEST["Nombre_fia_per"]);
@@ -893,61 +715,6 @@ if (isset($_REQUEST["pas_cp"])) {
                 if (repositorio_referencias::insertar_referencia(Conexion::obtener_conexion(), $referencias)) {
                     echo "<script type='text/javascript'>";
                     echo 'swal({
-=======
-
-    $fiador = new fiador();
-    $fiador->setNombre($_REQUEST["Nombre_fia_per"]);
-    $fiador->setApellido($_REQUEST["Apellido_fia_per"]);
-    $fiador->setCorreo($_REQUEST["Email_fia_per"]);
-    $fiador->setDireccion($_REQUEST["Direccion_fia_per"]);
-    $fiador->setDui($_REQUEST["Dui_fia_per"]);
-    $fiador->setNit($_REQUEST["Nit_fia_per"]);
-    $fiador->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
-    $fiador->setId_telefono($_REQUEST["Telefono_fia_per"]);
-    $fiador->setLugar_trabajo($_REQUEST["Trabajo_fia_per"]);
-
-
-    $prestamo = new presamo();
-   // $prestamo->setId_plan("1");
-    $prestamo->setId_asesor("1");
-    $prestamo->setPrestamo_original($_REQUEST["monto_per"]);
-    $prestamo->setId_plan("1");
-    $devolucion = date("d-m-Y");
-    $devolucion = date_format(date_create($devolucion), 'Y-m-d');
-    $prestamo->setFecha($devolucion);
-    $prestamo->setTiempo($_REQUEST["mese_per"]);
-//<<<<<<< HEAD
-     $prestamo->setTasa($_REQUEST["tasa_per"]);
-    
-//=======
-
-
-//>>>>>>> 44d5c4e583aff4c67c28847d4da3ec0dd083359f
-
-
-    $referencias = new referencias();
-    $nombres = $_REQUEST["Nombre_fia_per"];
-    $apellidos = $_REQUEST["ape_ref"];
-    $tels = $_REQUEST["tel_ref"];
-    $l = count($_REQUEST["nombre_ref"]);
-    if (
-            repositorio_fiador::insertar_fiador(Conexion::obtener_conexion(), $fiador) &&
-            repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo)
-    ) {
-        $prestamo1 = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());
-        $expediente = new expediente_natural();
-        $expediente->setId_prestamo($prestamo1);
-        $expediente->setPersona_natural($_REQUEST["codCliente_cpersonal"]);
-        repositorio_expediente_natural::insertar_expediente(Conexion::obtener_conexion(), $expediente);
-        for ($i = 0; $i < $l; $i++) {
-            $referencias->setNombre($nombres[$i]);
-            $referencias->setApellido($apellidos[$i]);
-            $referencias->setTelefono($tels[$i]);
-            $referencias->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
-            if (repositorio_referencias::insertar_referencia(Conexion::obtener_conexion(), $referencias)) {
-                echo "<script type='text/javascript'>";
-                echo 'swal({
->>>>>>> d4f8edfb11de3d4ec5ac44e862c5809b70ae5662
                     title: "Exito",
                     text: "Credito registrado",
                     type: "success"},
