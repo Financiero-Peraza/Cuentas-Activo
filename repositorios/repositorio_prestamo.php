@@ -4,7 +4,7 @@ class repositorio_prestamo {
 
     public static function insertar_prestamo($conexion, $prestamo) {
         $prestamo_insertado = false;
-       // $prestamo = new presamo();
+        //$prestamo = new presamo();
         if (isset($conexion)) {
             try {
 
@@ -13,11 +13,11 @@ class repositorio_prestamo {
                 $fecha = $prestamo->getFecha();
                 $t = $prestamo->getTiempo();
                 $tasa = $prestamo->getTasa();
+                $tipo = $prestamo->getTipo_credito();
 
 
-
-                $sql = 'INSERT INTO prestamo (  id_asesor, prestamo_original, estado, proximo_pago, saldo_actual, fecha, tiempo,tasa_interes, mora_acumulada, intereses_acumulados, tasa_moratoria ) '
-                        . " values ( :user, :nombre, 'PENDIENTE', DATE_ADD( CURDATE( ), INTERVAL 1 MONTH ), :nombre, :fecha, :t, :tasa, '0', '0', '0')";
+                $sql = 'INSERT INTO prestamo (  id_asesor, prestamo_original, estado, proximo_pago, saldo_actual, fecha, tiempo,tasa_interes, mora_acumulada, intereses_acumulados, tasa_moratoria, tipo_credito ) '
+                        . " values ( :user, :nombre, 'PENDIENTE', DATE_ADD( CURDATE( ), INTERVAL 1 MONTH ), :nombre, :fecha, :t, :tasa, '0', '0', '0', :tipo)";
                 ///estos son alias para que PDO pueda trabajar 
                 $sentencia = $conexion->prepare($sql);
 
@@ -26,7 +26,8 @@ class repositorio_prestamo {
                 $sentencia->bindParam(':plan', $plan, PDO::PARAM_STR);
                 $sentencia->bindParam(':fecha', $fecha, PDO::PARAM_STR);
                 $sentencia->bindParam(':t', $t, PDO::PARAM_STR);
-                 $sentencia->bindParam(':tasa', $tasa, PDO::PARAM_STR);
+                $sentencia->bindParam(':tasa', $tasa, PDO::PARAM_STR);
+                $sentencia->bindParam(':tipo', $tipo, PDO::PARAM_STR);
                 // $sentencia->bindParam(':nit1', $nit1, PDO::PARAM_STR);
 
 
