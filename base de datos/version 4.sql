@@ -25,17 +25,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `instituciones_financieras`.`tipo_credito`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`tipo_credito` (
-  `id_tipo_credito` INT NOT NULL AUTO_INCREMENT ,
-  `nombre` VARCHAR(20) NULL ,
-  `terminis_condiciones` VARCHAR(300) NULL ,
-  PRIMARY KEY (`id_tipo_credito`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `instituciones_financieras`.`referencias`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`referencias` (
@@ -180,27 +169,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `instituciones_financieras`.`plan_pago`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`plan_pago` (
-  `id_plan` INT NOT NULL AUTO_INCREMENT ,
-  `id_tipo_credito` INT NOT NULL ,
-  `tasa` FLOAT NULL ,
-  `periodo_minimo` INT NULL ,
-  `periodo_maximo` FLOAT NULL ,
-  `monto_minimo` FLOAT NULL ,
-  `monto_maximo` FLOAT NULL ,
-  PRIMARY KEY (`id_plan`) ,
-  INDEX `fk_plan_pago_tipo_credito1_idx` (`id_tipo_credito` ASC) ,
-  CONSTRAINT `fk_plan_pago_tipo_credito1`
-    FOREIGN KEY (`id_tipo_credito` )
-    REFERENCES `instituciones_financieras`.`tipo_credito` (`id_tipo_credito` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `instituciones_financieras`.`usuario`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`usuario` (
@@ -220,7 +188,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`prestamo` (
   `id_prestamo` INT NOT NULL AUTO_INCREMENT ,
-  `id_plan` INT NOT NULL ,
   `id_asesor` INT NOT NULL ,
   `prestamo_original` FLOAT NULL ,
   `saldo_actual` FLOAT NULL ,
@@ -230,14 +197,10 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`prestamo` (
   `proximo_pago` DATE NULL ,
   `fecha` DATE NULL ,
   `tiempo` VARCHAR(45) NULL ,
+  `tasa_interes` FLOAT NULL ,
+  `tasa_moratoria` FLOAT NULL ,
   PRIMARY KEY (`id_prestamo`) ,
-  INDEX `fk_prestamo_plan_pago1_idx` (`id_plan` ASC) ,
   INDEX `fk_prestamo_asesor_credito1_idx` (`id_asesor` ASC) ,
-  CONSTRAINT `fk_prestamo_plan_pago1`
-    FOREIGN KEY (`id_plan` )
-    REFERENCES `instituciones_financieras`.`plan_pago` (`id_plan` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_prestamo_asesor_credito1`
     FOREIGN KEY (`id_asesor` )
     REFERENCES `instituciones_financieras`.`usuario` (`id_usuario` )

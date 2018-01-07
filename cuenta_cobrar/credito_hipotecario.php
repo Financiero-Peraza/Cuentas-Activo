@@ -1,6 +1,19 @@
-<script>
-    
-    
+<script language="javascript">
+    $(document).ready(function () {
+
+        $('form').keypress(function (e) {
+            if (e == 13) {
+                return false;
+            }
+        });
+
+        $('input').keypress(function (e) {
+            if (e.which == 13) {
+                return false;
+            }
+        });
+
+    });
 </script>
 
 
@@ -10,12 +23,11 @@ include_once '../plantilla/barraSuperior.php';
 include_once '../plantilla/barra_lateral_usuario.php';
 ?>
 
-
-    <section class="content">
-        <!--    INICIO DE DATOS-->
-        <form action="newhp.php" method="post" name="credito_hipotecario" onsubmit="enviarhp()" id="credito_hipotecario" class="credito_hipotecarioo"  enctype="multipart/form-data">
+<form action="" method="post" name="credito_hipotecario" id="credito_personal" onsubmit="return validarTablas_hp()" enctype="multipart/form-data">
     <input type="hidden" id="pas_hp" name="pas_cp"/>
     <input type="radio" id="uno" checked="" style="visibility: hidden"/>
+    <section class="content">
+        <!--    INICIO DE DATOS-->
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -92,16 +104,22 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                 </div>
 
 
-                                  <div class="file-field input-field">
+                                <div class="row clearfix">
+                                    
+                                                <div class="file-field">
 
 
-                                    <div class="btn">
-                                        <span><i class="fa fa-address-book" aria-hidden="true"></i>Biografia</span>
-                                        <input type="file" accept=".pdf" required name="bio1">
+                                                    <div class="btn ">
+                                                        <span><i class="fa fa-address-book" aria-hidden="true"></i>ANEXO</span>
+                                                        <input type="file" accept=".pdf" required name="anexo1" onchange="asignar(this.value)">
+                                                    </div>
+                                                    <div class="file-path-wrapper">
+                                                        <input type="text" id="anexo" name="anexo" class="file-path validate" >
+                                                    </div>
+                                            
                                     </div>
-                                    <div class="file-path-wrapper">
-                                        <input type="text" id="bio" name="bio" class="form-control file-path validate">
-                                    </div>
+
+
                                 </div>
 
 
@@ -223,7 +241,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
 
 
                                 <div class="text-center">
-                                    <button type="submit" form="credito_hipotecario"  class="btn btn-primary m-t-15 waves-effect">GUARDAR</button>
+                                    <button type="submit" form="credito_personal" class="btn btn-primary m-t-15 waves-effect">GUARDAR</button>
                                     <button type="reset" form="credito_personal" class="btn btn-primary m-t-15 waves-effect">CANCELAR</button>
                                 </div>
 
@@ -234,12 +252,12 @@ include_once '../plantilla/barra_lateral_usuario.php';
             </div>
         </div>
         <!--FIN DE DATO DE CREDITO-->
-</form>
 
     </section>
-<!--    <input type="hidden"  name="nombre" id="nombre"  />
-    <input type="file" style="visibility: hidden"  name="archivo" id="archivo"/>-->
+    <input type="hidden"  name="nombre" id="nombre"  />
+    <input type="file" style="visibility: hidden"  name="archivo" id="archivo"/>
         
+</form>
 
 
 <datalist id="lista_personas_naturales_hp">
@@ -302,7 +320,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
             swal("Ooops", "Tabla de cliente vacia", "warning");
         }
 
-       enviarhp();
+        return okk;
     }
     function interes_hp(valor) {
         valor=valor.value; //alert("aso "+valor);
@@ -333,7 +351,6 @@ include_once '../plantilla/barra_lateral_usuario.php';
         }
     }
 function asignar(valor){
-        
         var n = valor.toString();
         n=n.split("h");
         n=n[1].substring(1, n[1].length);
@@ -343,153 +360,118 @@ function asignar(valor){
      
 }
 
- function enviarhp(){
-     $('.credito_hipotecarioo').submit(function () {
-     alert("paso")
-     var formData = new FormData(document.getElementById('credito_hipotecario'))
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                dataType: "html",
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false
-            }).done(function (resp) {
-                if (resp == 1) {
-                    swal({
-                        title: "Exito",
-                        text: "Autor Registrado",
-                        type: "success"},
-                            function () {
-                                document.getElementById('credito_hipotecario').reset();
-
-                            }
-
-                    );
-
-                } else {
-                    swal("Oops", resp, "error")
-
-                }
-            })
-            return false;
-            })
- }
-        
-
 </script>
 <?php
 include_once '../plantilla/pie.php';
-//if (isset($_REQUEST["pas_cp"])) {
-//
-//    include_once '../app/Conexion.php';
-//    include_once '../modelos/bien_hipotecario.php';
-//    include_once '../modelos/presamo.php';
-//    include_once '../modelos/expediente_natural.php';
-//    include_once '../repositorios/repositorio_prestamo.php';
-//    include_once '../repositorios/repositorio_expediente_natural.php';
-//
-//
-//
-//    Conexion::abrir_conexion();
+if (isset($_REQUEST["pas_cp"])) {
+
+    include_once '../app/Conexion.php';
+    include_once '../modelos/bien_hipotecario.php';
+    include_once '../modelos/presamo.php';
+    include_once '../modelos/expediente_natural.php';
+    include_once '../repositorios/repositorio_prestamo.php';
+    include_once '../repositorios/repositorio_expediente_natural.php';
+
+
+
+    Conexion::abrir_conexion();
 //echo '<script language="javascript">alert("juas");</script>'; 
-//    $ruta="../anexo/";
-//    $biografia =$ruta.$_REQUEST["anexo"];
-//    $biografia2=$_POST['anexo'];
-//    
-//    
-//    $bien = new bien_hipotecario();    
-//    $bien->setDescripcion($_REQUEST["descr"]);
-//    $bien->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
-//    $bien->setOtros_datos("no");
-//    $bien->setUbicacion($_REQUEST["hubica"]);
-//    
-//    //echo '<script language="javascript">alert("'.$_FILES['anexo1']['tmp_name'].'");</script>'; 
-//    if (move_uploaded_file($_FILES['anexo1']['tmp_name'], $biografia)) {
-//        $bien->setAnexo($biografia2);
-//       
-//    }else{
-//         $bien->setAnexo("");
-//       // echo basename($FILES['bio1']['name']);
-//}
-//
-//    $prestamo = new presamo();
-//    $prestamo->setId_plan("1");
-//    $prestamo->setId_asesor("1");
-//    $prestamo->setPrestamo_original($_REQUEST["monto_per"]);
-//    $prestamo->setId_plan("1");
-//    $devolucion = date("d-m-Y");
-//    $devolucion = date_format(date_create($devolucion), 'Y-m-d');
-//    $prestamo->setFecha($devolucion);
-//    $prestamo->setTiempo($_REQUEST["mese_per"]);
-//
-//
-//
-//
-//    $referencias = new referencias();
-//    $nombres = $_REQUEST["Nombre_fia_per"];
-//    $apellidos = $_REQUEST["ape_ref"];
-//    $tels = $_REQUEST["tel_ref"];
-//    $l = count($_REQUEST["nombre_ref"]);
-//    if (
-//            repositorio_fiador::insertar_fiador(Conexion::obtener_conexion(), $fiador) &&
-//            repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo)
-//    ) {
-//        $prestamo1 = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());
-//        $expediente = new expediente_natural();
-//        $expediente->setId_prestamo($prestamo1);
-//        $expediente->setPersona_natural($_REQUEST["codCliente_cpersonal"]);
-//        repositorio_expediente_natural::insertar_expediente(Conexion::obtener_conexion(), $expediente);
-//        for ($i = 0; $i < $l; $i++) {
-//            $referencias->setNombre($nombres[$i]);
-//            $referencias->setApellido($apellidos[$i]);
-//            $referencias->setTelefono($tels[$i]);
-//            $referencias->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
-//            if (repositorio_referencias::insertar_referencia(Conexion::obtener_conexion(), $referencias)) {
-//                echo "<script type='text/javascript'>";
-//                echo 'swal({
-//                    title: "Exito",
-//                    text: "Credito registrado",
-//                    type: "success"},
-//                    function(){
-//                    }
-//                    );';
-//                echo "</script>";
-//            } else {
-//                echo "<script type='text/javascript'>";
-//                echo 'swal({
-//                    title: "Ooops",
-//                    text: "Credito no Registrado",
-//                    type: "error"},
-//                    function(){
-//                    }
-//                    );';
-////echo "alert('datos no atualizados')";
-////echo "location.href='inicio_b.php'";
-//                echo "</script>";
-//            }
-//        }
-//
-//        //
-//        //Conexion::cerrar_conexion();
-//    } else {
-//        echo "<script type='text/javascript'>";
-//        echo 'swal({
-//                    title: "Ooops",
-//                    text: "Credito  no Registrado",
-//                    type: "error"},
-//                    function(){
-//                       
-//                       
-//                     
-//                        
-//                    }
-//
-//                    );';
-////echo "alert('datos no atualizados')";
-////echo "location.href='inicio_b.php'";
-//        echo "</script>";
-//    }
-//}
+    $ruta="../anexo/";
+    $biografia =$ruta.$_REQUEST["nombre"];
+    $biografia2=$_POST['nombre'];
+    
+    
+    $bien = new bien_hipotecario();    
+    $bien->setDescripcion($_REQUEST["descr"]);
+    $bien->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
+    $bien->setOtros_datos("no");
+    $bien->setUbicacion($_REQUEST["hubica"]);
+    
+    echo '<script language="javascript">alert("'.$_FILES['anexo1']['tmp_name'].'");</script>'; 
+    if (move_uploaded_file($_FILES['archivo']['tmp_name'], $biografia)) {
+        $bien->setAnexo($biografia2);
+       
+    }else{
+         $bien->setAnexo("");
+       // echo basename($FILES['bio1']['name']);
+}
+
+    $prestamo = new presamo();
+    $prestamo->setId_plan("1");
+    $prestamo->setId_asesor("1");
+    $prestamo->setPrestamo_original($_REQUEST["monto_per"]);
+    $prestamo->setId_plan("1");
+    $devolucion = date("d-m-Y");
+    $devolucion = date_format(date_create($devolucion), 'Y-m-d');
+    $prestamo->setFecha($devolucion);
+    $prestamo->setTiempo($_REQUEST["mese_per"]);
+
+
+
+
+    $referencias = new referencias();
+    $nombres = $_REQUEST["Nombre_fia_per"];
+    $apellidos = $_REQUEST["ape_ref"];
+    $tels = $_REQUEST["tel_ref"];
+    $l = count($_REQUEST["nombre_ref"]);
+    if (
+            repositorio_fiador::insertar_fiador(Conexion::obtener_conexion(), $fiador) &&
+            repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo)
+    ) {
+        $prestamo1 = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());
+        $expediente = new expediente_natural();
+        $expediente->setId_prestamo($prestamo1);
+        $expediente->setPersona_natural($_REQUEST["codCliente_cpersonal"]);
+        repositorio_expediente_natural::insertar_expediente(Conexion::obtener_conexion(), $expediente);
+        for ($i = 0; $i < $l; $i++) {
+            $referencias->setNombre($nombres[$i]);
+            $referencias->setApellido($apellidos[$i]);
+            $referencias->setTelefono($tels[$i]);
+            $referencias->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
+            if (repositorio_referencias::insertar_referencia(Conexion::obtener_conexion(), $referencias)) {
+                echo "<script type='text/javascript'>";
+                echo 'swal({
+                    title: "Exito",
+                    text: "Credito registrado",
+                    type: "success"},
+                    function(){
+                    }
+                    );';
+                echo "</script>";
+            } else {
+                echo "<script type='text/javascript'>";
+                echo 'swal({
+                    title: "Ooops",
+                    text: "Credito no Registrado",
+                    type: "error"},
+                    function(){
+                    }
+                    );';
+//echo "alert('datos no atualizados')";
+//echo "location.href='inicio_b.php'";
+                echo "</script>";
+            }
+        }
+
+        //
+        //Conexion::cerrar_conexion();
+    } else {
+        echo "<script type='text/javascript'>";
+        echo 'swal({
+                    title: "Ooops",
+                    text: "Credito  no Registrado",
+                    type: "error"},
+                    function(){
+                       
+                       
+                     
+                        
+                    }
+
+                    );';
+//echo "alert('datos no atualizados')";
+//echo "location.href='inicio_b.php'";
+        echo "</script>";
+    }
+}
 ?>
