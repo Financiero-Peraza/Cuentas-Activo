@@ -379,7 +379,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
 //var numero=valor.id.substr(7)
 //alert(valor.id);
         if (depto != "") {//alert("paso"+depto);
-            $.post("../cuenta_cobrar/llenar_tabla_cliente.php", {libro: depto, idtabla:"tabla_cliente_cpersonal"}, function (mensaje) {
+            $.post("../cuenta_cobrar/llenar_tabla_cliente.php", {libro: depto, idtabla: "tabla_cliente_cpersonal"}, function (mensaje) {
                 $('#lista_personas_naturales').html(mensaje).fadeIn();
 
             });
@@ -436,7 +436,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
         document.getElementById('pils-tiempo-txt').innerHTML = meses_persona + " meses";
         document.getElementById('pils-tasa-txt').innerHTML = document.getElementById("tasa_per").value + "%";
         // $( '#pils-cuota-txt' ).text( '$' + numberWithCommas( cuota ) );
-        addfilas("plan_pago_personal" ,document.getElementById("tasa_per").value);
+        addfilas("plan_pago_personal", document.getElementById("tasa_per").value);
     }
 
     function validarTablas_cper() {
@@ -494,13 +494,18 @@ if (isset($_REQUEST["pas_cp"])) {
    // $prestamo->setId_plan("1");
     $prestamo->setId_asesor("1");
     $prestamo->setPrestamo_original($_REQUEST["monto_per"]);
-    $prestamo->setId_plan("1");    
+    $prestamo->setId_plan("1");
     $devolucion = date("d-m-Y");
     $devolucion = date_format(date_create($devolucion), 'Y-m-d');
     $prestamo->setFecha($devolucion);
     $prestamo->setTiempo($_REQUEST["mese_per"]);
+<<<<<<< HEAD
      $prestamo->setTasa($_REQUEST["tasa_per"]);
     
+=======
+
+
+>>>>>>> 44d5c4e583aff4c67c28847d4da3ec0dd083359f
 
 
     $referencias = new referencias();
@@ -510,14 +515,13 @@ if (isset($_REQUEST["pas_cp"])) {
     $l = count($_REQUEST["nombre_ref"]);
     if (
             repositorio_fiador::insertar_fiador(Conexion::obtener_conexion(), $fiador) &&
-            repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo) 
-            
-    ) { 
+            repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo)
+    ) {
         $prestamo1 = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());
-    $expediente = new expediente_natural();
-    $expediente->setId_prestamo($prestamo1);
-   $expediente->setPersona_natural($_REQUEST["codCliente_cpersonal"]);
-   repositorio_expediente_natural::insertar_expediente(Conexion::obtener_conexion(), $expediente);
+        $expediente = new expediente_natural();
+        $expediente->setId_prestamo($prestamo1);
+        $expediente->setPersona_natural($_REQUEST["codCliente_cpersonal"]);
+        repositorio_expediente_natural::insertar_expediente(Conexion::obtener_conexion(), $expediente);
         for ($i = 0; $i < $l; $i++) {
             $referencias->setNombre($nombres[$i]);
             $referencias->setApellido($apellidos[$i]);
@@ -525,14 +529,14 @@ if (isset($_REQUEST["pas_cp"])) {
             $referencias->setId_persona_natural($_REQUEST["codCliente_cpersonal"]);
             if (repositorio_referencias::insertar_referencia(Conexion::obtener_conexion(), $referencias)) {
                 echo "<script type='text/javascript'>";
-        echo 'swal({
+                echo 'swal({
                     title: "Exito",
                     text: "Credito registrado",
                     type: "success"},
                     function(){
                     }
                     );';
-        echo "</script>";
+                echo "</script>";
             } else {
                 echo "<script type='text/javascript'>";
                 echo 'swal({

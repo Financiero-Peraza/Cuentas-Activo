@@ -1,16 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of repositorio_prestamo
- *
- * @author Miranda
- */
 class repositorio_prestamo {
 
     public static function insertar_prestamo($conexion, $prestamo) {
@@ -102,7 +91,47 @@ prestamo.id_prestamo = '$id'";
         }
         return $codigo;
     }
+    
+    public static function insertar_prestamo_juridico($conexion, $prestamo) {
+        $prestamo_insertado = false;
+        
+        if (isset($conexion)) {
+            try {
 
+                $asesor = '1';
+                $monto_original = $prestamo->getPrestamo_original();
+                $tiempo = $prestamo->getTiempo();
+                $tasa_interes = $prestamo->getTasa();
+                $mora = '';
+                $estado = 'PENDIENTE';
+                $interes_acumulado = '';
+                $tasa_moratora = '';
+                
+                $sql = "INSERT INTO prestamo (id_asesor, prestamo_original, saldo_actual, mora_acumulada, intereses_acumulados, estado,   tiempo, tasa_interes, tasa_moratoria)"
+                        . " VALUES(:id_asesor, :prestamo_original, :saldo_actual, :mora_acumulada, :intereses_acumulados, :estado,  :tiempo, :tasa_interes, :tasa_moratoria) ";
+                ///estos son alias para que PDO pueda trabajar 
+                $sentencia = $conexion->prepare($sql);
+
+                $sentencia->bindParam(':id_asesor', $asesor, PDO::PARAM_STR);
+                $sentencia->bindParam(':prestamo_original', $monto_original, PDO::PARAM_STR);
+                $sentencia->bindParam(':saldo_actual', $monto_original, PDO::PARAM_STR);
+                $sentencia->bindParam(':mora_acumulada', $mora, PDO::PARAM_STR);
+                $sentencia->bindParam(':intereses_acumulados', $interes_acumulado, PDO::PARAM_STR);
+                $sentencia->bindParam(':estado', $estado, PDO::PARAM_STR);
+                $sentencia->bindParam(':tiempo', $tiempo, PDO::PARAM_STR);
+                $sentencia->bindParam(':tasa_interes', $tasa_interes, PDO::PARAM_STR);
+                $sentencia->bindParam(':tasa_moratoria', $tasa_moratora, PDO::PARAM_STR);
+                
+                $prestamo_insertado = $sentencia->execute();
+
+            } catch (PDOException $ex) {
+                echo '<script>swal("No se puedo realizar el registro", "Revise los datos ingresados  ", "warning");</script>';
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return $prestamo_insertado;
+    }
+   
 }
 
 ?>
