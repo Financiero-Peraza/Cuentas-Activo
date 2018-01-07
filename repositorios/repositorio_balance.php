@@ -67,9 +67,9 @@ class repositorio_balance {
 
         return $resultado;
     }
-    
-    public static function lista_balance($conexion, $codigo) {
 
+    public static function lista_balance($conexion, $codigo) {
+        $lista = array();
 
         if (isset($conexion)) {
             try {
@@ -81,7 +81,7 @@ class repositorio_balance {
                 if (count($resultado)) {
                     foreach ($resultado as $fila) {
                         $balance = new balance_general();
-                        
+
                         $balance->setEfectivo($fila['efectivo']);
                         $balance->setValor_negociable($fila['valor_negociable']);
                         $balance->setCuenta_por_cobrar($fila['cuentas_por_cobrar']);
@@ -99,8 +99,10 @@ class repositorio_balance {
                         $balance->setAccioneC($fila['acciones_comunes']);
                         $balance->setGanancias_retenidas($fila['ganancias_retenidas']);
                         $balance->setTotal_pasivo_patrimonio($fila['total_pasivo']);
+                        $balance->setPeriodo($fila['periodo']);
+
                         
-                        $lista = $balance;
+                        $lista[] = $balance;
                     }
                 }
             } catch (PDOException $exc) {

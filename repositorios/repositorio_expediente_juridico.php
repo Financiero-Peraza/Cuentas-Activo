@@ -31,22 +31,18 @@ class repositorio_expediente_juridico {
     public static function  calculo_ratios ($balance, $estado){
     
         $ratio = new ratios();
-        
-        
-        $ratio->setLiquidez_corriente($balance->getTotal_activo_corriente() / $balance->getTotal_pasivo_corriente() );
-        $ratio->setRazon_rapida( ($balance->getTotal_activo_corriente() -$balance->getInventarios()) / $balance->getTotal_pasivo_corriente() );
-        $ratio->setRotacion_inventarios($estado->getCosto_venta()/$balance->getInventarios());
-        $ratio->setPeriodo_cobro(365 / ($estado->getIngreso_venta()/ $balance->getCuenta_por_cobrar()));
-        $ratio->setIndice_endeudamiento(  ($balance->getTotal_pasivo_corriente()+$balance->getDeuda_largop())/ $balance->getTotal_pasivo_patrimonio()   ) ;
-        $ratio->setCargo_interes_fijo($estado->getUtilidad_operativa() / $estado->getGasto_interes() );
-        $ratio->setMargen_utilidad_bruta($estado->getUtilidad_bruta() / $estado->getIngreso_venta() );
-//        $ratio->setMargen_utilidad_neta($estado->getUtilidad_neta() / $balance->getTotal_activo() );
-          $ratio->setMargen_utilidad_neta($estado->getUtilidad_neta() / $estado->getIngreso_venta() );
-        
-        
-        
-        $ratio->setRendimiento_activo($estado->getUtilidad_neta() / $balance->getTotal_activo() );
-        $ratio->setRendimiento_patrimonio( $estado->getUtilidad_neta() / ($balance->getAccioneC() + $balance->getGanancias_retenidas()));
+                
+        $ratio->setPeriodo($balance->getPeriodo());
+        $ratio->setLiquidez_corriente(  round  ($balance->getTotal_activo_corriente() / $balance->getTotal_pasivo_corriente(),2) );
+        $ratio->setRazon_rapida(   round(  ($balance->getTotal_activo_corriente() -$balance->getInventarios()) / $balance->getTotal_pasivo_corriente(),2 ));
+        $ratio->setRotacion_inventarios(  round ( $estado->getCosto_venta()/$balance->getInventarios(),2 ));
+        $ratio->setPeriodo_cobro(  round( 365 / ($estado->getIngreso_venta()/ $balance->getCuenta_por_cobrar())));
+        $ratio->setIndice_endeudamiento(  round (100 *($balance->getTotal_pasivo_corriente()+$balance->getDeuda_largop())/ $balance->getTotal_pasivo_patrimonio(),2 )  ) ;
+        $ratio->setCargo_interes_fijo( round($estado->getUtilidad_operativa() / $estado->getGasto_interes(),2) );
+        $ratio->setMargen_utilidad_bruta(round(100 * ($estado->getUtilidad_bruta() / $estado->getIngreso_venta()),2) );
+        $ratio->setMargen_utilidad_neta(round( 100 * ($estado->getUtilidad_neta() / $estado->getIngreso_venta()),2) );
+        $ratio->setRendimiento_activo(round( 100*( $estado->getUtilidad_neta() / $balance->getTotal_activo()),2) );
+        $ratio->setRendimiento_patrimonio( round( 100 * ($estado->getUtilidad_neta() / ($balance->getAccioneC() + $balance->getGanancias_retenidas())),2));
      
         return $ratio;
     }

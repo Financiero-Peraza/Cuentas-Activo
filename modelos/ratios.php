@@ -11,12 +11,22 @@ private $margen_utilidad_bruta ;
 private $margen_utilidad_neta ;
 private $rendimiento_activo ;
 private $rendimiento_patrimonio ;
+private $periodo ;
 
 
 
 function __construct() {
     
 }
+function getPeriodo() {
+    return $this->periodo;
+}
+
+function setPeriodo($periodo) {
+    $this->periodo = $periodo;
+}
+
+
 function getLiquidez_corriente() {
     return $this->liquidez_corriente;
 }
