@@ -167,6 +167,39 @@ prestamo.id_prestamo = '$id'";
         return $resultado;
     }
     
+    public static function lista_prestamo_pendiente_natural($conexion) {
+        $lista = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        usuario.apellido,
+                        persona_natural.nombre,
+                        persona_natural.apellido,
+                        prestamo.tipo_credito,
+                        prestamo.prestamo_original,
+                        prestamo.tiempo,
+                        persona_natural.id_persona_natural,
+                        prestamo.estado
+                        FROM
+                        usuario
+                        INNER JOIN prestamo ON prestamo.id_asesor = usuario.id_usuario
+                        INNER JOIN expediente_natural ON expediente_natural.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_natural ON expediente_natural.persona_natural = persona_natural.id_persona_natural
+                        WHERE prestamo.estado = 'PENDIENTE'";
+                        $sentencia = $conexion->prepare($sql);
+                        $sentencia->execute();
+                        $resultado = $sentencia->fetchAll();
+
+                
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
+    
     public static function aprobar_prestamo($conexion, $id) {
          $respuesta = false;
         if (isset($conexion)) {

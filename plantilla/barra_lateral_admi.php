@@ -31,7 +31,13 @@
                     <li>
                         <a href="../admi/solicitud_pendiente.php">
                             <i class="material-icons col-deep-orange">description</i>
-                            <span>Solicitudes Pendientes</span>
+                            <span>Solicitudes Juridicas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../admi/solicitud_natural.php">
+                            <i class="material-icons col-amber">description</i>
+                            <span>Solicitudes Naturales</span>
                         </a>
                     </li>
                                         

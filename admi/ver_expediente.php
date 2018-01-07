@@ -46,11 +46,11 @@ for ($i = 0; $i < count($lista_balance); $i++) {
                             <table class="table table-striped table-bordered" id="tabla_cliente_juridico">
 
                                 <thead>
-                                <th>Codigo</th>
-                                <th>Nombre de la empresa</th>
-                                <th>Numero de empresa</th>
-                                <th>Dui de Representante</th>
-                                <th>Nit de Representante</th>
+                                <th class="text-center">Codigo</th>
+                                <th class="text-center">Nombre de la empresa</th>
+                                <th class="text-center">Numero de empresa</th>
+                                <th class="text-center">Dui de Representante</th>
+                                <th class="text-center">Nit de Representante</th>
 
                                 </thead>
                                 <tbody>

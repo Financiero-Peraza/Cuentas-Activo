@@ -25,9 +25,8 @@ if (isset($_REQUEST['id_prestamo'])) {
 }else{
 
 
-$lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_juridica(Conexion::obtener_conexion());
+$lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_natural(Conexion::obtener_conexion());
 ?>    
-
 
 <section class="content">
     <div class="container-fluid">
@@ -56,18 +55,18 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_juridica(Conexi
                         <?php foreach ($lista_prestamo as $lista) { ?>
                             <tr>
                                 <td class="text-center">
-                                    <button class="btn btn-success" onclick="aprobar_credito('<?php echo $lista['8'];?>')"> 
+                                    <button class="btn btn-success" onclick="aprobar_credito('<?php echo $lista['6'];?>')"> 
                                         <i class="Medium material-icons prefix ">check_circle</i> 
                                     </button>
                                 </td>
-                                <th class="text-center"><?php echo $lista['4'];?></th>
-                                <th class="text-center"><?php echo $lista['2'];?></th>
-                                <th class="text-center"><?php echo $lista['1'];?></th>
-                                <th class="text-center">Servicio</th>
-                                <th class="text-center"><?php echo "$". $lista['3'];?></th>
-                                <th class="text-center"><?php echo $lista['6'];?></th>
+                                <th class="text-center"><?php echo $lista['0'];?></th>
+                                <th class="text-center"><?php echo $lista['1'] ." ". $lista['2'] ;?></th>
+                                <th class="text-center"><?php echo $lista['3'];?></th>
+                                <th class="text-center">COMERSIAL</th>
+                                <th class="text-center"><?php echo "$". $lista['4'];?></th>
+                                <th class="text-center"><?php echo $lista['5'];?></th>
                                  <td class="text-center">
-                                     <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['8'];?>')"> 
+                                     <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['6'];?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>
@@ -82,8 +81,8 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_juridica(Conexi
 </section>
 
 <script>
-function abrir_expediente(id_juridico){
-    var url="./ver_expediente.php?id_juridico=" +id_juridico;
+function abrir_expediente(id_natural){
+    var url="./expediente_natural.php?id_natural=" +id_natural;
     
     var a = document.createElement("a");
 		a.target = "_blank";
