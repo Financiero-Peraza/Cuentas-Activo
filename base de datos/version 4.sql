@@ -23,6 +23,9 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`persona_natural` (
   PRIMARY KEY (`id_persona_natural`) )
 ENGINE = InnoDB;
 
+INSERT INTO `persona_natural` (`id_persona_natural`, `nombre`, `apellido`, `direccion`, `dui`, `nit`, `correo`, `categoria`, `observaciones`, `telefono`, `monto`) VALUES
+(1, 'BORIS', 'RICARDO', 'san vicente, verapaz', '45454', 'ADF3453453', NULL, NULL, NULL, '52342', 0);
+
 
 -- -----------------------------------------------------
 -- Table `instituciones_financieras`.`referencias`
@@ -100,6 +103,14 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`persona_juridica` (
   PRIMARY KEY (`id_persona_juridica`) )
 ENGINE = InnoDB;
 
+INSERT INTO `persona_juridica` (`id_persona_juridica`, `nombre`, `categoria`, `numero`, `dui`, `nit`) VALUES
+(1, 'coca cola', NULL, '4444333', '12312312-2', '3231-231231-231-2'),
+(2, 'Mazda', NULL, '4444333', '12312312-2', '3231-231231-231-2'),
+(3, 'Susuky', NULL, '34234323', '34242342-3', '2342-342342-342-3'),
+(4, 'Fifa', NULL, '34234323', '34242342-3', '2342-342342-342-3'),
+(5, 'Espn', NULL, '34234323', '34242342-3', '2342-342342-342-3'),
+(6, 'Campero', NULL, '34234323', '34242342-3', '2342-342342-342-3');
+
 
 -- -----------------------------------------------------
 -- Table `instituciones_financieras`.`balance_general`
@@ -135,6 +146,9 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`balance_general` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO `balance_general` (`id_balance`, `id_persona_juridica`, `periodo`, `prestable`, `efectivo`, `valor_negociable`, `cuentas_por_cobrar`, `inventarios`, `terrenos`, `edificio_equipo`, `depreciacion_acumulada`, `total_activo_corriente`, `total_activo_pasivo`, `total_activo`, `cuentas_por_pagar`, `documentos_por_pagar`, `total_pasivo_corriente`, `deuda_largo_plazo`, `acciones_comunes`, `ganancias_retenidas`, `total_pasivo`) VALUES
+(5, 5, 2017, NULL, 500, 1000, 25000, 45500, 26000, 90000, 38000, 72000, 78000, 150000, 22000, 47000, 69000, 22950, 31500, 26550, 150000),
+(7, 5, 2016, NULL, 423422000, 2423420, 234234, 34234, 34234, 34234200, 342342000, 423423, 234234, 423423, 4234, 34234, 3423, 423423, 3242340, 34234, 234234);
 
 -- -----------------------------------------------------
 -- Table `instituciones_financieras`.`estado_resultado`
@@ -167,6 +181,9 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`estado_resultado` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO `estado_resultado` (`id_estado`, `id_persona_juridica`, `periodo`, `prestable`, `ingreso_ventas`, `costo_venta`, `utilidad_bruta`, `gastos_operativos`, `gasto_venta`, `gasto_administrativo`, `gasto_arrendamiento`, `gasto_depreciacion`, `total_gasto_operativo`, `utlidad_operativa`, `gasto_interes`, `utilidad_antes_impuestos`, `impuestos`, `utilidad_neta`) VALUES
+(5, 5, 2017, NULL, 160000, 106000, 54000, NULL, 16000, 10000, 1000, 10000, 37000, 17000, 6100, 10900, 4360, 6540),
+(7, 5, 2016, NULL, 324234000, 34234, 42342, 423432, 23423, 3423420, 423423, 34234, 34234, 42342, 2342340, 342342, 87987, 8798780);
 
 -- -----------------------------------------------------
 -- Table `instituciones_financieras`.`usuario`
@@ -204,6 +221,7 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`prestamo` (
   `tiempo` VARCHAR(45) NULL ,
   `tasa_interes` FLOAT NULL ,
   `tasa_moratoria` FLOAT NULL ,
+  `tipo_credito` VARCHAR(45) NULL ,
   PRIMARY KEY (`id_prestamo`) ,
   INDEX `fk_prestamo_asesor_credito1_idx` (`id_asesor` ASC) ,
   CONSTRAINT `fk_prestamo_asesor_credito1`

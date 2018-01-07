@@ -101,7 +101,6 @@ class repositorio_balance {
                         $balance->setTotal_pasivo_patrimonio($fila['total_pasivo']);
                         $balance->setPeriodo($fila['periodo']);
 
-                        
                         $lista[] = $balance;
                     }
                 }
