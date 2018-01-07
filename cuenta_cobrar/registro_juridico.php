@@ -57,8 +57,7 @@ if (isset($_REQUEST['nameEnviar'])) {
         $estado->setGasto_arrendamiento($_REQUEST['nameGastoArrendamiento']);
         $estado->setGasto_depreciacion($_REQUEST['nameGastoDepreciacion']);
         $estado->setGasto_interes($_REQUEST['nameGastoInteres']);
-        echo 'el costo de venta es ' .$_REQUEST['nameCostoVenta'];
-        
+                
         repositorio_estado_resultado::insertar_estado_resultado(Conexion::obtener_conexion(), $estado);
         
         

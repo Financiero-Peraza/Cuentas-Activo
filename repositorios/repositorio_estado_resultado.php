@@ -65,6 +65,45 @@ class repositorio_estado_resultado {
 
         return $resultado;
     }
+    
+    public static function lista_estado($conexion, $codigo) {
+        $lista = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "select * from estado_resultado where (id_persona_juridica = '$codigo' )";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+                if (count($resultado)) {
+                    foreach ($resultado as $fila) {
+                        $estado = new estado_resultado();
+                        
+                        $estado->setIngreso_venta($fila['ingreso_ventas']);
+                        $estado->setCosto_venta($fila['costo_venta']);
+                        $estado->setUtilidad_bruta($fila['utilidad_bruta']);
+                        $estado->setGasto_venta($fila['gasto_venta']);
+                        $estado->setGasto_administrativo($fila['gasto_administrativo']);
+                        $estado->setGasto_arrendamiento($fila['gasto_arrendamiento']);
+                        $estado->setGasto_depreciacion($fila['gasto_depreciacion']);
+                        $estado->setTotal_operativo($fila['total_gasto_operativo']);
+                        $estado->setUtilidad_operativa($fila['utlidad_operativa']);
+                        $estado->setGasto_interes($fila['gasto_interes']);
+                        $estado->setUtilidad_antes_impuestos($fila['utilidad_antes_impuestos']);
+                        $estado->setImpuestos($fila['impuestos']);
+                        $estado->setUtilidad_neta($fila['utilidad_neta']);
+                        
+                        $lista[] = $estado;
+                    }
+                }
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $lista;
+    }
 
 }
 

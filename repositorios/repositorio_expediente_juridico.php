@@ -40,7 +40,7 @@ class repositorio_expediente_juridico {
         $ratio->setCargo_interes_fijo($estado->getUtilidad_bruta() / $estado->getGasto_interes() );
         $ratio->setMargen_utilidad_bruta($estado->getUtilidad_bruta() / $estado->getIngreso_venta() );
         $ratio->setMargen_utilidad_neta($estado->getUtilidad_neta() / $balance->getTotal_activo() );
-        $ratio->setRendimiento_patrimonio( $estado->getUtilidad_neta / ($balance->getAccioneC() + $balance->getGanancias_retenidas()));
+        $ratio->setRendimiento_patrimonio( $estado->getUtilidad_neta() / ($balance->getAccioneC() + $balance->getGanancias_retenidas()));
         
     }
 
