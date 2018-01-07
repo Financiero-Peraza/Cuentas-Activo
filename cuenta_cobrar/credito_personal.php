@@ -99,6 +99,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">NOMBRE</span>
                                                 <input type="text"class="form-control text-center" required="" minlength="3" id="Nombre_fia_per" name="Nombre_fia_per" placeholder="NOMBRE...">
                                             </div>
                                         </div>
@@ -107,6 +108,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">APELLIDO</span>
                                                 <input type="text" class="form-control text-center" required="" minlength="3" id="Apellido_fia_per" name="Apellido_fia_per" placeholder="APELLIDO...">
                                             </div>
                                         </div>
@@ -117,6 +119,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">DIRECCION</span>
                                                 <input type="text" class="form-control text-center" required="" minlength="3" id="Direccion_fia_per" name="Direccion_fia_per" placeholder="DIRECCION...">
                                             </div>
                                         </div>
@@ -125,6 +128,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">TELEFONO</span>
                                                 <input type="tel" class="form-control text-center" required="" minlength="3" id="Telefono_fia_per" name="Telefono_fia_per" placeholder="TELEFONO...">
                                             </div>
                                         </div>
@@ -134,6 +138,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">DUI</span>
                                                 <input type="text" class="form-control text-center" required="" minlength="3" id="Dui_fia_per" name="Dui_fia_per" placeholder="DUI...">
                                             </div>
                                         </div>
@@ -141,6 +146,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">NIT</span>
                                                 <input type="text" class="form-control text-center" required="" minlength="3" id="Nit_fia_per" name="Nit_fia_per" placeholder="NIT...">
                                             </div>
                                         </div>
@@ -150,6 +156,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">EMAIL</span>
                                                 <input type="email" class="form-control text-center" required="" minlength="3" id="Email_fia_per" name="Email_fia_per" placeholder="EMAIL...">
                                             </div>
                                         </div>
@@ -157,6 +164,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">LUGAR DE TRABAJO</span>
                                                 <input type="text" class="form-control text-center" required="" minlength="3" id="Trabajo_fia_per" name="Trabajo_fia_per" placeholder="LUGAR DE TRABAJO...">
                                             </div>
                                         </div>
@@ -185,6 +193,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">NOMBRE</span>
                                                 <input type="text"class="form-control text-center" id="ref_Nombre" name="ref_Nombre" placeholder="NOMBRE...">
                                             </div>
                                         </div>
@@ -193,6 +202,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">APELLIDO</span>
                                                 <input type="text" class="form-control text-center" id="ref_Apellido" name="ref_Apellido" placeholder="APELLIDO...">
                                             </div>
                                         </div>
@@ -203,6 +213,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">DIRECCION</span>
                                                 <input type="text" class="form-control text-center" id="ref_Direccion" name="ref_Direccion" placeholder="DIRECCION...">
                                             </div>
                                         </div>
@@ -211,6 +222,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">TELEFONO</span>
                                                 <input type="tel" class="form-control text-center" id="ref_Telefono" name="ref_Telefono" placeholder="TELEFONO...">
                                             </div>
                                         </div>
@@ -245,6 +257,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">MONTO SOLICITADO($)</span>
                                                 <input type="number" required="" min="1500" max="40000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="MONTO SOLICITADO($)... MINIMO $1,500, MAXIMO $40,000">
                                             </div>
                                         </div>
@@ -252,6 +265,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
 
                                     <div class="col-md-3">
                                         <div class="form-group">
+                                            <span class="input-group-addon" id="basic-addon1">NUMERO DE MESES</span>
                                             <div class="form-line">
                                                 <select class="form-control show-tick" required="" id="mese_per" name="mese_per">
                                                     <option value="">SELECCIONE EL NUMERO DE MESES</option>
@@ -270,6 +284,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">TASA DE INTERES</span>
                                                 <input type="number" required="" min="3" max="20" class="form-control text-center" id="tasa_per" name="tasa_per" placeholder="TASA">
                                             </div>
 
@@ -499,13 +514,13 @@ if (isset($_REQUEST["pas_cp"])) {
     $devolucion = date_format(date_create($devolucion), 'Y-m-d');
     $prestamo->setFecha($devolucion);
     $prestamo->setTiempo($_REQUEST["mese_per"]);
-<<<<<<< HEAD
+//<<<<<<< HEAD
      $prestamo->setTasa($_REQUEST["tasa_per"]);
     
-=======
+//=======
 
 
->>>>>>> 44d5c4e583aff4c67c28847d4da3ec0dd083359f
+//>>>>>>> 44d5c4e583aff4c67c28847d4da3ec0dd083359f
 
 
     $referencias = new referencias();

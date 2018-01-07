@@ -86,8 +86,8 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <label>HUBICACION</label> 
-                                                <input type="text"class="form-control text-center" required="" id="hubica" name="hubica" placeholder="HUBICACION...">
+                                                <span class="input-group-addon" id="basic-addon1">UBICACION</span>
+                                                <input type="text"class="form-control text-center" required="" id="hubica" name="hubica" placeholder="UBICACION...">
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +95,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <label>DESCRIPCION</label> 
+                                                    <span class="input-group-addon" id="basic-addon1">DESCRIPCION</span>
                                                     <input type="text" class="form-control text-center" required="" id="rdescr" name="descr" placeholder="DESCRIPCION...">
                                                 </div>
                                             </div>
