@@ -110,8 +110,13 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="form-line">
+<<<<<<< HEAD
                                                     <span class="input-group-addon" id="basic-addon1">UBICACION</span>
                                                     <input type="text"class="form-control text-center"  id="hubica" name="hubica" placeholder="UBICACION...">
+=======
+                                                    <label>UBICACION</label> 
+                                                    <input type="text"class="form-control text-center"  id="hubica" name="hubica" placeholder="HUBICACION...">
+>>>>>>> d5e3fee580cea801ceba6da1a03b98d0c2ca3ea7
                                                 </div>
                                             </div>
                                         </div>

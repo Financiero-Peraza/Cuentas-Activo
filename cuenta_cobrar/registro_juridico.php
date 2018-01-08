@@ -51,12 +51,14 @@ if (isset($_REQUEST['nameEnviar'])) {
         $estado = new estado_resultado();
         $estado->setId_persona_juridica($id_juridico);
         $estado->setIngreso_venta($_REQUEST['nameIngresoVenta']);
-        $estado->setValor_negociable($_REQUEST['nameNegociable']);
+        $estado->setCosto_venta($_REQUEST['nameCostoVenta']);
         $estado->setGasto_venta($_REQUEST['nameGastoVenta']);
         $estado->setGasto_administrativo($_REQUEST['nameGastoAdmi']);
         $estado->setGasto_arrendamiento($_REQUEST['nameGastoArrendamiento']);
         $estado->setGasto_depreciacion($_REQUEST['nameGastoDepreciacion']);
         $estado->setGasto_interes($_REQUEST['nameGastoInteres']);
+        echo 'el costo de venta es ' .$_REQUEST['nameCostoVenta'];
+        
         repositorio_estado_resultado::insertar_estado_resultado(Conexion::obtener_conexion(), $estado);
         
         
@@ -103,7 +105,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <span class="input-group-addon" id="basic-addon1">DUI REPRESENTANTE JURIDICO</span>
-                                                    <input type="text" class="form-control text-center" name="nameDuiJuridico" placeholder="DUI DEL REPRESENTANTE JURIDICO" required="">
+                                                    <input type="text" class="form-control text-center" name="nameDuiJuridico" id="Dui_fia_per" placeholder="DUI DEL REPRESENTANTE JURIDICO" required="">
                                                 </div>
                                             </div>
                                         </div>
@@ -111,7 +113,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <span class="input-group-addon" id="basic-addon1">NIT REPRESENTANTE JURIDICO</span>
-                                                    <input type="text" class="form-control text-center" name="nameNitJuridico" placeholder="NIT DEL REPRESENTANTE JURIDICO" required="">
+                                                    <input type="text" class="form-control text-center" name="nameNitJuridico" id="Nit_fia_per" placeholder="NIT DEL REPRESENTANTE JURIDICO" required="">
                                                 </div>
                                             </div>
                                         </div>
@@ -290,8 +292,8 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <span class="input-group-addon" id="basic-addon1">VALORES NEGOCIABLES($)</span>
-                                                    <input type="number"  min="0" step="any"class="form-control text-center" name="nameValorNegociable" placeholder="VALORES NEGOCIABLES($)" required="">
+                                                    <span class="input-group-addon" id="basic-addon1">COSTOS DE LOS BIENES VENDIDOS($)</span>
+                                                    <input type="number"  min="0" step="any"class="form-control text-center" name="nameCostoVenta" placeholder="COSTOS DE LOS BIENES VENDIDOS($)" required="">
                                                 </div>
                                             </div>
                                         </div>

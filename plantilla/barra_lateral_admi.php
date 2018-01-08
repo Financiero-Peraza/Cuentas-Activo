@@ -28,17 +28,10 @@
                             <span>Inicio</span>
                         </a>
                     </li>
-                    
                     <li>
-                        <a href="#">
-                            <i class="material-icons col-blue">collections</i>
-                            <span>Nueva Galeria</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
+                        <a href="../admi/solicitud_pendiente.php">
                             <i class="material-icons col-deep-orange">description</i>
-                            <span>Nueva Noticia</span>
+                            <span>Solicitudes Pendientes</span>
                         </a>
                     </li>
                                         
