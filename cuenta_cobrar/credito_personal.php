@@ -327,7 +327,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <span class="input-group-addon" id="basic-addon1">MONTO SOLICITADO($)</span>
-                                                    <input type="number" required="" min="1500" max="40000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="MONTO SOLICITADO($)... MINIMO $1,500, MAXIMO $40,000">
+                                                    <input type="number" required="" min="1000" max="20000" class="form-control text-center" id="monto_per" name="monto_per" placeholder="MONTO SOLICITADO($)... MINIMO $1,500, MAXIMO $40,000">
                                                 </div>
                                             </div>
                                         </div>
@@ -566,6 +566,8 @@ include_once '../plantilla/barra_lateral_usuario.php';
             $("#Nit_fia_per").prop("required", true);
             $("#Email_fia_per").prop("required", true);
             $("#Trabajo_fia_per").prop("required", true);
+             $("#monto_per").prop("min", 1000);
+             $("#monto_per").prop("max", 2000);
 
             document.getElementById('containeBien').style.display = 'none';
             document.getElementById('containerFiedor').style.display = 'block';
@@ -594,12 +596,44 @@ include_once '../plantilla/barra_lateral_usuario.php';
             $("#Trabajo_fia_per").removeAttr("required");
         }
 
-        if (valor == 4) {
-            document.getElementById("n").value = 2
+       if (valor == 3) {
+           $("#Nombre_fia_per").prop("required", true);
+            $("#Apellido_fia_per").prop("required", true);
+            $("#Direccion_fia_per").prop("required", true);
+            $("#Telefono_fia_per").prop("required", true);
+            $("#Dui_fia_per").prop("required", true);
+            $("#Nit_fia_per").prop("required", true);
+            $("#Email_fia_per").prop("required", true);
+            $("#Trabajo_fia_per").prop("required", true);
+            $("#monto_per").prop("min", 50);
+             $("#monto_per").prop("max", 5000);
+
             document.getElementById('containeBien').style.display = 'none';
             document.getElementById('containerFiedor').style.display = 'block';
             document.getElementById('containerReferencia').style.display = 'block';
             document.getElementById('tabla_referencias').style.visibility = 'visible';
+            $("#hubica").removeAttr("required");
+            $("#rdescr").removeAttr("required");
+            $("#anexo1").removeAttr("required");
+        }
+        
+        if (valor == 4) {
+            $("#hubica").prop("required", true);
+            $("#rdescr").prop("required", true);
+            $("#anexo1").prop("required", true);
+
+            document.getElementById('containeBien').style.display = 'block';
+            document.getElementById('containerFiedor').style.display = 'none';
+            document.getElementById('containerReferencia').style.display = 'none';
+            document.getElementById('tabla_referencias').style.visibility = ' hidden';
+            $("#Nombre_fia_per").removeAttr("required");
+            $("#Apellido_fia_per").removeAttr("required");
+            $("#Direccion_fia_per").removeAttr("required");
+            $("#Telefono_fia_per").removeAttr("required");
+            $("#Dui_fia_per").removeAttr("required");
+            $("#Nit_fia_per").removeAttr("required");
+            $("#Email_fia_per").removeAttr("required");
+            $("#Trabajo_fia_per").removeAttr("required");
         }
 
     }
@@ -637,27 +671,54 @@ include_once '../plantilla/barra_lateral_usuario.php';
         if (tipo == 2) {
             switch (valor) {
                 case '12':
-                    document.getElementById('tasa_per').value = 17;
+                    document.getElementById('tasa_per').value = 27;
                     break;
                 case '24':
-                    document.getElementById('tasa_per').value = 15;
+                    document.getElementById('tasa_per').value = 25;
                     break;
                 case '36':
-                    document.getElementById('tasa_per').value = 14;
+                    document.getElementById('tasa_per').value = 23;
                     break;
                 case '48':
-                    document.getElementById('tasa_per').value = 13;
+                    document.getElementById('tasa_per').value = 20;
                     break;
                 case '60':
-                    document.getElementById('tasa_per').value = 11;
+                    document.getElementById('tasa_per').value = 16;
                     break;
                 case '72':
-                    document.getElementById('tasa_per').value = 9;
+                    document.getElementById('tasa_per').value = 13;
                     break;
                 case '84':
-                    document.getElementById('tasa_per').value = 8;
+                    document.getElementById('tasa_per').value = 10;
                 case '96':
-                    document.getElementById('tasa_per').value = 5;
+                    document.getElementById('tasa_per').value = 10;
+                    break;
+            }
+        }
+        if (tipo == 3) {
+            switch (valor) {
+                case '12':
+                    document.getElementById('tasa_per').value = 6;
+                    break;
+                case '24':
+                    document.getElementById('tasa_per').value = 6;
+                    break;
+                case '36':
+                    document.getElementById('tasa_per').value = 5.8;
+                    break;
+                case '48':
+                    document.getElementById('tasa_per').value = 5.8;
+                    break;
+                case '60':
+                    document.getElementById('tasa_per').value = 5.8;
+                    break;
+                case '72':
+                    document.getElementById('tasa_per').value = 5.5;
+                    break;
+                case '84':
+                    document.getElementById('tasa_per').value = 5.5;
+                case '96':
+                    document.getElementById('tasa_per').value = 5.5;
                     break;
             }
         }

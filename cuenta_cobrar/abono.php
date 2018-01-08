@@ -336,7 +336,7 @@ if (isset($_REQUEST["paso_abono"])) {
     $pago->setMora($_REQUEST["mora_hoy"]);
 
     $prestamo = new presamo();
-    $prestamo->setEpreoximo_pago($_REQUEST["proximo_pago"]);
+    $prestamo->setSaldo_actual($_REQUEST["saldo_act_hoy"]);
 
 
     if (repositorio_pago::insertar_pago(Conexion::obtener_conexion(), $pago) && repositorio_prestamo::actualizar_prestamo(Conexion::obtener_conexion(), $prestamo, $_REQUEST["id_prestamo_abono"])) {

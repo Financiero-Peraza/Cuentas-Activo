@@ -57,7 +57,7 @@ WHERE
 prestamo.id_prestamo = '$id'";
                 $resultado = $conexion->query($sql);
                 foreach ($resultado as $fila) {
-                    $pp = $fila[0] . " \n " . $observacion;
+                    $pp = $fila[0] ;
                 }
 
                 echo '<script language="javascript">alert("' . $pp . '");</script>';
