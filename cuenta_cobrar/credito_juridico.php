@@ -34,6 +34,7 @@ if (isset($_REQUEST['nameEnviar'])) {
     $prestamo->setTasa($_REQUEST['tasa_per']);
     $devolucion = date_format(date_create($devolucion), 'Y-m-d');
         $prestamo->setFecha($devolucion);
+    $prestamo->setTipo_credito("JURIDICO");
     Conexion::abrir_conexion();
     
     if (repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo)) {
@@ -47,7 +48,17 @@ if (isset($_REQUEST['nameEnviar'])) {
          $expediente->setId_prestamo($id_prestamo);
          
          if (repositorio_expediente_juridico::insertar_expediente_juridico(Conexion::obtener_conexion(), $expediente)) {
-             echo 'guardo expediente juridico';
+             echo "<script type='text/javascript'>";
+                    echo 'swal({
+                    title: "Exito",
+                    text: "Credito registrado",
+                    type: "success"},
+                    function(){
+                    }
+                    );';
+                    echo "</script>";
+         }else{
+             
          }
          
          
