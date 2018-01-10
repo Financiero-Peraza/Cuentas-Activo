@@ -55,7 +55,7 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_natural(Conexio
                         <?php foreach ($lista_prestamo as $lista) { ?>
                             <tr>
                                 <td class="text-center">
-                                    <button class="btn btn-success" onclick="aprobar_credito('<?php echo $lista['6'];?>')"> 
+                                    <button class="btn btn-success" onclick="aprobar_creditso('<?php echo $lista['6'];?>')"> 
                                         <i class="Medium material-icons prefix ">check_circle</i> 
                                     </button>
                                 </td>

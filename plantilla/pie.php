@@ -27,7 +27,6 @@
 
 <!-- Demo Js -->
 <script src="../js/demo.js"></script>
-<script src="../js/jquery.inputmask.bundle.js"></script>
-<script src="../js/Mascara.js"></script>
+
 </body>
 </html>
