@@ -796,8 +796,8 @@ if (isset($_REQUEST["pas_cp"])) {
     }
     if ($op == 2) {
         $ruta = "../anexo/";
-        $biografia = $ruta . $_POST["bio"];
-        $biografia2 = $_POST['bio'];
+//        $biografia = $ruta . $_POST["bio"];
+//        $biografia2 = $_POST['bio'];
         //echo '<script language="javascript">alert("'.$nombre_archivo.'");</script>'; 
         $bien = new bien_hipotecario();
         $bien->setDescripcion($_REQUEST["descr"]);
@@ -805,12 +805,12 @@ if (isset($_REQUEST["pas_cp"])) {
         $bien->setOtros_datos("no");
         $bien->setUbicacion($_REQUEST["hubica"]);
       
-        if (move_uploaded_file($_FILES['bio1']['tmp_name'], $biografia)) {
-            $bien->setAnexo($biografia2);
-        } else {
-            $bien->setAnexo("");
-            // echo basename($FILES['bio1']['name']);
-        }
+//        if (move_uploaded_file($_FILES['bio1']['tmp_name'], $biografia)) {
+//            $bien->setAnexo($biografia2);
+//        } else {
+//            $bien->setAnexo("");
+//            // echo basename($FILES['bio1']['name']);
+//        }
         
         $prestamo = new presamo();
         $prestamo->setId_plan("1");
