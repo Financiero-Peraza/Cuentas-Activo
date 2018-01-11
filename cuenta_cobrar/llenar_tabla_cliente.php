@@ -90,6 +90,4 @@ foreach ($listado as $fila) {
     <?php
 }
 ?>
-    <script>//para no ingrasar los mismos activoa a la tabla de presatamo
-        
-    </script>
+    
