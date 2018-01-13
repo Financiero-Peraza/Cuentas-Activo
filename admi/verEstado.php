@@ -28,7 +28,7 @@ $lista_estado = repositorio_estado_resultado::lista_estado_filtrada(Conexion::ob
                 <div class="card">
                     <div class="header">
                         <a href="#">
-                            <h3 class="text-center"><?php echo 'BALANCE GENERAL AL 31 DE DICIEMBRE'; ?></h3>
+                            <h3 class="text-center"><?php echo 'BALANCE GENERAL AL 31 DE DICIEMBRE' . ' ' . $_REQUEST['periodo']; ?></h3>
                         </a>
                     </div>
                     <div id="" class="">
@@ -36,81 +36,81 @@ $lista_estado = repositorio_estado_resultado::lista_estado_filtrada(Conexion::ob
                             <table class="table table-striped table-bordered" id="tabla_cliente_juridico">
 
                                 <thead>
-                                <th class="text-center"><strong>Activos</strong></th>
+                                <th style="font-size: 20px" class="text-center"><strong>Activos</strong></th>
                                 <th class="text-center"><strong>($)</strong></th>
 
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="">Efectivo</td>
+                                        <td class="text-center">Efectivo</td>
                                         <td class="text-center"><?php echo $lista_balance->getEfectivo();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Valores Negociables</td>
+                                        <td class="text-center">Valores Negociables</td>
                                         <td class="text-center"><?php echo $lista_balance->getValor_negociable();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Cuentas por Cobrar</td>
+                                        <td class="text-center">Cuentas por Cobrar</td>
                                         <td class="text-center"><?php echo $lista_balance->getCuenta_por_cobrar();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Inventarios</td>
+                                        <td class="text-center">Inventarios</td>
                                         <td class="text-center"><?php echo $lista_balance->getInventarios();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Total de Activos corrientes</td>
+                                        <td class="text-center">Total de Activos corrientes</td>
                                         <td class="text-center"><?php echo $lista_balance->getTotal_activo_corriente();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Terrenos</td>
+                                        <td class="text-center">Terrenos</td>
                                         <td class="text-center"><?php echo $lista_balance->getTerrenos();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Edificio y equivo</td>
+                                        <td class="text-center">Edificio y equivo</td>
                                         <td class="text-center"><?php echo $lista_balance->getEdificio_equipo();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Menos: Depreciacion acumulada</td>
+                                        <td class="text-center">Menos: Depreciacion acumulada</td>
                                         <td class="text-center"><?php echo $lista_balance->getDepreciacion();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Activos Fijos Netos</td>
+                                        <td class="text-center">Activos Fijos Netos</td>
                                         <td class="text-center"><?php echo $lista_balance->getTotal_activo_noCorriente();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Total de Activos</td>
+                                        <td class="text-center">Total de Activos</td>
                                         <td class="text-center"><strong><?php echo $lista_balance->getTotal_activo();?></strong></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center"><strong>Pasivo y patrimonio de los accionistas</strong></td>
+                                        <td style="font-size: 20px" class="text-center"><strong>Pasivo y patrimonio de los accionistas</strong></td>
                                         <td class="text-center"></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Cuentas por pagar </td>
+                                        <td class="text-center">Cuentas por pagar </td>
                                         <td class="text-center"><?php echo $lista_balance->getCuenta_por_pagar();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Documentos por pagar</td>
+                                        <td class="text-center">Documentos por pagar</td>
                                         <td class="text-center"><?php echo $lista_balance->getDocumento_por_pagar();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Total de pasivos corrientes</td>
+                                        <td class="text-center">Total de pasivos corrientes</td>
                                         <td class="text-center"><?php echo $lista_balance->getTotal_pasivo_corriente();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Deudas a largo plazo</td>
+                                        <td class="text-center">Deudas a largo plazo</td>
                                         <td class="text-center"><?php echo $lista_balance->getDeuda_largop();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Acciones comunes</td>
+                                        <td class="text-center">Acciones comunes</td>
                                         <td class="text-center"><?php echo $lista_balance->getAccioneC();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Ganancias Retenidas</td>
+                                        <td class="text-center">Ganancias Retenidas</td>
                                         <td class="text-center"><?php echo $lista_balance->getGanancias_retenidas();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Total de pasivo y patrimonios de los accionistas</td>
+                                        <td class="text-center" style="font-size: 20px"><strong>Total de pasivo y patrimonios de los accionistas</strong></td>
                                         <td class="text-center"><strong><?php echo $lista_balance->getTotal_pasivo_patrimonio();?></strong></td>
                                     </tr>
                                 </tbody>
@@ -132,7 +132,7 @@ $lista_estado = repositorio_estado_resultado::lista_estado_filtrada(Conexion::ob
                 <div class="card">
                     <div class="header">
                         <a href="#">
-                            <h3 class="text-center"><?php echo 'ESTADO DE RESULTADO AL 31 DE DICIEMBRE'; ?></h3>
+                            <h3 class="text-center"><?php echo 'ESTADO DE RESULTADO AL 31 DE DICIEMBRE' . ' ' . $_REQUEST['periodo']; ?></h3>
                         </a>
                     </div>
                     <div id="" class="">
@@ -140,61 +140,61 @@ $lista_estado = repositorio_estado_resultado::lista_estado_filtrada(Conexion::ob
                             <table class="table table-striped table-bordered" id="tabla_cliente_juridico">
 
                                 <thead>
-                                <th class="text-center"><strong>Concepto</strong></th>
+                                <th style="font-size: 20px" class="text-center"><strong>Concepto</strong></th>
                                 <th class="text-center"><strong>($)</strong></th>
 
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="">Ingresos por ventas</td>
+                                        <td class="text-center">Ingresos por ventas</td>
                                         <td class="text-center"><?php echo $lista->getIngreso_venta();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Menos: Costo de los bienes vendidos</td>
+                                        <td class="text-center">Menos: Costo de los bienes vendidos</td>
                                         <td class="text-center"><?php echo $lista->getCosto_venta();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Utilidad Bruta</td>
+                                        <td class="text-center">Utilidad Bruta</td>
                                         <td class="text-center"><?php echo $lista->getUtilidad_bruta();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Menos: Gastos operativos</td>
+                                        <td class="text-center">Menos: Gastos operativos</td>
                                         <td class="text-center"></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Gastos de venta</td>
+                                        <td class="text-center">Gastos de venta</td>
                                         <td class="text-center"><?php echo $lista->getGasto_venta();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Gastos generales y administrativos</td>
+                                        <td class="text-center">Gastos generales y administrativos</td>
                                         <td class="text-center"><?php echo $lista->getGasto_administrativo();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Gastos de Arrendamiento</td>
+                                        <td class="text-center">Gastos de Arrendamiento</td>
                                         <td class="text-center"><?php echo $lista->getGasto_arrendamiento();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Gastos de depreciación</td>
+                                        <td class="text-center">Gastos de depreciación</td>
                                         <td class="text-center"><?php echo $lista->getGasto_depreciacion();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Total de gastos operativos</td>
+                                        <td class="text-center">Total de gastos operativos</td>
                                         <td class="text-center"><?php echo $lista->getTotal_operativo();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Menos: gastos por intereses</td>
+                                        <td class="text-center">Menos: gastos por intereses</td>
                                         <td class="text-center"><?php echo $lista->getGasto_interes();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Utilidad antes de impuestos </td>
+                                        <td class="text-center">Utilidad antes de impuestos </td>
                                         <td class="text-center"><?php echo $lista->getUtilidad_antes_impuestos();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Menos: impuestos</td>
+                                        <td class="text-center">Menos: impuestos</td>
                                         <td class="text-center"><?php echo $lista->getImpuestos();?></td>
                                     </tr>
                                     <tr>
-                                        <td class="">Utilidad neta despues de impuestos</td>
+                                        <td class="text-center">Utilidad neta despues de impuestos</td>
                                         <td class="text-center"><?php echo $lista->getUtilidad_neta();?></td>
                                     </tr>
                                     
