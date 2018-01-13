@@ -8,7 +8,7 @@ class repositorio_balance {
             try {
                 //$balance = new balance_general();
                 $idPersona = $balance->getId_persona();
-                $periodo = '2017';
+                $periodo = $balance->getPeriodo();
                 $efectivo = $balance->getEfectivo();
                 $valorNegociable = $balance->getValor_negociable();
                 $cuentaXcobrar = $balance->getCuenta_por_cobrar();
@@ -73,7 +73,7 @@ class repositorio_balance {
 
         if (isset($conexion)) {
             try {
-                $sql = "select * from balance_general where (id_persona_juridica = '$codigo' )";
+                $sql = "select * from balance_general where (id_persona_juridica = '$codigo' ) ORDER by id_persona_juridica";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();

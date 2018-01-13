@@ -122,8 +122,7 @@ if (isset($_REQUEST['nameEnviar'])) {
         </div>
         <!--    FIN DE DATOS-->
 
-        <!--INICIO DE FIADOR-->
-        <div class="container-fluid">
+    
 
         <!--INICIO DATO DE CREDITO-->
         <div class="container-fluid">

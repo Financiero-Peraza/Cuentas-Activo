@@ -86,55 +86,55 @@ for ($i = 0; $i < count($lista_balance); $i++) {
                 <table padding="20px" class="table table-striped" id="data-table-simple">
                     <thead class="">
                     <th class="">Razon</th>
-                    <?php foreach ($ratio as $lista) { ?><th class=""> <?php echo $lista->getPeriodo(); ?></th><?php } ?>
+                    <?php foreach ($ratio as $lista) { ?><th class="text-center"> <?php echo $lista->getPeriodo(); ?></th><?php } ?>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Liquidez Corriente</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getLiquidez_corriente(); ?></td><?php } ?>
+                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getLiquidez_corriente(); ?></td><?php } ?>
                         </tr>
                         <tr>
                             <td>Razon Rapida</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getRazon_rapida(); ?></td><?php } ?>
+                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getRazon_rapida(); ?></td><?php } ?>
                         </tr>
                         <tr>
                             <td>Rotacion de Inventarios</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getRotacion_inventarios() . " veces"; ?></td><?php } ?>
+                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getRotacion_inventarios() . " veces"; ?></td><?php } ?>
                         </tr>
                         <tr>
                             <td>Periodo Promedio de Cobro</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getPeriodo_cobro() . " dias"; ?></td><?php } ?>
+                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getPeriodo_cobro() . " dias"; ?></td><?php } ?>
                         </tr>
                         <tr>
                             <td>Indice de Endeudamiento</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getIndice_endeudamiento() . "%"; ?></td><?php } ?>
+                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getIndice_endeudamiento() . "%"; ?></td><?php } ?>
                         </tr>
                         <tr>
                             <td>Razon de cargo de interes fijo</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getCargo_interes_fijo(); ?></td><?php } ?>
+                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getCargo_interes_fijo(); ?></td><?php } ?>
                         </tr>
                         <tr>
                             <td>Margen de Utilidad Bruta</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getMargen_utilidad_bruta() . "%"; ?></td><?php } ?>
+                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getMargen_utilidad_bruta() . "%"; ?></td><?php } ?>
                         </tr>
                         <tr>
                             <td>Margen de Utilidad Neta</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getMargen_utilidad_neta() . "%"; ?></td><?php } ?>
+                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getMargen_utilidad_neta() . "%"; ?></td><?php } ?>
                         </tr>
                         <tr>
                             <td>Rendimiento sobre activos totales</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getRendimiento_activo() . "%"; ?></td><?php } ?>
+                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getRendimiento_activo() . "%"; ?></td><?php } ?>
                         </tr>
                         <tr>
                             <td>Rendimiento sobre patrimonio</td>
-                            <?php foreach ($ratio as $lista) { ?><td><?php echo $lista->getRendimiento_patrimonio() . "%"; ?></td><?php } ?>
+                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getRendimiento_patrimonio() . "%"; ?></td><?php } ?>
                         </tr>
                          <tr>
                              <td class="">Ver Estados</td>
                             <?php foreach ($ratio as $lista) { ?>
                             
-                             <td class="">
-                                 <button class="btn btn-primary" onclick="abrir_estados('<?php echo $lista->getId(); ?>','<?php echo $lista->getPeriodo();?>')"> 
+                             <td class="text-center">
+                                 <button class="btn btn-primary " onclick="abrir_estados('<?php echo $lista->getId(); ?>','<?php echo $lista->getPeriodo();?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>

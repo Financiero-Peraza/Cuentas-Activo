@@ -6,9 +6,9 @@ class repositorio_estado_resultado {
         $resultado = FALSE;
         if (isset($conexion)) {
             try {
-//                $estado = new estado_resultado();
+               // $estado = new estado_resultado();
                 $idPersona = $estado->getId_persona_juridica();
-                $periodo = '2017';
+                $periodo = $estado->getPeriodo();
                 $ingresoXventa = $estado->getIngreso_venta();
                 $costoVenta = $estado->getCosto_venta();
                 $utlidad_bruta = $ingresoXventa - $costoVenta;
@@ -71,7 +71,7 @@ $lista = array();
 
         if (isset($conexion)) {
             try {
-                $sql = "select * from estado_resultado where (id_persona_juridica = '$codigo' )";
+                $sql = "select * from estado_resultado where (id_persona_juridica = '$codigo' ) ORDER by id_persona_juridica";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
