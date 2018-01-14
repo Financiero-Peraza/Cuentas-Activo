@@ -27,6 +27,7 @@
 
 <!-- Demo Js -->
 <script src="../js/demo.js"></script>
+<script src="../js/Mascara.js"></script>
 
 </body>
 </html>

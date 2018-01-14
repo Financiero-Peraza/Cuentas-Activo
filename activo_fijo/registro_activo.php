@@ -13,25 +13,39 @@ include_once '../repositorios/correlativos.php';
 Conexion::abrir_conexion();
 
 if (isset($_REQUEST['nameEnviar'])) {
-    $nombre = $_REQUEST['nameNombre'];
-    $select = $_REQUEST['NameSelect'];
+    $institucion = $_REQUEST['select_institucion'];
+    $departamento = $_REQUEST['select_departamento'];
+    $tipo_activo = $_REQUEST['select_tipo'];
+    $encargado = $_REQUEST['select_encargado'];
+    $meses = $_REQUEST['meses'];
+    $observaciones = $_REQUEST['obsevaciones'];
+    $cantidad = $_REQUEST['cantidad'];
+    $fecha = $_REQUEST['fecha'];
+    $descripcion  = $_REQUEST['descripcion'];
+    $cantidad  = $_REQUEST['cantidad'];
+    
+    
     $conexion = Conexion::obtener_conexion();
-    $correlativo = correlativos::obtener_correlativo($conexion, 'tipo_activo');
-
-    $sql = "INSERT INTO tipo_activo (id_clasificacion, nombre, correlativo) VALUES ('$select', '$nombre', '$correlativo')";
+    
+ for($i=0; $i<$cantidad;$i++){
+ 
+    $correlativo = correlativos::obtener_correlativo($conexion, 'activo');
+    $sql = "INSERT INTO activo (id_tipo, id_departamento, id_institucion, id_usuario, encargado_id_encargado, correlativo, fecha_adquisicion, descripcion, estado, tiempo_uso, observaciones) "
+                                   . "VALUES ( '$tipo_activo', '$departamento', '$institucion', '1', '$encargado', '$correlativo', '$fecha', '$descripcion', 'ACTIVO', '$meses', '$observaciones');";
     $sentencia = $conexion->prepare($sql);
     $resultado = $sentencia->execute();
-
+ }
     echo '<script>location.href ="registro_tipo_activo.php";</script>';
 } else {
     $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::obtener_conexion());
     $lista_institucion = correlativos::lista_institucion(Conexion::obtener_conexion());
     $lista_depatamento = correlativos::lista_departamento(Conexion::obtener_conexion());
     $lista_tipo = correlativos::lista_tipo(Conexion::obtener_conexion());
+    $lista_encargado = correlativos::lista_encargado(Conexion::obtener_conexion());
     ?>
 
 
-    <form action="registro_tipo_activo.php" method="GET" autocomplete="off">
+<form action="registro_activo.php" method="GET" autocomplete="off">
         <section class="content">
             <!--INICIO DE FIADOR-->
             <div class="container-fluid">
@@ -49,11 +63,14 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             <div class="form-line">
                                                 <div class="form-line">
                                                     <span class="input-group-addon" id="basic-addon1">SELECCIONE LA INSTITUCION</span>
-                                                    <select class="form-control show-tick" name="NameSelect" required="">
+                                                    <select class="form-control show-tick" name="select_institucion" required="">
                                                  
                                                         <?php foreach ($lista_institucion as $lista) { ?>
 
-                                                        <option value="<?php echo $lista->getId_departamento(); ?>"><?php echo $lista->getCorrelativo() ."--". $lista->getNombre() ; ?></option>
+                                                        <option value="<?php echo $lista->getId_departamento(); ?>">
+                                                       
+                                                            <?php echo $lista->getCorrelativo() ."--". $lista->getNombre() ; ?>
+                                                        </option>
 
                                                         <?php } ?>
                                                     </select>
@@ -67,7 +84,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             <div class="form-line">
                                                 <div class="form-line">
                                                     <span class="input-group-addon" id="basic-addon1">SELECCIONE EL DEPARTAMENTO</span>
-                                                    <select class="form-control show-tick" name="NameSelect" required="">
+                                                    <select class="form-control show-tick" name="select_departamento" required="">
                                                         <?php foreach ($lista_depatamento as $lista) { ?>
 
                                                         <option value="<?php echo $lista->getId_departamento(); ?>"><?php echo $lista->getCorrelativo()."--". $lista->getNombre(); ?></option>
@@ -85,11 +102,11 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             <div class="form-line">
                                                 <div class="form-line">
                                                     <span class="input-group-addon" id="basic-addon1">SELECCIONE EL TIPO DE ACTIVO</span>
-                                                    <select class="form-control show-tick" name="NameSelect" required="">
+                                                    <select class="form-control show-tick" name="select_tipo" required="">
                                                         <option  value="" disabled="">SELECCIONE EL TIPO DE ACTIVO</option>
-                                                        <?php foreach ($lista_tip as $lista) { ?>
+                                                        <?php foreach ($lista_tipo as $lista2) { ?>
 
-                                                            <option value="<?php echo $lista->getId_cl; ?>"><?php echo $lista->getNombre(); ?></option>
+                                                        <option value="<?php echo $lista2->getId_tipo(); ?>"><?php echo $lista2->getId_correlativo(). "--". $lista2->getId_nombre(); ?></option>
 
                                                         <?php } ?>
                                                     </select>
@@ -102,11 +119,12 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
-                                                    <select class="form-control show-tick" name="NameSelect" required="">
+                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE EL ENCARGADO</span>
+                                                    <select class="form-control show-tick" name="select_encargado" required="">
                                                         <option  value="" disabled="">SELECCIONE ENCARGADO</option>
-                                                        <?php foreach ($lista_clasificacion as $lista) { ?>
+                                                        <?php foreach ($lista_encargado as $lista3) { ?>
 
-                                                            <option value="<?php echo $lista->getId_clasificacion(); ?>"><?php echo $lista->getNombre(); ?></option>
+                                                        <option value="<?php echo $lista3->getId_encargado(); ?>"><?php echo $lista3->getNombre() ." ". $lista3->getApellido(); ?></option>
 
                                                         <?php } ?>
                                                     </select>
@@ -120,7 +138,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <span class="input-group-addon" id="basic-addon1">FECHA ADQUISICION</span>
-                                                <input type="date"  class="form-control text-center" required="" name="nameEfectivo" placeholder="FECHA ADQUISICION">
+                                                <input type="date"  class="form-control text-center" required="" name="fecha" placeholder="FECHA ADQUISICION">
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +147,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <span class="input-group-addon" id="basic-addon1">TIEMPO DE USO (MESES)</span>
-                                                <input type="number"  min="0" step="any"class="form-control text-center" name="nameNegociable" placeholder="TIEMPO DE USO (MESES)" required="">
+                                                <input type="number"  min="0" step="any"class="form-control text-center" name="meses" placeholder="TIEMPO DE USO (MESES)" required="">
                                             </div>
                                         </div>
                                     </div>
@@ -138,8 +156,8 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">DESCRIPCION</span>
-                                                <input type=""  class="form-control text-center" required="" name="nameEfectivo" placeholder="FECHA ADQUISICION">
+                                                <span class="input-group-addon" id="basic-addon1">OBSERVACIONES</span>
+                                                <input type="text"  class="form-control text-center" required="" name="obsevaciones" placeholder="OBSERVACIONES">
                                             </div>
                                         </div>
                                     </div>
@@ -147,11 +165,23 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">OBSERVACIONES</span>
-                                                <input type=""  min="0" step="any"class="form-control text-center" name="nameNegociable" placeholder="TIEMPO DE USO (MESES)" required="">
+                                                <span class="input-group-addon" id="basic-addon1">CANTIDAD</span>
+                                                <input type="number"  min="0" step="any"class="form-control text-center" name="cantidad" placeholder="UNIDADES" required="">
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                   <div class="row clearfix">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">DESCRIPCION</span>
+                                                <input type=""  class="form-control text-center" required="" name="descripcion" placeholder="DESCRIPCION">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                 
                                 </div>
 
                                 <div class="text-center">

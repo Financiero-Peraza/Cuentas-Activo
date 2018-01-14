@@ -139,7 +139,7 @@ class correlativos {
                         $encargado->setDui($fila['dui']);
                         
                         
-                        $lista[] = $institucion;
+                        $lista[] = $encargado;
                     }
                 }
             } catch (PDOException $exc) {
@@ -147,6 +147,29 @@ class correlativos {
             }
         }
         return $lista;
+    }
+    
+    public static function insertar_activo($conexion, $activo) {
+
+        $usuario_insertado = false;
+         $activo = new $activo;
+        if (isset($conexion)) {
+
+            try {
+                $sql = "INSERT INTO usuarios(codigo_usuario,codigo_institucion,nombre,apellido,telefono,correo,direccion,estado,sexo,observaciones,foto)
+                    values (:codigo_usuario,:codigo_institucion,:nombre,:apellido,:telefono,:correo,:direccion,:estado,:sexo,:observaciones,'$foto') ";
+
+                $sentencia = $conexion->prepare($sql);
+                $usuario_insertado = $sentencia->execute();
+                
+            } catch (PDOException $ex) {
+                //echo '<script>swal("No se puedo realizar el registro", "Favor '.$ex->getMessage().' revisar los  datos e intentar nuevamente", "warning");</script>';
+                
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        } else {
+            echo 'no hay conexion';
+        }
     }
 
 }
