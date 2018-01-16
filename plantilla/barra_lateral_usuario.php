@@ -57,7 +57,25 @@
                     </li>
                 </ul>
             </li>
+             <li>
+                <a href="#" class="menu-toggle">
+                    <i class="material-icons col-green">description</i>
+                    <span>Cartera de Clientes</span>
+                </a>
+                <ul class="ml-menu">
+                    <li>
+                        <a href="../cuenta_cobrar/cartera_norma.php">Normal</a>
+                    </li>
 
+                    <li>
+                        <a href="../cuenta_cobrar/cartera_mora.php">Mora</a>
+                    </li>
+                    <li>
+                        <a href="../cuenta_cobrar/cartera_incobrable.php">Incobrable</a>
+                    </li>
+                </ul>
+            </li>
+         
             <li>
                 <a href="../cuenta_cobrar/estados_financieros.php" >
                     <i class="material-icons col-deep-purple">assignment</i>

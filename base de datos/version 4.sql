@@ -305,6 +305,18 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`clasificacion` (
   PRIMARY KEY (`id_clasificacion`) )
 ENGINE = InnoDB;
 
+--
+-- Volcado de datos para la tabla `clasificacion`
+--
+
+INSERT INTO `clasificacion` (`id_clasificacion`, `nombre`, `correlativo`, `tiempo_depreciacion`) VALUES
+(1, 'Moviliario y Equipo', '001', 24),
+(2, 'Vehiculos', '002', 48),
+(3, 'Maquinaria', '003', 60),
+(4, 'Edificio', '004', 240),
+(5, 'Terrenos', '005', 0);
+
+
 
 -- -----------------------------------------------------
 -- Table `instituciones_financieras`.`institucion`
