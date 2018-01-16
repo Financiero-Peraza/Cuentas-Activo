@@ -28,7 +28,7 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
 ?>
         
 
-<form action="registro_tipo_activo.php" method="GET">
+<form action="registro_tipo_activo.php" method="GET" autocomplete="off">
     <section class="content">
         <!--INICIO DE FIADOR-->
         <div class="container-fluid">
