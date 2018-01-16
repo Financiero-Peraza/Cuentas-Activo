@@ -4,6 +4,8 @@ include_once '../plantilla/barraSuperior.php';
 include_once '../plantilla/barra_lateral_usuario.php';
 include_once '../modelos/tipo_activo.php';
 include_once '../modelos/clasificacion.php';
+include_once '../modelos/departamento.php';
+include_once '../modelos/encargado.php';
 include_once '../repositorios/repositorio_clasificacion.php';
 include_once '../repositorios/repositorio_tipoActivo.php';
 include_once '../app/Conexion.php';
@@ -23,6 +25,9 @@ if (isset($_REQUEST['nameEnviar'])) {
     echo '<script>location.href ="registro_tipo_activo.php";</script>';
 } else {
     $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::obtener_conexion());
+    $lista_institucion = correlativos::lista_institucion(Conexion::obtener_conexion());
+    $lista_depatamento = correlativos::lista_departamento(Conexion::obtener_conexion());
+    $lista_tipo = correlativos::lista_tipo(Conexion::obtener_conexion());
     ?>
 
 
@@ -43,12 +48,12 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
-                                                    
+                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE LA INSTITUCION</span>
                                                     <select class="form-control show-tick" name="NameSelect" required="">
-                                                        <option  value="" disabled="">SELECCIONE EL ENCARGADO</option>
-                                                        <?php foreach ($lista_clasificacion as $lista) { ?>
+                                                 
+                                                        <?php foreach ($lista_institucion as $lista) { ?>
 
-                                                            <option value="<?php echo $lista->getId_clasificacion(); ?>"><?php echo $lista->getNombre(); ?></option>
+                                                        <option value="<?php echo $lista->getId_departamento(); ?>"><?php echo $lista->getCorrelativo() ."--". $lista->getNombre() ; ?></option>
 
                                                         <?php } ?>
                                                     </select>
@@ -61,11 +66,11 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE EL DEPARTAMENTO</span>
                                                     <select class="form-control show-tick" name="NameSelect" required="">
-                                                        <option  value="" disabled="">SELECCIONE TIPO DE ACTIVO</option>
-                                                        <?php foreach ($lista_clasificacion as $lista) { ?>
+                                                        <?php foreach ($lista_depatamento as $lista) { ?>
 
-                                                            <option value="<?php echo $lista->getId_clasificacion(); ?>"><?php echo $lista->getNombre(); ?></option>
+                                                        <option value="<?php echo $lista->getId_departamento(); ?>"><?php echo $lista->getCorrelativo()."--". $lista->getNombre(); ?></option>
 
                                                         <?php } ?>
                                                     </select>
@@ -79,11 +84,12 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE EL TIPO DE ACTIVO</span>
                                                     <select class="form-control show-tick" name="NameSelect" required="">
-                                                        <option  value="" disabled="">SELECCIONE INSTITUCIÓN</option>
-                                                        <?php foreach ($lista_clasificacion as $lista) { ?>
+                                                        <option  value="" disabled="">SELECCIONE EL TIPO DE ACTIVO</option>
+                                                        <?php foreach ($lista_tip as $lista) { ?>
 
-                                                            <option value="<?php echo $lista->getId_clasificacion(); ?>"><?php echo $lista->getNombre(); ?></option>
+                                                            <option value="<?php echo $lista->getId_cl; ?>"><?php echo $lista->getNombre(); ?></option>
 
                                                         <?php } ?>
                                                     </select>
