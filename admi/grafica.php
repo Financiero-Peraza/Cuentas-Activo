@@ -15,10 +15,10 @@ include_once '../repositorios/repositorio_juridico.php';
 
 Conexion::abrir_conexion();
 
-$lista_balance = repositorio_balance::lista_balance(Conexion::obtener_conexion(), '1');
-$lista_estado = repositorio_estado_resultado::lista_estado(Conexion::obtener_conexion(), '1');
-$datos = repositorio_juridico::obtener_persona_juridca(Conexion::obtener_conexion(), '1');
-$prestamos_pendientes = repositorio_expediente_juridico::lista_prestamo_previos(Conexion::obtener_conexion(), '1');
+$lista_balance = repositorio_balance::lista_balance(Conexion::obtener_conexion(), $_REQUEST['id_juridico']);
+$lista_estado = repositorio_estado_resultado::lista_estado(Conexion::obtener_conexion(), $_REQUEST['id_juridico']);
+$datos = repositorio_juridico::obtener_persona_juridca(Conexion::obtener_conexion(), $_REQUEST['id_juridico']);
+$prestamos_pendientes = repositorio_expediente_juridico::lista_prestamo_previos(Conexion::obtener_conexion(), $_REQUEST['id_juridico']);
 
 $ratio = array();
 

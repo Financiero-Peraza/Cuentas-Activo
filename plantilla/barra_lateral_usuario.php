@@ -64,7 +64,7 @@
                 </a>
                 <ul class="ml-menu">
                     <li>
-                        <a href="../cuenta_cobrar/cartera_norma.php">Normal</a>
+                        <a href="../cuenta_cobrar/cartera_normal.php">Normal</a>
                     </li>
 
                     <li>
