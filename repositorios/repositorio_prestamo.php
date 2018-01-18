@@ -167,6 +167,40 @@ prestamo.id_prestamo = '$id'";
         return $resultado;
     }
     
+    public static function lista_prestamo_normales($conexion) {
+        $lista = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        usuario.nombre,
+                        prestamo.tipo_credito,
+                        persona_juridica.nombre,
+                        prestamo.prestamo_original,
+                        usuario.apellido,
+                        persona_juridica.categoria,
+                        prestamo.tiempo,
+                        persona_juridica.id_persona_juridica,
+                        prestamo.id_prestamo
+                        FROM
+                        prestamo
+                        INNER JOIN usuario ON prestamo.id_asesor = usuario.id_usuario
+                        INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
+                            WHERE prestamo.estado = 'NORMAL'";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+                
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
+    
     public static function lista_prestamo_pendiente_natural($conexion) {
         $lista = array();
 
@@ -204,7 +238,7 @@ prestamo.id_prestamo = '$id'";
          $respuesta = false;
         if (isset($conexion)) {
             try {
-                $sql = "UPDATE prestamo SET estado = 'APROBADO' where id_prestamo = '$id'" ;
+                $sql = "UPDATE prestamo SET estado = 'NORMAL' where id_prestamo = '$id'" ;
                 $sentencia = $conexion->prepare($sql);
                 $respuesta = $sentencia->execute();
             } catch (PDOException $exc) {

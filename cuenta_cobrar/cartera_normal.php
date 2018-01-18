@@ -17,7 +17,7 @@ if (isset($_REQUEST['id_prestamo'])) {
 
     if (repositorio_prestamo::aprobar_prestamo(Conexion::obtener_conexion(), $_REQUEST['id_prestamo'])) {
         echo "<script>
-        alert('prestamo actualizado');
+        alert('prestamo aprobado');
         location.href='solicitud_pendiente.php';
         </script>";
     }
@@ -25,7 +25,7 @@ if (isset($_REQUEST['id_prestamo'])) {
 }else{
 
 
-$lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_juridica(Conexion::obtener_conexion());
+$lista_prestamo = repositorio_prestamo::lista_prestamo_normales(Conexion::obtener_conexion());
 ?>    
 
 
@@ -42,7 +42,7 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_juridica(Conexi
             <div class="panel-body">
                 <table padding="20px" class="table table-striped" id="data-table-simple">
                     <thead class="">
-                    <th class="text-center">Aprobar</th>
+                    
                     <th class="text-center">Asesor</th>
                     <th class="text-center">Solicitante</th>
                     <th class="text-center">Tipo Prestamo</th>

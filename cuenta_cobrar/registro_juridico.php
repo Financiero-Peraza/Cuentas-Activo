@@ -71,7 +71,7 @@ if (isset($_REQUEST['nameEnviar'])) {
 } else {
     ?>
 
-<form action="registro_juridico.php" method="GET">
+<form action="registro_juridico.php" method="GET" autocomplete="off">
         <!--    INICIO DE DATOS-->
         <section class="content">
             <div class="container-fluid">
