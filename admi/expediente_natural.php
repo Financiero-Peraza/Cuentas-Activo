@@ -49,7 +49,7 @@ $prestamos_pendientes = repositorio_natural::lista_prestamo_previos_natural(Cone
                                 <th class="text-center">Direccion</th>
                                 <th class="text-center">Dui</th>
                                 <th class="text-center">Nit</th>
-                                <th class="text-center">Correo</th>
+                                
                                 <th class="text-center">Telefono</th>
                                 
 
@@ -61,7 +61,7 @@ $prestamos_pendientes = repositorio_natural::lista_prestamo_previos_natural(Cone
                                         <td class="text-center"><?php echo $datos->getDireccion(); ?></td>
                                         <td class="text-center"><?php echo $datos->getDui(); ?></td>
                                         <td class="text-center"><?php echo $datos->getNit(); ?></td>
-                                        <td class="text-center"><?php echo $datos->getCorreo(); ?></td>
+                                
                                         <td class="text-center"><?php echo $datos->getTelefono(); ?></td>
                                     </tr>
                                 </tbody>

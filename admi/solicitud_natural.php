@@ -18,7 +18,7 @@ if (isset($_REQUEST['id_prestamo'])) {
     if (repositorio_prestamo::aprobar_prestamo(Conexion::obtener_conexion(), $_REQUEST['id_prestamo'])) {
         echo "<script>
         alert('prestamo actualizado');
-        location.href='solicitud_pendiente.php';
+        location.href='solicitud_natural.php';
         </script>";
     }
     
@@ -55,7 +55,7 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_natural(Conexio
                         <?php foreach ($lista_prestamo as $lista) { ?>
                             <tr>
                                 <td class="text-center">
-                                    <button class="btn btn-success" onclick="aprobar_creditso('<?php echo $lista['6'];?>')"> 
+                                    <button class="btn btn-success" onclick="aprobar_credito('<?php echo $lista['6'];?>')"> 
                                         <i class="Medium material-icons prefix ">check_circle</i> 
                                     </button>
                                 </td>
@@ -91,7 +91,7 @@ function abrir_expediente(id_natural){
 }
 
 function aprobar_credito(id_prestamo){
-    location.href="solicitud_pendiente.php?id_prestamo=" +id_prestamo, "_parent";
+    location.href="solicitud_natural.php?id_prestamo=" +id_prestamo, "_parent";
 }
 
 </script>
