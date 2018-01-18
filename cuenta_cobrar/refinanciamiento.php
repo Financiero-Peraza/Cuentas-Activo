@@ -14,14 +14,12 @@ include_once '../modelos/presamo.php';
 include_once '../repositorios/repositorio_prestamo.php';
 Conexion::abrir_conexion();
 if (isset($_REQUEST['id_prestamo'])) {
+    $id_prestamo = $_REQUEST['id_prestamo'];
 
-    if (repositorio_prestamo::hacer_incobrable(Conexion::obtener_conexion(), $_REQUEST['id_prestamo'])) {
         echo "<script>
-        alert('Credito Marcado como incobrable');
-        location.href='cartera_normal.php';
+        location.href='credito_refinanciado.php?id_prestamo='".$id_prestamo." ;
         </script>";
-    }
-    
+   
 }else{
 
 
@@ -57,7 +55,7 @@ $lista_prestamo_natural = repositorio_prestamo::lista_refinanciamiento_naturales
                         <?php foreach ($lista_prestamo as $lista) { ?>
                             <tr>
                                <td class="text-center">
-                                   <button class="btn btn-danger" onclick="refinanciar('<?php echo $lista['8'];?>')"> 
+                                   <button class="btn btn-danger" onclick="refinanciar('<?php echo $lista['8'];?>', '<?php echo $lista['7'];?>')"> 
                                         <i class="Medium material-icons prefix">refresh</i> 
                                     </button>
                                 </td>
@@ -124,8 +122,8 @@ function abrir_pagos_natural(id_prestamo) {
         a.click();
     }
 
-function refinanciar(id_prestamo){
-    location.href="refinanciamiento.php?id_prestamo=" +id_prestamo, "_parent";
+function refinanciar(id_prestamo ,id_juridico ){
+    location.href="credito_refinanciado_juridico.php?id_prestamo=" +id_prestamo+"&id_juridico="+id_juridico+ "_parent";
 }
 
 </script>

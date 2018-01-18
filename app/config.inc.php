@@ -2,6 +2,6 @@
 
 $nombre_servidor = 'localhost';
 $nombre_usuario = 'root';
-$password = 'root';
+$password = '';
 $nombre_base_datos = 'instituciones_financieras';
 ?>
