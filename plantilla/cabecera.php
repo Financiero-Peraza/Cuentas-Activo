@@ -43,10 +43,10 @@
         
         <script src="../js/Mascara.js"></script>
 
-
+<script type="text/javascript" src="../js/jquery.min2.2.4.js"></script>
     </head>
-    <script>
+    
 
-
-    </script>
+<script type="text/javascript" src="../js/jquery.min2.2.4.js"></script>
+    
     <body class="theme-red">        

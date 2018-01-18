@@ -71,7 +71,7 @@ $lista = array();
 
         if (isset($conexion)) {
             try {
-                $sql = "select * from estado_resultado where (id_persona_juridica = '$codigo' ) ORDER by id_persona_juridica";
+                $sql = "select * from estado_resultado where (id_persona_juridica = '$codigo' ) ORDER by periodo";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
