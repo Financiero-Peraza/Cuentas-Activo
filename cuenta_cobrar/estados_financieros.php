@@ -69,11 +69,13 @@ if (isset($_REQUEST['nameEnviar'])) {
 
     repositorio_estado_resultado::insertar_estado_resultado(Conexion::obtener_conexion(), $estado);
 
-    echo '  location.href="estados_financieros.php"';
+    echo '<script>
+          location.href="estados_financieros.php";
+         </script>';
 } else {
     ?>
 
-<form action="estados_financieros.php" method="get" name="credito_personal" id="credito_personal" >
+<form action="estados_financieros.php" method="get" name="credito_personal" id="credito_personal" autocomplete="off">
         <input type="hidden" id="pas_cp" name="pas_cp"/>
         <input type="radio" id="uno" checked="" style="visibility: hidden"/>
         <section class="content">
@@ -93,7 +95,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                                 <div class="input-field"><i class="fa fa-search prefix" aria-hidden="true">
 
                                                     </i><label for="" style="font-size:16px">Buscar Empresa</label>
-                                                    <input type="text" id="buscar_cliente"  name="" autofocus onkeypress="return llenar_tabla_cliente(this)" list="lista_personas_naturales2">
+                                                    <input type="text" id="buscar_cliente" class="form-control"  name="" autofocus onkeypress="return llenar_tabla_cliente(this)"  list="lista_personas_naturales2">
                                                 </div>              
                                             </div>
                                             <div class="col-md-5">
@@ -101,7 +103,7 @@ if (isset($_REQUEST['nameEnviar'])) {
 
                                                     </i><label for="" style="font-size:16px">Periodo</label>
                                                     
-                                                    <input type="number" name="NamePeriodo" autofocus min="2000" max="2016">
+                                                    <input type="number" class="form-control" name="NamePeriodo" autofocus min="2000" max="2016">
                                                 </div>              
                                             </div>
                                             

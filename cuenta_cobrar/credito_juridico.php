@@ -1,3 +1,10 @@
+<style>
+    .rojo{
+        color: red;
+    }
+    
+</style>
+
 <script language="javascript">
     $(document).ready(function () {
 
@@ -48,15 +55,9 @@ if (isset($_REQUEST['nameEnviar'])) {
          $expediente->setId_prestamo($id_prestamo);
          
          if (repositorio_expediente_juridico::insertar_expediente_juridico(Conexion::obtener_conexion(), $expediente)) {
-             echo "<script type='text/javascript'>";
-                    echo 'swal({
-                    title: "Exito",
-                    text: "Credito registrado",
-                    type: "success"},
-                    function(){
-                    }
-                    );';
-                    echo "</script>";
+             echo '<script>
+                    location.href="credito_juridico.php";
+                  </script';
          }else{
              
          }
@@ -73,7 +74,7 @@ if (isset($_REQUEST['nameEnviar'])) {
 
 ?>
 
-<form action="credito_juridico.php" method="get" name="credito_personal" id="credito_personal" >
+<form action="credito_juridico.php" autocomplete="off" method="get" name="credito_personal" id="credito_personal" >
     <input type="hidden" id="pas_cp" name="pas_cp"/>
     <input type="radio" id="uno" checked="" style="visibility: hidden"/>
     <section class="content">
@@ -93,7 +94,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             <div class="input-field"><i class="fa fa-search prefix" aria-hidden="true">
 
                                                 </i><label for="" style="font-size:16px">Buscar Empresa</label>
-                                                <input type="text" id="buscar_cliente"  name="" autofocus onkeypress="return llenar_tabla_cliente(this)" list="lista_personas_naturales2">
+                                                <input type="text" id="buscar_cliente" class="form-control"  name="" autofocus onkeypress="return llenar_tabla_cliente(this)" list="lista_personas_naturales2">
                                             </div>              
                                         </div>
                                     </div>
@@ -165,7 +166,7 @@ if (isset($_REQUEST['nameEnviar'])) {
 
                       <div class="col-md-3">
                                             <div class="row">
-                                                 <span class="input-group-addon" id="basic-addon1">TASA DE INTERES</span>
+                                                 <span class="input-group-addon rojo" id="basic-addon1">TASA DE INTERES</span>
                                                 <div class="col-md-6">
                                                     <div class="form-line">
                                                        
@@ -195,30 +196,30 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="col-sm-3 resultado">
                                             <div class="big-bullet">
                                                 <div class="bullet"></div>
-                                                <div class="contenido text-120">Cuota Mensual</div>
+                                                <div class="contenido rojo text-120">Cuota Mensual</div>
                                             </div>
-                                            <p class="text-center" id="pils-cuota-txt">$00.00</p>
+                                            <p class="text-center rojo" id="pils-cuota-txt">$00.00</p>
                                         </div>
                                         <div class="col-sm-3 resultado">
                                             <div class="big-bullet">
                                                 <div class="bullet"></div>
-                                                <div class="contenido text-120">Monto de Préstamo</div>
+                                                <div class="contenido text-120 rojo">Monto de Préstamo</div>
                                             </div>
-                                            <p class="text-center" id="pils-monto-txt">$00.00</p>
+                                            <p class="text-center rojo" id="pils-monto-txt">$00.00</p>
                                         </div>
                                         <div class="col-sm-3 resultado">
                                             <div class="big-bullet">
                                                 <div class="bullet"></div>
-                                                <div class="contenido text-120">Plazo</div>
+                                                <div class="contenido text-120 rojo">Plazo</div>
                                             </div>
-                                            <p class="text-center" id="pils-tiempo-txt">0 meses</p>
+                                            <p class="text-center rojo" id="pils-tiempo-txt">0 meses</p>
                                         </div>
                                         <div class="col-sm-3 resultado">
                                             <div class="big-bullet">
                                                 <div class="bullet"></div>
-                                                <div class="contenido text-120">Tasa</div>
+                                                <div class="contenido text-120 rojo">Tasa</div>
                                             </div>
-                                            <p class="text-center" id="pils-tasa-txt">00.00%</p>
+                                            <p class="text-center rojo" id="pils-tasa-txt">00.00%</p>
                                         </div>
                                     </div>
                                     <div class="text-center ">

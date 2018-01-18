@@ -53,7 +53,7 @@
             $pass = $_REQUEST['namePass'];
             Conexion::abrir_conexion();
             $respuesta = repositorio_usuario::verificar_pass(Conexion::obtener_conexion(), $pass, $usuario);
-
+                $_SESSION['user'] = $usuario;
             if ($respuesta == '1') {
                 echo '<script>swal({
                     title: "Exito",
