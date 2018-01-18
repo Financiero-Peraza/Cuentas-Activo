@@ -38,31 +38,32 @@ for ($i = 0; $i < count($lista_balance); $i++) {
                 <div class="card">
                     <div class="header">
                         <a href="#">
-                            <h3 class="text-center">DATOS DE LA EMPRESA</h3>
+                            <h3 class="text-center">LIQUIDEZ CORRIENTE</h3>
                         </a>
                     </div>
                     <div id="" class="">
                         <div class="body">
                             <script type="text/javascript">
                                 $(function () {
-                                    $('#container').highcharts({
+                                    $('#liquidez_corriente').highcharts({
                                         chart: {
                                             type: 'line'
                                         },
                                         title: {
-                                            text: 'Liquidez Corriente'
+                                            text: ''
                                         },
                                         subtitle: {
-                                            text: 'Nombre de Empresa'
+                                            text: ''
                                         },
                                         xAxis: {
-                                            categories: [<?php foreach ($ratio as $lista) { ?>
+                                            categories: [
+                                                    <?php foreach ($ratio as $lista) { ?>
                                                     '<?php echo $lista->getPeriodo(); ?>', <?php } ?>
                                             ]
                                         },
                                         yAxis: {
                                             title: {
-                                                text: 'Temperature (°C)'
+                                                text: ''
                                             }
                                         },
                                         plotOptions: {
@@ -75,12 +76,564 @@ for ($i = 0; $i < count($lista_balance); $i++) {
                                         },
                                         series: [{
                                                 name: 'Tokyo',
-                                                data: [7.0, 6.9, 9.5, 14.5]
+                                                data: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    <?php echo $lista->getLiquidez_corriente(); ?>, <?php } ?>
+                                                ]
                                             }]
                                     });
                                 });
                             </script>
-                            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                            <div id="liquidez_corriente" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <a href="#">
+                            <h3 class="text-center">RAZON RAPIDA</h3>
+                        </a>
+                    </div>
+                    <div id="" class="">
+                        <div class="body">
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#razon_rapida').highcharts({
+                                        chart: {
+                                            type: 'line'
+                                        },
+                                        title: {
+                                            text: ''
+                                        },
+                                        subtitle: {
+                                            text: ''
+                                        },
+                                        xAxis: {
+                                            categories: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    '<?php echo $lista->getRazon_rapida(); ?>', <?php } ?>
+                                            ]
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                text: ''
+                                            }
+                                        },
+                                        plotOptions: {
+                                            line: {
+                                                dataLabels: {
+                                                    enabled: true
+                                                },
+                                                enableMouseTracking: false
+                                            }
+                                        },
+                                        series: [{
+                                                name: 'Tokyo',
+                                                data: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    <?php echo $lista->getRazon_rapida(); ?>, <?php } ?>
+                                                ]
+                                            }]
+                                    });
+                                });
+                            </script>
+                            <div id="razon_rapida" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <a href="#">
+                            <h3 class="text-center">ROTACIÓN DE INVENTARIOS</h3>
+                        </a>
+                    </div>
+                    <div id="" class="">
+                        <div class="body">
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#rotacion').highcharts({
+                                        chart: {
+                                            type: 'line'
+                                        },
+                                        title: {
+                                            text: ''
+                                        },
+                                        subtitle: {
+                                            text: ''
+                                        },
+                                        xAxis: {
+                                            categories: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    '<?php echo $lista->getPeriodo(); ?>', <?php } ?>
+                                            ]
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                text: 'ROTACIONES POR AÑO'
+                                            }
+                                        },
+                                        plotOptions: {
+                                            line: {
+                                                dataLabels: {
+                                                    enabled: true
+                                                },
+                                                enableMouseTracking: false
+                                            }
+                                        },
+                                        series: [{
+                                                name: 'Tokyo',
+                                                data: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    <?php echo $lista->getRotacion_inventarios(); ?>, <?php } ?>
+                                                ]
+                                            }]
+                                    });
+                                });
+                            </script>
+                            <div id="rotacion" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <a href="#">
+                            <h3 class="text-center">PERIODO PROMEDIO DE COBRO</h3>
+                        </a>
+                    </div>
+                    <div id="" class="">
+                        <div class="body">
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#ppcobro').highcharts({
+                                        chart: {
+                                            type: 'line'
+                                        },
+                                        title: {
+                                            text: ''
+                                        },
+                                        subtitle: {
+                                            text: ''
+                                        },
+                                        xAxis: {
+                                            categories: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    '<?php echo $lista->getPeriodo(); ?>', <?php } ?>
+                                            ]
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                text: 'DIAS'
+                                            }
+                                        },
+                                        plotOptions: {
+                                            line: {
+                                                dataLabels: {
+                                                    enabled: true
+                                                },
+                                                enableMouseTracking: false
+                                            }
+                                        },
+                                        series: [{
+                                                name: 'Tokyo',
+                                                data: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    <?php echo $lista->getPeriodo_cobro(); ?>, <?php } ?>
+                                                ]
+                                            }]
+                                    });
+                                });
+                            </script>
+                            <div id="ppcobro" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <a href="#">
+                            <h3 class="text-center">INDICE DE ENDEUDAMIENTO</h3>
+                        </a>
+                    </div>
+                    <div id="" class="">
+                        <div class="body">
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#endeudamiento').highcharts({
+                                        chart: {
+                                            type: 'line'
+                                        },
+                                        title: {
+                                            text: ''
+                                        },
+                                        subtitle: {
+                                            text: ''
+                                        },
+                                        xAxis: {
+                                            categories: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    '<?php echo $lista->getPeriodo(); ?>', <?php } ?>
+                                            ]
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                text: '% DE ENDEUDAMIENTO'
+                                            }
+                                        },
+                                        plotOptions: {
+                                            line: {
+                                                dataLabels: {
+                                                    enabled: true
+                                                },
+                                                enableMouseTracking: false
+                                            }
+                                        },
+                                        series: [{
+                                                name: 'Tokyo',
+                                                data: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    <?php echo $lista->getIndice_endeudamiento(); ?>, <?php } ?>
+                                                ]
+                                            }]
+                                    });
+                                });
+                            </script>
+                            <div id="endeudamiento" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <a href="#">
+                            <h3 class="text-center">RAZON DE CARGO DE INTERES FIJO</h3>
+                        </a>
+                    </div>
+                    <div id="" class="">
+                        <div class="body">
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#interes').highcharts({
+                                        chart: {
+                                            type: 'line'
+                                        },
+                                        title: {
+                                            text: ''
+                                        },
+                                        subtitle: {
+                                            text: ''
+                                        },
+                                        xAxis: {
+                                            categories: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    '<?php echo $lista->getPeriodo(); ?>', <?php } ?>
+                                            ]
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                text: '% DE ENDEUDAMIENTO'
+                                            }
+                                        },
+                                        plotOptions: {
+                                            line: {
+                                                dataLabels: {
+                                                    enabled: true
+                                                },
+                                                enableMouseTracking: false
+                                            }
+                                        },
+                                        series: [{
+                                                name: 'Tokyo',
+                                                data: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    <?php echo $lista->getCargo_interes_fijo(); ?>, <?php } ?>
+                                                ]
+                                            }]
+                                    });
+                                });
+                            </script>
+                            <div id="interes" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <a href="#">
+                            <h3 class="text-center">MARGEN DE UTILIDAD BRUTA</h3>
+                        </a>
+                    </div>
+                    <div id="" class="">
+                        <div class="body">
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#utilidad_bruta').highcharts({
+                                        chart: {
+                                            type: 'line'
+                                        },
+                                        title: {
+                                            text: ''
+                                        },
+                                        subtitle: {
+                                            text: ''
+                                        },
+                                        xAxis: {
+                                            categories: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    '<?php echo $lista->getPeriodo(); ?>', <?php } ?>
+                                            ]
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                text: '% DE UTILIDAD BRUTA'
+                                            }
+                                        },
+                                        plotOptions: {
+                                            line: {
+                                                dataLabels: {
+                                                    enabled: true
+                                                },
+                                                enableMouseTracking: false
+                                            }
+                                        },
+                                        series: [{
+                                                name: 'Tokyo',
+                                                data: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    <?php echo $lista->getMargen_utilidad_bruta(); ?>, <?php } ?>
+                                                ]
+                                            }]
+                                    });
+                                });
+                            </script>
+                            <div id="utilidad_bruta" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <a href="#">
+                            <h3 class="text-center">MARGEN DE UTILIDAD NETA</h3>
+                        </a>
+                    </div>
+                    <div id="" class="">
+                        <div class="body">
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#utilidad_neta').highcharts({
+                                        chart: {
+                                            type: 'line'
+                                        },
+                                        title: {
+                                            text: ''
+                                        },
+                                        subtitle: {
+                                            text: ''
+                                        },
+                                        xAxis: {
+                                            categories: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    '<?php echo $lista->getPeriodo(); ?>', <?php } ?>
+                                            ]
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                text: '% DE UTILIDAD NETA'
+                                            }
+                                        },
+                                        plotOptions: {
+                                            line: {
+                                                dataLabels: {
+                                                    enabled: true
+                                                },
+                                                enableMouseTracking: false
+                                            }
+                                        },
+                                        series: [{
+                                                name: 'Tokyo',
+                                                data: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    <?php echo $lista->getMargen_utilidad_neta(); ?>, <?php } ?>
+                                                ]
+                                            }]
+                                    });
+                                });
+                            </script>
+                            <div id="utilidad_neta" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <a href="#">
+                            <h3 class="text-center">RENDIMIENTO DE ACTIVOS TOTALES</h3>
+                        </a>
+                    </div>
+                    <div id="" class="">
+                        <div class="body">
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#rendimiento').highcharts({
+                                        chart: {
+                                            type: 'line'
+                                        },
+                                        title: {
+                                            text: ''
+                                        },
+                                        subtitle: {
+                                            text: ''
+                                        },
+                                        xAxis: {
+                                            categories: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    '<?php echo $lista->getPeriodo(); ?>', <?php } ?>
+                                            ]
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                text: '% DE RENDIMIENTO SOBRE ACTIVOS TOTALES'
+                                            }
+                                        },
+                                        plotOptions: {
+                                            line: {
+                                                dataLabels: {
+                                                    enabled: true
+                                                },
+                                                enableMouseTracking: false
+                                            }
+                                        },
+                                        series: [{
+                                                name: 'Tokyo',
+                                                data: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    <?php echo $lista->getRendimiento_activo(); ?>, <?php } ?>
+                                                ]
+                                            }]
+                                    });
+                                });
+                            </script>
+                            <div id="rendimiento" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <a href="#">
+                            <h3 class="text-center">RENDIMIENTO SOBRE EL PATRIMONIO</h3>
+                        </a>
+                    </div>
+                    <div id="" class="">
+                        <div class="body">
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#patrimonio').highcharts({
+                                        chart: {
+                                            type: 'line'
+                                        },
+                                        title: {
+                                            text: ''
+                                        },
+                                        subtitle: {
+                                            text: ''
+                                        },
+                                        xAxis: {
+                                            categories: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    '<?php echo $lista->getPeriodo(); ?>', <?php } ?>
+                                            ]
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                text: '% DE RENDIMIENTO SOBRE EL PATRIMONIO'
+                                            }
+                                        },
+                                        plotOptions: {
+                                            line: {
+                                                dataLabels: {
+                                                    enabled: true
+                                                },
+                                                enableMouseTracking: false
+                                            }
+                                        },
+                                        series: [{
+                                                name: 'Tokyo',
+                                                data: [
+                                                    <?php foreach ($ratio as $lista) { ?>
+                                                    <?php echo $lista->getRendimiento_patrimonio(); ?>, <?php } ?>
+                                                ]
+                                            }]
+                                    });
+                                });
+                            </script>
+                            <div id="patrimonio" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                         </div>
                     </div>
                 </div>
@@ -88,143 +641,9 @@ for ($i = 0; $i < count($lista_balance); $i++) {
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="panel" name="libros">
-            <div class="panel-heading text-center">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>RATIOS</h3>
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="panel-body">
-
-                <table padding="20px" class="table table-striped" id="data-table-simple">
-                    <thead class="">
-                    <th class="">Razon</th>
-                    <?php foreach ($ratio as $lista) { ?><th class="text-center"> <?php echo $lista->getPeriodo(); ?></th><?php } ?>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Liquidez Corriente</td>
-                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getLiquidez_corriente(); ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Razon Rapida</td>
-                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getRazon_rapida(); ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Rotacion de Inventarios</td>
-                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getRotacion_inventarios() . " veces"; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Periodo Promedio de Cobro</td>
-                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getPeriodo_cobro() . " dias"; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Indice de Endeudamiento</td>
-                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getIndice_endeudamiento() . "%"; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Razon de cargo de interes fijo</td>
-                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getCargo_interes_fijo(); ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Margen de Utilidad Bruta</td>
-                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getMargen_utilidad_bruta() . "%"; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Margen de Utilidad Neta</td>
-                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getMargen_utilidad_neta() . "%"; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Rendimiento sobre activos totales</td>
-                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getRendimiento_activo() . "%"; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td>Rendimiento sobre patrimonio</td>
-                            <?php foreach ($ratio as $lista) { ?><td class="text-center"><?php echo $lista->getRendimiento_patrimonio() . "%"; ?></td><?php } ?>
-                        </tr>
-                        <tr>
-                            <td class="">Ver Estados</td>
-                            <?php foreach ($ratio as $lista) { ?>
-
-                                <td class="text-center">
-                                    <button class="btn btn-primary " onclick="abrir_estados('<?php echo $lista->getId(); ?>', '<?php echo $lista->getPeriodo(); ?>')"> 
-                                        <i class="Medium material-icons prefix">visibility</i> 
-                                    </button>
-                                </td>
-                            <?php } ?>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid">
-        <div class="panel" name="libros">
-            <div class="panel-heading text-center">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>PRESTAMOS PREVIOS</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="panel-body">
-                <table class="table table-striped table-bordered" id="tabla_cliente_juridico">
-
-                    <thead>
-                    <th class="text-center">Codigo</th>
-                    <th class="text-center">Asesor</th>
-                    <th class="text-center">Monto de prestamo</th>
-                    <th class="text-center">Estado de Prestamo</th>
-                    <th class="text-center">Ver</th>
-
-                    </thead>
-                    <tbody>
-                        <?php foreach ($prestamos_pendientes as $lista) { ?>
-                            <tr>
-                                <th class="text-center"><?php echo $lista['3']; ?></th>
-                                <th class="text-center"><?php echo $lista['4']; ?></th>
-                                <th class="text-center"><?php echo $lista['1']; ?></th>
-                                <th class="text-center"><?php echo $lista['2']; ?></th>
-                                <td class="text-center">
-                                    <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['3']; ?>')"> 
-                                        <i class="Medium material-icons prefix">visibility</i> 
-                                    </button>
-                                </td>
-                            </tr>
-
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    
 </section>
-<script>
-    function abrir_expediente(id_prestamo) {
-        var url = "./ver_pagos.php?id_prestamo=" + id_prestamo;
 
-        var a = document.createElement("a");
-        a.target = "_blank";
-        a.href = url;
-        a.click();
-    }
-    function abrir_estados(id_persona, periodo) {
-        var url = "./verEstado.php?id_persona=" + id_persona + "&periodo=" + periodo;
-
-        var a = document.createElement("a");
-        a.target = "_blank";
-        a.href = url;
-        a.click();
-    }
-
-
-</script>
 
 <?php
 include_once '../plantilla/pie.php';
