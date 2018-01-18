@@ -34,7 +34,7 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_natural(Conexio
             <div class="panel-heading text-center">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>Solicitudes de Creditos empresariales</h3>
+                        <h3>Solicitudes de Creditos Personales</h3>
                     </div>
                 </div>
             </div>

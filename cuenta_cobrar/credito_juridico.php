@@ -35,10 +35,11 @@ if (isset($_REQUEST['nameEnviar'])) {
     include_once '../app/Conexion.php';
     
     $prestamo = new presamo();
-    $prestamo->setId_asesor("1");
+    $prestamo->setId_asesor('1');
     $prestamo->setPrestamo_original($_REQUEST['monto_per']);
     $prestamo->setTiempo($_REQUEST['mese_per']);
     $prestamo->setTasa($_REQUEST['tasa_per']);
+    $devolucion = date("d-m-Y");
     $devolucion = date_format(date_create($devolucion), 'Y-m-d');
         $prestamo->setFecha($devolucion);
     $prestamo->setTipo_credito("JURIDICO");
@@ -84,7 +85,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2 class="text-center">SELECCIONE LA EMPRESA</h2>
+                            <h2 class="text-center">SELECCIONE LA EMPRESA  </h2>
                         </div>
                         <div class="body">
                             <div class="row clearfix">
