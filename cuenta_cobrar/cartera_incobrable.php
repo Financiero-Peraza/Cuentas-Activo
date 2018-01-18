@@ -55,7 +55,7 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_incobrable_natura
                     <tbody>
                         <?php foreach ($lista_prestamo as $lista) { ?>
                             <tr>
-                               
+                              
                                 <th class="text-center"><?php echo $lista['4'];?></th>
                                 <th class="text-center"><?php echo $lista['2'];?></th>
                                 <th class="text-center"><?php echo $lista['1'];?></th>
@@ -63,7 +63,7 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_incobrable_natura
                                 <th class="text-center"><?php echo "$". $lista['3'];?></th>
                                 <th class="text-center"><?php echo $lista['6'];?></th>
                                  <td class="text-center">
-                                     <button class="btn btn-success" onclick="abrir_expediente('<?php echo $lista['8'];?>')"> 
+                                     <button class="btn btn-success" onclick="abrir_pagos('<?php echo $lista['8'];?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>
@@ -72,11 +72,7 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_incobrable_natura
                         <?php } ?>
                          <?php foreach ($lista_prestamo_natural as $lista2) { ?>
                             <tr>
-                               <td class="text-center">
-                                     <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['6'];?>')"> 
-                                        <i class="Medium material-icons prefix">delete</i> 
-                                    </button>
-                                </td>
+                               
                                 <th class="text-center"><?php echo $lista2['0'];?></th>
                                 <th class="text-center"><?php echo $lista2['1'] . " " .$lista2['2'];?></th>
                                 <th class="text-center"><?php echo $lista2['3'];?></th>
@@ -84,7 +80,7 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_incobrable_natura
                                 <th class="text-center"><?php echo "$". $lista2['4'];?></th>
                                 <th class="text-center"><?php echo $lista2['5'];?></th>
                                  <td class="text-center">
-                                     <button class="btn btn-success" onclick="abrir_expediente('<?php echo $lista['6'];?>')"> 
+                                     <button class="btn btn-success" onclick="abrir_pagos('<?php echo $lista['6'];?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>
@@ -99,14 +95,14 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_incobrable_natura
 </section>
 
 <script>
-function abrir_expediente(id_juridico){
-    var url="./ver_expediente.php?id_juridico=" +id_juridico;
-    
-    var a = document.createElement("a");
-		a.target = "_blank";
-		a.href = url;
-		a.click();
-}
+function abrir_pagos(id_prestamo) {
+        var url = "./ver_pagos.php?id_prestamo=" + id_prestamo;
+
+        var a = document.createElement("a");
+        a.target = "_blank";
+        a.href = url;
+        a.click();
+    }
 
 function aprobar_credito(id_prestamo){
     location.href="cartera_normal?id_prestamo=" +id_prestamo, "_parent";

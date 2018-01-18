@@ -67,7 +67,7 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_normales_naturale
                                 <th class="text-center"><?php echo "$". $lista['3'];?></th>
                                 <th class="text-center"><?php echo $lista['6'];?></th>
                                  <td class="text-center">
-                                     <button class="btn btn-success" onclick="abrir_expediente('<?php echo $lista['8'];?>')"> 
+                                     <button class="btn btn-success" onclick="abrir_pagos('<?php echo $lista['8'];?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>
@@ -77,7 +77,7 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_normales_naturale
                          <?php foreach ($lista_prestamo_natural as $lista2) { ?>
                             <tr>
                                <td class="text-center">
-                                   <button class="btn btn-danger" onclick="hacer_incobrable('<?php echo $lista['6'];?>')"> 
+                                   <button class="btn btn-danger" onclick="hacer_incobrable('<?php echo $lista2['6'];?>')"> 
                                         <i class="Medium material-icons prefix">delete</i> 
                                     </button>
                                 </td>
@@ -88,7 +88,7 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_normales_naturale
                                 <th class="text-center"><?php echo "$". $lista2['4'];?></th>
                                 <th class="text-center"><?php echo $lista2['5'];?></th>
                                  <td class="text-center">
-                                     <button class="btn btn-success" onclick="abrir_expediente('<?php echo $lista['6'];?>')"> 
+                                     <button class="btn btn-success" onclick="abrir_pagos('<?php echo $lista2['6'];?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>
@@ -103,14 +103,14 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_normales_naturale
 </section>
 
 <script>
-function abrir_expediente(id_juridico){
-    var url="./ver_expediente.php?id_juridico=" +id_juridico;
-    
-    var a = document.createElement("a");
-		a.target = "_blank";
-		a.href = url;
-		a.click();
-}
+function abrir_pagos(id_prestamo) {
+        var url = "./ver_pagos.php?id_prestamo=" + id_prestamo;
+
+        var a = document.createElement("a");
+        a.target = "_blank";
+        a.href = url;
+        a.click();
+    }
 
 function hacer_incobrable(id_prestamo){
     location.href="cartera_normal.php?id_prestamo=" +id_prestamo, "_parent";

@@ -49,7 +49,38 @@ class repositorio_expediente_juridico {
         return $ratio;
     }
 
-    public static function lista_pagos_previos($conexion,$codigo) {
+    public static function lista_pagos_previos_jurdico($conexion,$codigo) {
+        $lista = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        pago.id_pago,
+                        pago.monto,
+                        pago.fecha,
+                        pago.mora,
+                        pago.interes,
+                        persona_juridica.nombre
+                        FROM
+                        prestamo    
+                        INNER JOIN pago ON pago.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
+                        WHERE
+                        prestamo.id_prestamo = '".$codigo."'";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
+    
+    public static function lista_pagos_previos_natural($conexion,$codigo) {
         $lista = array();
 
         if (isset($conexion)) {

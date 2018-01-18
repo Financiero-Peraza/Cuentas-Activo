@@ -49,36 +49,36 @@ class repositorio_prestamo {
             try {
 
                 $sa = $prestamo->getSaldo_actual();
-                $estado = $prestamo->getEstado(); 
-                $ppesona=$prestamo->getId_asesor(); 
-               
+                $estado = $prestamo->getEstado();
+                $ppesona = $prestamo->getId_asesor();
+
                 $sql = "SELECT
                         (DATE_ADD( prestamo.proximo_pago, INTERVAL 1 MONTH )) as pp
                         FROM
                         prestamo
                         WHERE
                         prestamo.id_prestamo = '$id'";
-                
-                
+
+
                 $resultado = $conexion->query($sql);
                 foreach ($resultado as $fila) {
-                    $pp = $fila[0] ;
+                    $pp = $fila[0];
                 }
 
-               
 
-                 if($estado=="no"){
-                $sql = "UPDATE prestamo SET saldo_actual='$sa', proximo_pago='$pp' WHERE (`id_prestamo`=$id) LIMIT 1 ";
-                }else{
-                   $sql2 = "UPDATE `persona_natural` SET `monto`='0' WHERE (`id_persona_natural`='$ppesona') LIMIT 1 "; 
+
+                if ($estado == "no") {
+                    $sql = "UPDATE prestamo SET saldo_actual='$sa', proximo_pago='$pp' WHERE (`id_prestamo`=$id) LIMIT 1 ";
+                } else {
+                    $sql2 = "UPDATE `persona_natural` SET `monto`='0' WHERE (`id_persona_natural`='$ppesona') LIMIT 1 ";
                     $sql = "UPDATE prestamo SET saldo_actual='$sa', estado='FINALIZADO' WHERE (`id_prestamo`=$id) LIMIT 1 ";
-              $sentencia2 = $conexion->prepare($sql2);
-              $prestamo_insertado = $sentencia2->execute();
-                    }
+                    $sentencia2 = $conexion->prepare($sql2);
+                    $prestamo_insertado = $sentencia2->execute();
+                }
                 ///estos son alias para que PDO pueda trabajar 
                 $sentencia = $conexion->prepare($sql);
-                
-                
+
+
                 $prestamo_insertado = $sentencia->execute();
             } catch (PDOException $ex) {
                 echo '<script>swal("No se puedo realizar el registro", "Revise los datos ingresados  ", "warning");</script>';
@@ -104,10 +104,10 @@ class repositorio_prestamo {
         }
         return $codigo;
     }
-    
+
     public static function insertar_prestamo_juridico($conexion, $prestamo) {
         $prestamo_insertado = false;
-        
+
         if (isset($conexion)) {
             try {
 
@@ -119,7 +119,7 @@ class repositorio_prestamo {
                 $estado = 'PENDIENTE';
                 $interes_acumulado = '';
                 $tasa_moratora = '';
-                
+
                 $sql = "INSERT INTO prestamo (id_asesor, prestamo_original, saldo_actual, mora_acumulada, intereses_acumulados, estado,   tiempo, tasa_interes, tasa_moratoria)"
                         . " VALUES(:id_asesor, :prestamo_original, :saldo_actual, :mora_acumulada, :intereses_acumulados, :estado,  :tiempo, :tasa_interes, :tasa_moratoria) ";
                 ///estos son alias para que PDO pueda trabajar 
@@ -134,9 +134,8 @@ class repositorio_prestamo {
                 $sentencia->bindParam(':tiempo', $tiempo, PDO::PARAM_STR);
                 $sentencia->bindParam(':tasa_interes', $tasa_interes, PDO::PARAM_STR);
                 $sentencia->bindParam(':tasa_moratoria', $tasa_moratora, PDO::PARAM_STR);
-                
-                $prestamo_insertado = $sentencia->execute();
 
+                $prestamo_insertado = $sentencia->execute();
             } catch (PDOException $ex) {
                 echo '<script>swal("No se puedo realizar el registro", "Revise los datos ingresados  ", "warning");</script>';
                 print 'ERROR: ' . $ex->getMessage();
@@ -144,7 +143,7 @@ class repositorio_prestamo {
         }
         return $prestamo_insertado;
     }
-   
+
     public static function lista_prestamo_pendiente_juridica($conexion) {
         $lista = array();
 
@@ -169,8 +168,6 @@ class repositorio_prestamo {
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
-
-                
             } catch (PDOException $exc) {
                 print('ERROR' . $exc->getMessage());
             }
@@ -178,7 +175,7 @@ class repositorio_prestamo {
 
         return $resultado;
     }
-    
+
     public static function lista_prestamo_normales_juridico($conexion) {
         $lista = array();
 
@@ -203,8 +200,6 @@ class repositorio_prestamo {
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
-
-                
             } catch (PDOException $exc) {
                 print('ERROR' . $exc->getMessage());
             }
@@ -212,7 +207,7 @@ class repositorio_prestamo {
 
         return $resultado;
     }
-    
+
     public static function lista_prestamo_normales_naturales($conexion) {
         $lista = array();
 
@@ -237,8 +232,6 @@ class repositorio_prestamo {
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
-
-                
             } catch (PDOException $exc) {
                 print('ERROR' . $exc->getMessage());
             }
@@ -246,7 +239,7 @@ class repositorio_prestamo {
 
         return $resultado;
     }
-    
+
     public static function lista_prestamo_incobrable_juridico($conexion) {
         $lista = array();
 
@@ -271,8 +264,6 @@ class repositorio_prestamo {
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
-
-                
             } catch (PDOException $exc) {
                 print('ERROR' . $exc->getMessage());
             }
@@ -280,7 +271,7 @@ class repositorio_prestamo {
 
         return $resultado;
     }
-    
+
     public static function lista_prestamo_incobrable_naturales($conexion) {
         $lista = array();
 
@@ -305,8 +296,6 @@ class repositorio_prestamo {
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
-
-                
             } catch (PDOException $exc) {
                 print('ERROR' . $exc->getMessage());
             }
@@ -314,7 +303,7 @@ class repositorio_prestamo {
 
         return $resultado;
     }
-    
+
     public static function lista_prestamo_pendiente_natural($conexion) {
         $lista = array();
 
@@ -336,11 +325,9 @@ class repositorio_prestamo {
                         INNER JOIN expediente_natural ON expediente_natural.id_prestamo = prestamo.id_prestamo
                         INNER JOIN persona_natural ON expediente_natural.persona_natural = persona_natural.id_persona_natural
                         WHERE prestamo.estado = 'PENDIENTE'";
-                        $sentencia = $conexion->prepare($sql);
-                        $sentencia->execute();
-                        $resultado = $sentencia->fetchAll();
-
-                
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
             } catch (PDOException $exc) {
                 print('ERROR' . $exc->getMessage());
             }
@@ -348,9 +335,9 @@ class repositorio_prestamo {
 
         return $resultado;
     }
-    
-    public static function lista_prestamo_mora($conexion , $codigo) {
-        $mora = "";
+
+    public static function lista_prestamo_mora($conexion, $codigo) {
+        $mora = "0";
 
         if (isset($conexion)) {
             try {
@@ -364,16 +351,16 @@ class repositorio_prestamo {
                         WHERE prestamo.id_prestamo = '$codigo' 
                         ORDER BY pago.id_pago DESC
                         LIMIT 1";
-                
-                        $sentencia = $conexion->prepare($sql);
-                        $sentencia->execute();
-                        $resultado = $sentencia->fetch();
-                        
-                        foreach ($resultado as $fila) {
-                            $mora = $fila[0];
-                            }
 
-                
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetch();
+
+                if ($resultado != "") {
+                    foreach ($resultado as $fila) {
+                        $mora = $fila[0];
+                    }
+                }
             } catch (PDOException $exc) {
                 print('ERROR' . $exc->getMessage());
             }
@@ -381,12 +368,12 @@ class repositorio_prestamo {
 
         return $mora;
     }
-    
+
     public static function aprobar_prestamo($conexion, $id) {
-         $respuesta = false;
+        $respuesta = false;
         if (isset($conexion)) {
             try {
-                $sql = "UPDATE prestamo SET estado = 'NORMAL' where id_prestamo = '$id'" ;
+                $sql = "UPDATE prestamo SET estado = 'NORMAL' where id_prestamo = '$id'";
                 $sentencia = $conexion->prepare($sql);
                 $respuesta = $sentencia->execute();
             } catch (PDOException $exc) {
@@ -395,12 +382,12 @@ class repositorio_prestamo {
         }
         return $respuesta;
     }
-    
+
     public static function hacer_incobrable($conexion, $id) {
-         $respuesta = false;
+        $respuesta = false;
         if (isset($conexion)) {
             try {
-                $sql = "UPDATE prestamo SET estado = 'INCOBRABLE' where id_prestamo = '$id'" ;
+                $sql = "UPDATE prestamo SET estado = 'INCOBRABLE' where id_prestamo = '$id'";
                 $sentencia = $conexion->prepare($sql);
                 $respuesta = $sentencia->execute();
             } catch (PDOException $exc) {
@@ -409,6 +396,7 @@ class repositorio_prestamo {
         }
         return $respuesta;
     }
+
 }
 
 ?>

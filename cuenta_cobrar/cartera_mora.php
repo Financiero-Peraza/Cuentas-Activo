@@ -43,11 +43,13 @@ if (isset($_REQUEST['id_prestamo'])) {
                     <table padding="20px" class="table table-striped" id="data-table-simple">
                         <thead class="">
                         <th class="text-center">Incobrable</th>
+                        <th class="text-center">codigo</th>
                         <th class="text-center">Asesor</th>
                         <th class="text-center">Solicitante</th>
                         <th class="text-center">Tipo Prestamo</th>
                         <th class="text-center">Monto solicitado($)</th>
                         <th class="text-center">Tiempo(Meses)</th>
+                        <th class="text-center">Mora Adeudada</th>
                         <th class="text-center">Ver Pagos</th>
 
                         </thead>
@@ -63,14 +65,16 @@ if (isset($_REQUEST['id_prestamo'])) {
                                                 <i class="Medium material-icons prefix">delete</i> 
                                             </button>
                                         </td>
+                                        <th class="text-center"><?php echo $lista['8']; ?></th>
                                         <th class="text-center"><?php echo $lista['4']; ?></th>
                                         <th class="text-center"><?php echo $lista['2']; ?></th>
                                         <th class="text-center"><?php echo $lista['1']; ?></th>
 
                                         <th class="text-center"><?php echo "$" . $lista['3']; ?></th>
                                         <th class="text-center"><?php echo $lista['6']; ?></th>
+                                        <th class="text-center"><?php echo "$ ". $mora; ?></th>
                                         <td class="text-center">
-                                            <button class="btn btn-success" onclick="abrir_expediente('<?php echo $lista['8']; ?>')"> 
+                                            <button class="btn btn-success" onclick="abrir_pagos('<?php echo $lista['8']; ?>')"> 
                                                 <i class="Medium material-icons prefix">visibility</i> 
                                             </button>
                                         </td>
@@ -80,7 +84,7 @@ if (isset($_REQUEST['id_prestamo'])) {
                             } ?>
                             <?php
                             foreach ($lista_prestamo_natural as $lista2) {
-                                $mora = repositorio_prestamo::lista_prestamo_mora(Conexion::obtener_conexion(), $lista['8']);
+                                $mora = repositorio_prestamo::lista_prestamo_mora(Conexion::obtener_conexion(), $lista2['6']);
                                 if ($mora != '0') {
                                     ?>
                                     <tr>
@@ -89,14 +93,16 @@ if (isset($_REQUEST['id_prestamo'])) {
                                                 <i class="Medium material-icons prefix">delete</i> 
                                             </button>
                                         </td>
+                                        <th class="text-center"><?php echo $lista2['8']; ?></th>
                                         <th class="text-center"><?php echo $lista2['0']; ?></th>
                                         <th class="text-center"><?php echo $lista2['1'] . " " . $lista2['2']; ?></th>
                                         <th class="text-center"><?php echo $lista2['3']; ?></th>
 
                                         <th class="text-center"><?php echo "$" . $lista2['4']; ?></th>
                                         <th class="text-center"><?php echo $lista2['5']; ?></th>
+                                        <th class="text-center"><?php echo "$ ". $mora; ?></th>
                                         <td class="text-center">
-                                            <button class="btn btn-success" onclick="abrir_expediente('<?php echo $lista['6']; ?>')"> 
+                                            <button class="btn btn-success" onclick="abrir_pagos('<?php echo $lista['6']; ?>')"> 
                                                 <i class="Medium material-icons prefix">visibility</i> 
                                             </button>
                                         </td>
@@ -112,14 +118,15 @@ if (isset($_REQUEST['id_prestamo'])) {
     </section>
 
     <script>
-        function abrir_expediente(id_juridico) {
-            var url = "./ver_expediente.php?id_juridico=" + id_juridico;
+      function abrir_pagos(id_prestamo) {
+        var url = "./ver_pagos.php?id_prestamo=" + id_prestamo;
 
-            var a = document.createElement("a");
-            a.target = "_blank";
-            a.href = url;
-            a.click();
-        }
+        var a = document.createElement("a");
+        a.target = "_blank";
+        a.href = url;
+        a.click();
+    }
+
 
         function hacer_incobrable(id_prestamo) {
             location.href = "cartera_normal.php?id_prestamo=" + id_prestamo, "_parent";

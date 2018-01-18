@@ -196,7 +196,7 @@ for ($i = 0; $i < count($lista_balance); $i++) {
 </section>
 <script>
     function abrir_expediente(id_prestamo) {
-        var url = "./ver_pagos.php?id_prestamo=" + id_prestamo;
+        var url = "./ver_pagos_juridico.php?id_prestamo=" + id_prestamo;
 
         var a = document.createElement("a");
         a.target = "_blank";
