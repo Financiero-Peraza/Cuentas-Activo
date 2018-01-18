@@ -429,6 +429,86 @@ class repositorio_prestamo {
         }
         return $respuesta;
     }
+    
+    public static function lista_refinanciamiento_juridico($conexion) {
+        $lista = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        usuario.nombre,
+                        prestamo.tipo_credito,
+                        persona_juridica.nombre,
+                        prestamo.prestamo_original,
+                        usuario.apellido,
+                        persona_juridica.categoria,
+                        prestamo.tiempo,
+                        persona_juridica.id_persona_juridica,
+                        prestamo.id_prestamo,
+                        prestamo.saldo_actual
+                        FROM
+                        prestamo
+                        INNER JOIN usuario ON prestamo.id_asesor = usuario.id_usuario
+                        INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
+                        WHERE prestamo.estado = 'NORMAL' and prestamo.saldo_actual < (prestamo.prestamo_original/2)";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
+    
+    public static function lista_refinanciamiento_naturales($conexion) {
+        $lista = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        usuario.apellido,
+                        persona_natural.nombre,
+                        persona_natural.apellido,
+                        prestamo.tipo_credito,
+                        prestamo.prestamo_original,
+			prestamo.tiempo,
+                        prestamo.id_prestamo,
+                        usuario.id_usuario,
+                        expediente_natural.persona_natural,
+			prestamo.saldo_actual
+                        FROM
+                        usuario
+                        INNER JOIN prestamo ON prestamo.id_asesor = usuario.id_usuario
+                        INNER JOIN expediente_natural ON expediente_natural.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_natural ON expediente_natural.persona_natural = persona_natural.id_persona_natural
+                        WHERE prestamo.estado = 'NORMAL' and prestamo.saldo_actual < (prestamo.prestamo_original/2)";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
+    
+    public static function refinanciar($conexion, $id) {
+        $respuesta = false;
+        if (isset($conexion)) {
+            try {
+                $sql = "UPDATE prestamo SET estado = 'INCOBRABLE' where id_prestamo = '$id'";
+                $sentencia = $conexion->prepare($sql);
+                $respuesta = $sentencia->execute();
+            } catch (PDOException $exc) {
+                echo $exc->getTraceAsString();
+            }
+        }
+        return $respuesta;
+    }
 
 }
 

@@ -75,7 +75,12 @@
                     </li>
                 </ul>
             </li>
-         
+         <li>
+             <a href="../cuenta_cobrar/refinanciamiento.php" >
+                    <i class="material-icons col-red">assignment</i>
+                    <span>Refinanciamiento</span>
+                </a>
+            </li>
             <li>
                 <a href="../cuenta_cobrar/estados_financieros.php" >
                     <i class="material-icons col-deep-purple">assignment</i>
