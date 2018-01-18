@@ -65,5 +65,86 @@ class repositorio_natural {
         return $resultado;
     }
     
+    public static function lista_referencias($conexion, $codigo) {
+        
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        referencias.nombre,
+                        referencias.apellido,
+                        referencias.telefono,
+                        persona_natural.id_persona_natural
+                        FROM
+                        persona_natural
+                        INNER JOIN referencias ON referencias.id_persona_natural = persona_natural.id_persona_natural
+                        where persona_natural.id_persona_natural = '$codigo'";
+                
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
+    
+    public static function lista_fiador($conexion, $codigo) {
+        
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        persona_natural.id_persona_natural,
+                        fiador.nombre,
+                        fiador.apellido,
+                        fiador.direccion,
+                        fiador.dui,
+                        fiador.nit,
+                        fiador.correo
+                        FROM
+                        persona_natural
+                        INNER JOIN fiador ON fiador.id_persona_natural = persona_natural.id_persona_natural
+                        where persona_natural.id_persona_natural = '$codigo'";
+                
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
+    
+    public static function lista_bienes($conexion, $codigo) {
+        
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        bien_hipotecario.descripcion,
+                        bien_hipotecario.ubicacion,
+                        bien_hipotecario.otros_datos,
+                        persona_natural.id_persona_natural
+                        FROM
+                        persona_natural
+                        INNER JOIN bien_hipotecario ON bien_hipotecario.id_persona_natural = persona_natural.id_persona_natural
+                        WHERE persona_natural.id_persona_natural = '$codigo'";
+                
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
+    
     
 }
