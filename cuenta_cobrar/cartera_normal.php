@@ -49,7 +49,7 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_normales_naturale
                     <th class="text-center">Tipo Prestamo</th>
                     <th class="text-center">Monto solicitado($)</th>
                     <th class="text-center">Tiempo(Meses)</th>
-                    <th class="text-center">Expediente</th>
+                    <th class="text-center">Ver Pagoss</th>
 
                     </thead>
                     <tbody>

@@ -303,7 +303,6 @@ prestamo.id_prestamo = '$id'";
         return $resultado;
     }
     
-    
     public static function lista_prestamo_pendiente_natural($conexion) {
         $lista = array();
 
@@ -336,6 +335,39 @@ prestamo.id_prestamo = '$id'";
         }
 
         return $resultado;
+    }
+    
+    public static function lista_prestamo_mora($conexion , $codigo) {
+        $mora = "";
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                       pago.mora
+                        FROM
+                        prestamo
+                        INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN pago ON pago.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
+                        WHERE prestamo.id_prestamo = '$codigo' 
+                        ORDER BY pago.id_pago DESC
+                        LIMIT 1";
+                
+                        $sentencia = $conexion->prepare($sql);
+                        $sentencia->execute();
+                        $resultado = $sentencia->fetch();
+                        
+                        foreach ($resultado as $fila) {
+                            $mora = $fila[0];
+                            }
+
+                
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $mora;
     }
     
     public static function aprobar_prestamo($conexion, $id) {

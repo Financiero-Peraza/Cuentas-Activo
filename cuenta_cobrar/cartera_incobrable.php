@@ -43,23 +43,19 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_incobrable_natura
             <div class="panel-body">
                 <table padding="20px" class="table table-striped" id="data-table-simple">
                     <thead class="">
-                    <th class="text-center">Incobrable</th>
+                    
                     <th class="text-center">Asesor</th>
                     <th class="text-center">Solicitante</th>
                     <th class="text-center">Tipo Prestamo</th>
                     <th class="text-center">Monto Adeudado($)</th>
                     <th class="text-center">Tiempo(Meses)</th>
-                    <th class="text-center">Expediente</th>
+                    <th class="text-center">Ver Pagos</th>
 
                     </thead>
                     <tbody>
                         <?php foreach ($lista_prestamo as $lista) { ?>
                             <tr>
-                               <td class="text-center">
-                                     <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['8'];?>')"> 
-                                        <i class="Medium material-icons prefix">delete</i> 
-                                    </button>
-                                </td>
+                               
                                 <th class="text-center"><?php echo $lista['4'];?></th>
                                 <th class="text-center"><?php echo $lista['2'];?></th>
                                 <th class="text-center"><?php echo $lista['1'];?></th>
