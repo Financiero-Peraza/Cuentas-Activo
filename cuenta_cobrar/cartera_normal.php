@@ -67,7 +67,7 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_normales_naturale
                                 <th class="text-center"><?php echo "$". $lista['3'];?></th>
                                 <th class="text-center"><?php echo $lista['6'];?></th>
                                  <td class="text-center">
-                                     <button class="btn btn-success" onclick="abrir_pagos('<?php echo $lista['8'];?>')"> 
+                                     <button class="btn btn-success" onclick="abrir_pagos_juridicos('<?php echo $lista['8'];?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>
@@ -88,7 +88,7 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_normales_naturale
                                 <th class="text-center"><?php echo "$". $lista2['4'];?></th>
                                 <th class="text-center"><?php echo $lista2['5'];?></th>
                                  <td class="text-center">
-                                     <button class="btn btn-success" onclick="abrir_pagos('<?php echo $lista2['6'];?>')"> 
+                                     <button class="btn btn-success" onclick="abrir_pagos_natural('<?php echo $lista2['6'];?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>
@@ -103,8 +103,16 @@ $lista_prestamo_natural = repositorio_prestamo::lista_prestamo_normales_naturale
 </section>
 
 <script>
-function abrir_pagos(id_prestamo) {
-        var url = "./ver_pagos.php?id_prestamo=" + id_prestamo;
+function abrir_pagos_juridicos(id_prestamo) {
+        var url = "./ver_pagos_juridico.php?id_prestamo=" + id_prestamo;
+
+        var a = document.createElement("a");
+        a.target = "_blank";
+        a.href = url;
+        a.click();
+    }
+function abrir_pagos_natural(id_prestamo) {
+        var url = "./ver_pagos_natural.php?id_prestamo=" + id_prestamo;
 
         var a = document.createElement("a");
         a.target = "_blank";

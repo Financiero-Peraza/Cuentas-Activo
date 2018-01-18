@@ -56,7 +56,7 @@ if (isset($_REQUEST['id_prestamo'])) {
                         <tbody>
                             <?php
                             foreach ($lista_prestamo as $lista) {
-                                $mora = repositorio_prestamo::lista_prestamo_mora(Conexion::obtener_conexion(), $lista['8']);
+                                $mora = repositorio_prestamo::lista_prestamo_mora_juridica(Conexion::obtener_conexion(), $lista['8']);
                                 if ($mora != '0') {
                                     ?>
                                     <tr>
@@ -74,7 +74,7 @@ if (isset($_REQUEST['id_prestamo'])) {
                                         <th class="text-center"><?php echo $lista['6']; ?></th>
                                         <th class="text-center"><?php echo "$ ". $mora; ?></th>
                                         <td class="text-center">
-                                            <button class="btn btn-success" onclick="abrir_pagos('<?php echo $lista['8']; ?>')"> 
+                                            <button class="btn btn-success" onclick="abrir_pagos_juridicos('<?php echo $lista['8']; ?>')"> 
                                                 <i class="Medium material-icons prefix">visibility</i> 
                                             </button>
                                         </td>
@@ -84,16 +84,16 @@ if (isset($_REQUEST['id_prestamo'])) {
                             } ?>
                             <?php
                             foreach ($lista_prestamo_natural as $lista2) {
-                                $mora = repositorio_prestamo::lista_prestamo_mora(Conexion::obtener_conexion(), $lista2['6']);
+                                $mora = repositorio_prestamo::lista_prestamo_mora_natural(Conexion::obtener_conexion(), $lista2['6']);
                                 if ($mora != '0') {
                                     ?>
                                     <tr>
                                         <td class="text-center">
-                                            <button class="btn btn-danger" onclick="hacer_incobrable('<?php echo $lista['6']; ?>')"> 
+                                            <button class="btn btn-danger" onclick="hacer_incobrable('<?php echo $lista2['6']; ?>')"> 
                                                 <i class="Medium material-icons prefix">delete</i> 
                                             </button>
                                         </td>
-                                        <th class="text-center"><?php echo $lista2['8']; ?></th>
+                                        <th class="text-center"><?php echo $lista2['6']; ?></th>
                                         <th class="text-center"><?php echo $lista2['0']; ?></th>
                                         <th class="text-center"><?php echo $lista2['1'] . " " . $lista2['2']; ?></th>
                                         <th class="text-center"><?php echo $lista2['3']; ?></th>
@@ -102,7 +102,7 @@ if (isset($_REQUEST['id_prestamo'])) {
                                         <th class="text-center"><?php echo $lista2['5']; ?></th>
                                         <th class="text-center"><?php echo "$ ". $mora; ?></th>
                                         <td class="text-center">
-                                            <button class="btn btn-success" onclick="abrir_pagos('<?php echo $lista['6']; ?>')"> 
+                                            <button class="btn btn-success" onclick="abrir_pagos_natural('<?php echo $lista2['6']; ?>')"> 
                                                 <i class="Medium material-icons prefix">visibility</i> 
                                             </button>
                                         </td>
@@ -118,14 +118,23 @@ if (isset($_REQUEST['id_prestamo'])) {
     </section>
 
     <script>
-      function abrir_pagos(id_prestamo) {
-        var url = "./ver_pagos.php?id_prestamo=" + id_prestamo;
+      function abrir_pagos_juridicos(id_prestamo) {
+        var url = "./ver_pagos_juridico.php?id_prestamo=" + id_prestamo;
 
         var a = document.createElement("a");
         a.target = "_blank";
         a.href = url;
         a.click();
     }
+function abrir_pagos_natural(id_prestamo) {
+        var url = "./ver_pagos_natural.php?id_prestamo=" + id_prestamo;
+
+        var a = document.createElement("a");
+        a.target = "_blank";
+        a.href = url;
+        a.click();
+    }
+
 
 
         function hacer_incobrable(id_prestamo) {

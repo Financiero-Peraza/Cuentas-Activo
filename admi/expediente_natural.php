@@ -116,7 +116,7 @@ $prestamos_pendientes = repositorio_natural::lista_prestamo_previos_natural(Cone
 </section>
 <script>
 function abrir_expediente(id_prestamo){
-    var url = "./ver_pagos.php?id_prestamo=" +id_prestamo;
+    var url = "./ver_pagos_natural.php?id_prestamo=" +id_prestamo;
     
     var a = document.createElement("a");
 		a.target = "_blank";

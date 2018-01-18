@@ -203,6 +203,16 @@ for ($i = 0; $i < count($lista_balance); $i++) {
         a.href = url;
         a.click();
     }
+    function abrir_pagos_natural(id_prestamo) {
+        var url = "./ver_pagos_juridico.php?id_prestamo=" + id_prestamo;
+
+        var a = document.createElement("a");
+        a.target = "_blank";
+        a.href = url;
+        a.click();
+    }
+    
+    
     function abrir_estados(id_persona, periodo) {
         var url = "./verEstado.php?id_persona=" + id_persona + "&periodo=" + periodo;
 

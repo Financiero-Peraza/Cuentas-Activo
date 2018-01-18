@@ -86,19 +86,14 @@ class repositorio_expediente_juridico {
         if (isset($conexion)) {
             try {
                 $sql = "SELECT
-                        pago.id_pago,
                         pago.monto,
                         pago.fecha,
                         pago.mora,
-                        pago.interes,
-                        persona_juridica.nombre
+                        pago.interes
                         FROM
-                        prestamo    
+                        prestamo
                         INNER JOIN pago ON pago.id_prestamo = prestamo.id_prestamo
-                        INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
-                        INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
-                        WHERE
-                        prestamo.id_prestamo = '".$codigo."'";
+                        WHERE prestamo.id_prestamo = '$codigo'";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();

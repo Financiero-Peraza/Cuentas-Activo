@@ -10,7 +10,7 @@ include_once '../repositorios/repositorio_juridico.php';
 include_once '../app/Conexion.php';
 
 Conexion::abrir_conexion();
-$pagos = repositorio_expediente_juridico::lista_pagos_previos_jurdico(Conexion::obtener_conexion(), $_REQUEST['id_prestamo']);
+$pagos = repositorio_expediente_juridico::lista_pagos_previos_natural(Conexion::obtener_conexion(), $_REQUEST['id_prestamo']);
 
 ?>    
 <section class="content">
@@ -41,10 +41,10 @@ $pagos = repositorio_expediente_juridico::lista_pagos_previos_jurdico(Conexion::
                         
                             <tr>
                                 <th class="text-center"><?php echo $numero= $numero+1; ?></th>
-                                <th class="text-center"><?php echo '$'.$lista['1']; ?></th>
-                                <th class="text-center"><?php echo '$'.$lista['4']; ?></th>
+                                <th class="text-center"><?php echo '$'.$lista['0']; ?></th>
                                 <th class="text-center"><?php echo '$'.$lista['3']; ?></th>
-                                <th class="text-center"><?php echo $lista['2']; ?></th>
+                                <th class="text-center"><?php echo '$'.$lista['2']; ?></th>
+                                <th class="text-center"><?php echo $lista['1']; ?></th>
                                 
                             </tr>
 

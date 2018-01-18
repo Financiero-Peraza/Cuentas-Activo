@@ -336,7 +336,7 @@ class repositorio_prestamo {
         return $resultado;
     }
 
-    public static function lista_prestamo_mora($conexion, $codigo) {
+    public static function lista_prestamo_mora_juridica($conexion, $codigo) {
         $mora = "0";
 
         if (isset($conexion)) {
@@ -349,6 +349,39 @@ class repositorio_prestamo {
                         INNER JOIN pago ON pago.id_prestamo = prestamo.id_prestamo
                         INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
                         WHERE prestamo.id_prestamo = '$codigo' 
+                        ORDER BY pago.id_pago DESC
+                        LIMIT 1";
+
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetch();
+
+                if ($resultado != "") {
+                    foreach ($resultado as $fila) {
+                        $mora = $fila[0];
+                    }
+                }
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $mora;
+    }
+    
+    public static function lista_prestamo_mora_natural($conexion, $codigo) {
+        $mora = "0";
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        pago.mora
+                        FROM
+                        prestamo
+                        INNER JOIN pago ON pago.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN expediente_natural ON expediente_natural.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_natural ON expediente_natural.persona_natural = persona_natural.id_persona_natural
+                        WHERE prestamo.id_prestamo = '$codigo'
                         ORDER BY pago.id_pago DESC
                         LIMIT 1";
 
