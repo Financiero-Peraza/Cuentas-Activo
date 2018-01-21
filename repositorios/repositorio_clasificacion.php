@@ -1,17 +1,32 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of repositorio_clasificacion
- *
- * @author Miranda
- */
 class repositorio_clasificacion {
-    //put your code here
+    public  static function lista_clasificacion($conexion) {
+        $lista  = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "select * from clasificacion";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+                if (count($resultado)) {
+                    foreach ($resultado as $fila) {
+                        $clasificacion = new clasificacion();
+                        $clasificacion->setId_clasificacion($fila['id_clasificacion']);
+                        $clasificacion->setNombre($fila['nombre']);
+                        $clasificacion->setCorrelativo($fila['correlativo']);
+                        $clasificacion->setTiempo_depreciacion($fila['tiempo_depreciacion']);
+
+                        $lista[] = $clasificacion;
+                    }
+                }
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+        return $lista;
+    }
 }
 ?>

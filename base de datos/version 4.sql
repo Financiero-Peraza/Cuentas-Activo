@@ -305,6 +305,18 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`clasificacion` (
   PRIMARY KEY (`id_clasificacion`) )
 ENGINE = InnoDB;
 
+--
+-- Volcado de datos para la tabla `clasificacion`
+--
+
+INSERT INTO `clasificacion` (`id_clasificacion`, `nombre`, `correlativo`, `tiempo_depreciacion`) VALUES
+(1, 'Moviliario y Equipo', '001', 24),
+(2, 'Vehiculos', '002', 48),
+(3, 'Maquinaria', '003', 60),
+(4, 'Edificio', '004', 240),
+(5, 'Terrenos', '005', 0);
+
+
 
 -- -----------------------------------------------------
 -- Table `instituciones_financieras`.`institucion`
@@ -346,16 +358,6 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`tipo_activo` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `instituciones_financieras`.`estado`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`estado` (
-  `id_estado` INT NOT NULL AUTO_INCREMENT ,
-  `nombre` VARCHAR(45) NULL ,
-  `tiempo_de_uso` INT NULL ,
-  PRIMARY KEY (`id_estado`) )
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `instituciones_financieras`.`encargado`
@@ -377,20 +379,19 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`activo` (
   `id_tipo` INT NOT NULL ,
   `id_departamento` INT NOT NULL ,
   `id_institucion` INT NOT NULL ,
-  `id_estado` INT NOT NULL ,
   `id_usuario` INT NOT NULL ,
   `encargado_id_encargado` INT NOT NULL ,
   `correlativo` VARCHAR(45) NULL ,
   `fecha_adquisicion` DATE NULL ,
   `descripcion` VARCHAR(200) NULL ,
   `estado` VARCHAR(45) NULL ,
+  `tiempo_uso` INT NULL ,
   `observaciones` VARCHAR(200) NULL ,
   PRIMARY KEY (`id_activo`) ,
   INDEX `fk_activo_tipo_activo1_idx` (`id_tipo` ASC) ,
   INDEX `fk_activo_departamento1_idx` (`id_departamento` ASC) ,
   INDEX `fk_activo_institucion1_idx` (`id_institucion` ASC) ,
   INDEX `fk_activo_encargado1_idx` (`encargado_id_encargado` ASC) ,
-  INDEX `fk_activo_estado1_idx` (`id_estado` ASC) ,
   INDEX `fk_activo_usuario1_idx` (`id_usuario` ASC) ,
   CONSTRAINT `fk_activo_tipo_activo1`
     FOREIGN KEY (`id_tipo` )
@@ -410,11 +411,6 @@ CREATE  TABLE IF NOT EXISTS `instituciones_financieras`.`activo` (
   CONSTRAINT `fk_activo_encargado1`
     FOREIGN KEY (`encargado_id_encargado` )
     REFERENCES `instituciones_financieras`.`encargado` (`id_encargado` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_activo_estado1`
-    FOREIGN KEY (`id_estado` )
-    REFERENCES `instituciones_financieras`.`estado` (`id_estado` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_activo_usuario1`

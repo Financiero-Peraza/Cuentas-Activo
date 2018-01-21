@@ -2,304 +2,199 @@
 include_once '../plantilla/cabecera.php';
 include_once '../plantilla/barraSuperior.php';
 include_once '../plantilla/barra_lateral_usuario.php';
-?>
-<form action="" method="GET">
+include_once '../modelos/tipo_activo.php';
+include_once '../modelos/clasificacion.php';
+include_once '../modelos/departamento.php';
+include_once '../modelos/encargado.php';
+include_once '../repositorios/repositorio_clasificacion.php';
+include_once '../repositorios/repositorio_tipoActivo.php';
+include_once '../app/Conexion.php';
+include_once '../repositorios/correlativos.php';
+Conexion::abrir_conexion();
+
+if (isset($_REQUEST['nameEnviar'])) {
+    $institucion = $_REQUEST['select_institucion'];
+    $departamento = $_REQUEST['select_departamento'];
+    $tipo_activo = $_REQUEST['select_tipo'];
+    $encargado = $_REQUEST['select_encargado'];
+    $meses = $_REQUEST['meses'];
+    $observaciones = $_REQUEST['obsevaciones'];
+    $cantidad = $_REQUEST['cantidad'];
+    $fecha = $_REQUEST['fecha'];
+    $descripcion  = $_REQUEST['descripcion'];
+    $cantidad  = $_REQUEST['cantidad'];
     
-    <section class="content">
-        <!--    INICIO DE DATOS-->
-        <div class="container-fluid">
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2 class="text-center">SELECCIONE EL CLIENTE</h2>
-                        </div>
-                        <div class="body">
-                            <div class="row clearfix">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <select class="form-control show-tick">
-                                                <option value="">SELECCIONE EL CLIENTE</option>
-                                                <option value="10">JUAN PEREZ</option>
-                                                <option value="20">CRISTIANO RONALDO</option>
-                                                <option value="30">LEONEL MESSI</option>
-                                                <option value="40">JOSE MARIA VILLAR</option>
-                                                <option value="50">FLORENTINO PEREZ</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+    
+    $conexion = Conexion::obtener_conexion();
+    
+ for($i=0; $i<$cantidad;$i++){
+ 
+    $correlativo = correlativos::obtener_correlativo($conexion, 'activo');
+    $sql = "INSERT INTO activo (id_tipo, id_departamento, id_institucion, id_usuario, encargado_id_encargado, correlativo, fecha_adquisicion, descripcion, estado, tiempo_uso, observaciones) "
+                                   . "VALUES ( '$tipo_activo', '$departamento', '$institucion', '1', '$encargado', '$correlativo', '$fecha', '$descripcion', 'ACTIVO', '$meses', '$observaciones');";
+    $sentencia = $conexion->prepare($sql);
+    $resultado = $sentencia->execute();
+ }
+    echo '<script>location.href ="registro_tipo_activo.php";</script>';
+} else {
+    $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::obtener_conexion());
+    $lista_institucion = correlativos::lista_institucion(Conexion::obtener_conexion());
+    $lista_depatamento = correlativos::lista_departamento(Conexion::obtener_conexion());
+    $lista_tipo = correlativos::lista_tipo(Conexion::obtener_conexion());
+    $lista_encargado = correlativos::lista_encargado(Conexion::obtener_conexion());
+    ?>
+
+
+<form action="registro_activo.php" method="GET" autocomplete="off">
+        <section class="content">
+            <!--INICIO DE FIADOR-->
+            <div class="container-fluid">
+                <!-- Basic Validation -->
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2 class="text-center">REGISTRO DE ACTIVO</h2>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--    FIN DE DATOS-->
+                            <div class="body">
+                                <div class="row clearfix">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE LA INSTITUCION</span>
+                                                    <select class="form-control show-tick" name="select_institucion" required="">
+                                                 
+                                                        <?php foreach ($lista_institucion as $lista) { ?>
 
-        <!--INICIO DE FIADOR-->
-        <div class="container-fluid">
-            <!-- Basic Validation -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2 class="text-center">DATOS DE FIADOR</h2>
-                        </div>
-                        <div class="body">
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text"class="form-control text-center" name="nameNombre" placeholder="NOMBRE...">
-                                        </div>
-                                    </div>
-                                </div>
+                                                        <option value="<?php echo $lista->getId_departamento(); ?>">
+                                                       
+                                                            <?php echo $lista->getCorrelativo() ."--". $lista->getNombre() ; ?>
+                                                        </option>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="nameApellido" placeholder="APELLIDO...">
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameDireccion" placeholder="DIRECCION...">
-                                        </div>
-                                    </div>
-                                </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE EL DEPARTAMENTO</span>
+                                                    <select class="form-control show-tick" name="select_departamento" required="">
+                                                        <?php foreach ($lista_depatamento as $lista) { ?>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameTelefono" placeholder="TELEFONO...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameDui" placeholder="DUI...">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameNit" placeholder="NIT...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="email" class="form-control text-center" name="NameEmail" placeholder="EMAIL...">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="email" class="form-control text-center" name="NameTrabajo" placeholder="LUGAR DE TRABAJO...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                                        <option value="<?php echo $lista->getId_departamento(); ?>"><?php echo $lista->getCorrelativo()."--". $lista->getNombre(); ?></option>
 
-        </div>
-        <!--FIN DE FIADOR-->
-
-        <!--INICIO REFERENCIA-->
-        <div class="container-fluid">
-            <!-- Basic Validation -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2 class="text-center">DATOS DE REFERENCIA</h2>
-                        </div>
-                        <div class="body">
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text"class="form-control text-center" name="nameNombre" placeholder="NOMBRE...">
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row clearfix">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE EL TIPO DE ACTIVO</span>
+                                                    <select class="form-control show-tick" name="select_tipo" required="">
+                                                        <option  value="" disabled="">SELECCIONE EL TIPO DE ACTIVO</option>
+                                                        <?php foreach ($lista_tipo as $lista2) { ?>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="nameApellido" placeholder="APELLIDO...">
+                                                        <option value="<?php echo $lista2->getId_tipo(); ?>"><?php echo $lista2->getId_correlativo(). "--". $lista2->getId_nombre(); ?></option>
+
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <div class="form-line">
+                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE EL ENCARGADO</span>
+                                                    <select class="form-control show-tick" name="select_encargado" required="">
+                                                        <option  value="" disabled="">SELECCIONE ENCARGADO</option>
+                                                        <?php foreach ($lista_encargado as $lista3) { ?>
+
+                                                        <option value="<?php echo $lista3->getId_encargado(); ?>"><?php echo $lista3->getNombre() ." ". $lista3->getApellido(); ?></option>
+
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="row clearfix">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">FECHA ADQUISICION</span>
+                                                <input type="date"  class="form-control text-center" required="" name="fecha" placeholder="FECHA ADQUISICION">
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameDireccion" placeholder="DIRECCION...">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">TIEMPO DE USO (MESES)</span>
+                                                <input type="number"  min="0" step="any"class="form-control text-center" name="meses" placeholder="TIEMPO DE USO (MESES)" required="">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row clearfix">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">OBSERVACIONES</span>
+                                                <input type="text"  class="form-control text-center" required="" name="obsevaciones" placeholder="OBSERVACIONES">
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameTelefono" placeholder="TELEFONO...">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">CANTIDAD</span>
+                                                <input type="number"  min="0" step="any"class="form-control text-center" name="cantidad" placeholder="UNIDADES" required="">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                   <div class="row clearfix">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">DESCRIPCION</span>
+                                                <input type=""  class="form-control text-center" required="" name="descripcion" placeholder="DESCRIPCION">
+                                            </div>
+                                        </div>
+                                    </div>
 
-        </div>
-        <!--FIN DE REFERENCIA-->
-        
-         <!--INICIO DATO DE CREDITO-->
-        <div class="container-fluid">
-            <!-- Basic Validation -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2 class="text-center">DATOS DE BIEN HIPOTECARIO</h2>
-                        </div>
-                        <div class="body">
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameDireccion" placeholder="NUMERO DE REGISTRO...">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameDireccion" placeholder="UBICACION...">
-                                        </div>
-                                    </div>
+                                 
                                 </div>
 
-                               
-                            </div>
-
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameDireccion" placeholder="UBICACION...">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameTelefono" placeholder="OTROS DATOS...">
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!--FIN DE DATO DE CREDITO-->
-        
-        <!--INICIO DATO DE CREDITO-->
-        <div class="container-fluid">
-            <!-- Basic Validation -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2 class="text-center">DATOS DE CREDITO</h2>
-                        </div>
-                        <div class="body">
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="number" min="100" max="1000" class="form-control text-center" name="NameDireccion" placeholder="MONTO SOLICITADO($)...">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <select class="form-control show-tick">
-                                                <option value="">SELECCIONE EL NUMERO DE MESES</option>
-                                                <option value="10">6 meses</option>
-                                                <option value="20">12 meses</option>
-                                                <option value="30">18 meses</option>
-                                                <option value="40">24 meses</option>
-                                                
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameDireccion" placeholder="DIRECCION...">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control text-center" name="NameTelefono" placeholder="TELEFONO...">
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary m-t-15 waves-effect">GUARDAR</button>
+                                    <button type="submit" name="nameEnviar" class="btn btn-primary m-t-15 waves-effect" value="ok">GUARDAR</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-        <!--FIN DE DATO DE CREDITO-->
-        
-        
-        
-    </section>
-
-
-</form>
-<?php
+        </section>
+    </form>
+    <?php
+}
 include_once '../plantilla/pie.php';
 ?>

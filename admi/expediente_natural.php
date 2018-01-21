@@ -101,7 +101,7 @@ $prestamos_pendientes = repositorio_natural::lista_prestamo_previos_natural(Cone
                                 <th class="text-center"><?php echo $lista['2']; ?></th>
                                 <th class="text-center"><?php echo $lista['3']; ?></th>
                                 <td class="text-center">
-                                    <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['3']; ?>')"> 
+                                    <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['4']; ?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>

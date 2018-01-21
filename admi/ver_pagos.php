@@ -43,7 +43,7 @@ $pagos = repositorio_expediente_juridico::lista_pagos_previos(Conexion::obtener_
                                 <th class="text-center"><?php echo $numero= $numero+1; ?></th>
                                 <th class="text-center"><?php echo '$'.$lista['1']; ?></th>
                                 <th class="text-center"><?php echo '$'.$lista['4']; ?></th>
-                                <th class="text-center"><?php echo '$'.$lista['5']; ?></th>
+                                <th class="text-center"><?php echo '$'.$lista['3']; ?></th>
                                 <th class="text-center"><?php echo $lista['2']; ?></th>
                                 
                             </tr>

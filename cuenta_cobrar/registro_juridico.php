@@ -32,6 +32,7 @@ if (isset($_REQUEST['nameEnviar'])) {
     ///////////esto es para guardar rel balance general            
         $balance = new balance_general();
         $balance->setId_persona($id_juridico);
+        $balance->setPeriodo('2017');
         $balance->setEfectivo($_REQUEST['nameEfectivo']);
         $balance->setValor_negociable($_REQUEST['nameNegociable']);
         $balance->setCuenta_por_cobrar($_REQUEST['NameCuentaXcobrar']);
@@ -50,6 +51,7 @@ if (isset($_REQUEST['nameEnviar'])) {
         ///////////////////////esto es para el registro de estado de resultado 
         $estado = new estado_resultado();
         $estado->setId_persona_juridica($id_juridico);
+        $estado->setPeriodo('2017');
         $estado->setIngreso_venta($_REQUEST['nameIngresoVenta']);
         $estado->setCosto_venta($_REQUEST['nameCostoVenta']);
         $estado->setGasto_venta($_REQUEST['nameGastoVenta']);
@@ -69,7 +71,7 @@ if (isset($_REQUEST['nameEnviar'])) {
 } else {
     ?>
 
-<form action="registro_juridico.php" method="GET">
+<form action="registro_juridico.php" method="GET" autocomplete="off">
         <!--    INICIO DE DATOS-->
         <section class="content">
             <div class="container-fluid">

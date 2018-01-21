@@ -22,6 +22,8 @@ class balance_general {
  private $accioneC;
  private $ganancias_retenidas;
  private $total_pasivo_patrimonio;
+ private $total_pasivo;
+         
          
  function __construct() {
      

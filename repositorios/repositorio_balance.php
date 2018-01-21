@@ -8,7 +8,7 @@ class repositorio_balance {
             try {
                 //$balance = new balance_general();
                 $idPersona = $balance->getId_persona();
-                $periodo = '2017';
+                $periodo = $balance->getPeriodo();
                 $efectivo = $balance->getEfectivo();
                 $valorNegociable = $balance->getValor_negociable();
                 $cuentaXcobrar = $balance->getCuenta_por_cobrar();
@@ -73,7 +73,51 @@ class repositorio_balance {
 
         if (isset($conexion)) {
             try {
-                $sql = "select * from balance_general where (id_persona_juridica = '$codigo' )";
+                $sql = "select * from balance_general where (id_persona_juridica = '$codigo' ) ORDER by periodo";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+                if (count($resultado)) {
+                    foreach ($resultado as $fila) {
+                        $balance = new balance_general();
+
+                        $balance->setEfectivo($fila['efectivo']);
+                        $balance->setValor_negociable($fila['valor_negociable']);
+                        $balance->setCuenta_por_cobrar($fila['cuentas_por_cobrar']);
+                        $balance->setInventarios($fila['inventarios']);
+                        $balance->setTotal_activo_corriente($fila['total_activo_corriente']);
+                        $balance->setTerrenos($fila['terrenos']);
+                        $balance->setEdificio_equipo($fila['edificio_equipo']);
+                        $balance->setDepreciacion($fila['depreciacion_acumulada']);
+                        $balance->setTotal_activo_noCorriente($fila['total_activo_pasivo']);
+                        $balance->setTotal_activo($fila['total_activo']);
+                        $balance->setCuenta_por_pagar($fila['cuentas_por_pagar']);
+                        $balance->setDocumento_por_pagar($fila['total_pasivo_corriente']);
+                        $balance->setTotal_pasivo_corriente($fila['total_pasivo_corriente']);
+                        $balance->setDeuda_largop($fila['deuda_largo_plazo']);
+                        $balance->setAccioneC($fila['acciones_comunes']);
+                        $balance->setGanancias_retenidas($fila['ganancias_retenidas']);
+                        $balance->setTotal_pasivo_patrimonio($fila['total_pasivo']);
+                        $balance->setPeriodo($fila['periodo']);
+
+                        $lista[] = $balance;
+                    }
+                }
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $lista;
+    }
+    
+    public static function lista_balance_filtrada($conexion, $codigo, $periodo) {
+        $lista = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "select * from balance_general where (id_persona_juridica = '$codigo' and  periodo = '$periodo' )";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();

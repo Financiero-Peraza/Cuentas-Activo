@@ -41,12 +41,7 @@
                         </a>
                     </li>
                                         
-                    <li>
-                        <a href="#">
-                            <i class="material-icons col-deep-purple">event</i>
-                            <span>Nuevo Evento</span>
-                        </a>
-                    </li>
+                    
                     
                   
                 </ul>

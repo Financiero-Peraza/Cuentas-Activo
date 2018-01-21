@@ -1,4 +1,6 @@
-
+<script src="../Highcharts-4.1.5/js/highcharts.js"></script>
+        <script src="../Highcharts-4.1.5/js/exporting.js"></script>
+        
 <!-- Bootstrap Core Js -->
 <script src="../plugins/bootstrap/js/bootstrap.js"></script>
 
@@ -27,7 +29,7 @@
 
 <!-- Demo Js -->
 <script src="../js/demo.js"></script>
-<script src="../js/jquery.inputmask.bundle.js"></script>
 <script src="../js/Mascara.js"></script>
+
 </body>
 </html>

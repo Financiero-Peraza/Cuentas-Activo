@@ -23,8 +23,8 @@
         <ul class="list">
             <li class="header text-center">CUENTAS POR COBRAR</li>
             <li>
-                <a href="../index.html">
-                    <i class="material-icons">home</i>
+                <a href="../home/home_usuario.php">
+                    <i class="material-icons col-red">home</i>
                     <span>Home</span>
                 </a>
             </li>
@@ -44,7 +44,7 @@
             </li>
             <li>
                 <a href="#" class="menu-toggle">
-                    <i class="material-icons col-blue-grey">description</i>
+                    <i class="material-icons col-amber">description</i>
                     <span>Registro de Credito</span>
                 </a>
                 <ul class="ml-menu">
@@ -57,24 +57,30 @@
                     </li>
                 </ul>
             </li>
-
-            <li>
+             <li>
                 <a href="#" class="menu-toggle">
-                    <i class="material-icons col-deep-purple">event</i>
+                    <i class="material-icons col-green">description</i>
                     <span>Cartera de Clientes</span>
                 </a>
                 <ul class="ml-menu">
                     <li>
-                        <a href="#">Normal</a>
+                        <a href="../cuenta_cobrar/cartera_normal.php">Normal</a>
+                    </li>
+
+                    <li>
+                        <a href="../cuenta_cobrar/cartera_mora.php">Mora</a>
                     </li>
                     <li>
-                        <a href="#">Mora</a>
-                    </li>
-                    <li>
-                        <a href="#">Incobrable</a>
+                        <a href="../cuenta_cobrar/cartera_incobrable.php">Incobrable</a>
                     </li>
                 </ul>
-
+            </li>
+         
+            <li>
+                <a href="../cuenta_cobrar/estados_financieros.php" >
+                    <i class="material-icons col-deep-purple">assignment</i>
+                    <span>Estados Financieros</span>
+                </a>
             </li>
             <li>
                 <a href="../cuenta_cobrar/abono.php">

@@ -5,10 +5,8 @@ class departamento {
   private $nombre;
   private $correlativo;
   
-  function __construct($id_departamento, $nombre, $correlativo) {
-      $this->id_departamento = $id_departamento;
-      $this->nombre = $nombre;
-      $this->correlativo = $correlativo;
+  function __construct() {
+
   }
   function getId_departamento() {
       return $this->id_departamento;
