@@ -36,7 +36,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                         <h2 class="text-center">SELECCIONE EL CLIENTE</h2>
                     </div>
                     <div class="body">
-                        <form name="abono_form" id="abono_form" method="post" action="">
+                        <form name="abono_form" id="abono_form" method="post" action="" >
                             <input type="hidden" id="paso_abono" name="paso_abono"/>
                             <input type="hidden" id="saldo_act" name="saldo_act" />
                             <input type="hidden" id="interes" />
@@ -108,12 +108,12 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <tr>
                                         <td id="nit_fat">nit</td>
                                         <td id="dui_fat">dui</td>
-                                        <td >fecha </td>
+                                        <td > </td>
                                         <td id="fecha_pago_fat"> 12/12/1212</td>
                                     </tr>
                                     <tr>
                                         <td id="fecha_fin_fat">fecha vencimiento</td>
-                                        <td id="fecha_ultimo_fat">fecha ultimo pago</td>
+                                        <td id="fecha_ultimo_fat"></td>
                                         <td></td>
                                         <td> </td>
                                     </tr>
@@ -231,6 +231,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
     function calcular_factura() {
         if (document.getElementById("abono").value > 0) {
             var pago = document.getElementById("abono").value;
+            var pagoTotal = document.getElementById("saldo_act").value;
             var fecha_pago = document.getElementById("fecha_pago").value;
             var fecha_hoy = document.getElementById("fecha_hoy").value;
             var fecha_aux = fecha_hoy.split('-');
@@ -263,6 +264,28 @@ include_once '../plantilla/barra_lateral_usuario.php';
                 }
 
             }
+            if ((int_calculado + pagoTotal) < pago) {
+                swal({
+                    title: "¿Desea Continuar?",
+                    text: "La cantidad ingresada es mayor al saldo actual mas los intereses, se finalizara el prestamo " ,
+                    type: "warning",
+                    showCancelButton: true,
+                    cancelButtonText: "Cancelar",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Si, continuar!",
+                    closeOnConfirm: false
+                },
+                        function () {
+                            ok = true;
+                            swal(
+                                    'Registrado',
+                                    'Datos Registrados con Exito',
+                                    'success'
+                                    );
+                           document.form_persona_natural.submit();//lo envio aqui porque retorna la vaiable antes y despues ejecuta el swal
+
+                        });
+            }else{
             if (pago > int_calculado) {
                 document.getElementById('cap_fat').innerHTML = "$ " + (pago - int_calculado - mora).toFixed(2);
                 document.getElementById('int_fat').innerHTML = "$ " + int_calculado.toFixed(2);
@@ -277,6 +300,8 @@ include_once '../plantilla/barra_lateral_usuario.php';
             } else {
                 swal('Oops', 'Parece que el pago no alcanza a cubrir  el interes del mes', 'warning');
             }
+        }
+            
         } else {
             swal('Oops', 'Formato de abono no valido ', 'warning');
         }
@@ -311,7 +336,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
 <?php
 include_once '../plantilla/pie.php';
 if (isset($_REQUEST["paso_abono"])) {
-    
+
 
     include_once '../app/Conexion.php';
     include_once '../modelos/pago.php';

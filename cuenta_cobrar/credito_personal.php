@@ -701,6 +701,34 @@ include_once '../plantilla/barra_lateral_usuario.php';
                     break;
             }
         }
+        
+        if (tipo == 3) {
+            switch (valor) {
+                case '12':
+                    document.getElementById('tasa_per').value = 6.8;
+                    break;
+                case '24':
+                    document.getElementById('tasa_per').value = 6.5;
+                    break;
+                case '36':
+                    document.getElementById('tasa_per').value = 6;
+                    break;
+                case '48':
+                    document.getElementById('tasa_per').value = 5.5;
+                    break;
+                case '60':
+                    document.getElementById('tasa_per').value = 5.3;
+                    break;
+                case '72':
+                    document.getElementById('tasa_per').value = 5;
+                    break;
+                case '84':
+                    document.getElementById('tasa_per').value = 5;
+                case '96':
+                    document.getElementById('tasa_per').value = 4.5;
+                    break;
+            }
+        }
     }
 </script>
 <?php
@@ -822,7 +850,7 @@ if (isset($_REQUEST["pas_cp"])) {
         $prestamo->setFecha($devolucion);
         $prestamo->setTiempo($_REQUEST["mese_per"]);
         $prestamo->setTasa($_REQUEST["tasa_per"]);
-        $prestamo->setTipo_credito("PERSONAL");
+        $prestamo->setTipo_credito("HIPOTECARIO");
         if (repositorio_prestamo::insertar_prestamo(Conexion::obtener_conexion(), $prestamo)
         ) {
             $prestamo1 = repositorio_prestamo::obtenerU_ultimo_prestamo(Conexion::obtener_conexion());

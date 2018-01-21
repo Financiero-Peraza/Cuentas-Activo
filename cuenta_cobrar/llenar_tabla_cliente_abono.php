@@ -12,15 +12,15 @@ foreach ($listado as $fila) {
     ?>
     <script type="text/javascript">
         //alert("codigo"); 
-        document.getElementById('nprestamo_fat').innerHTML = "NO PRESTAMO: <?php echo $fila['idp'] ?>";
+        document.getElementById('nprestamo_fat').innerHTML = "NO. PRESTAMO: <?php echo $fila['idp'] ?>";
          document.getElementById('id_prestamo_abono').value= "<?php echo $fila['idp'] ?>";
         document.getElementById('nombre_fat').innerHTML = "NOMBRE: <?php echo $fila['nombre'] ?>";
-        document.getElementById('fecha_pres_fat').innerHTML = "FECHA DE APLICACION: <?php echo $fila['fech']; ?>";
+        document.getElementById('fecha_pres_fat').innerHTML = "FECHA DE APLICACION: <?php echo  date_format(date_create($fila['fech']), 'd-m-Y'); ?>";
         document.getElementById('nit_fat').innerHTML = "NIT: <?php echo $fila['nit'] ?>";
         document.getElementById('dui_fat').innerHTML = "DUI: <?php echo $fila['dui'] ?>";
         document.getElementById('fecha_pago_fat').innerHTML = "FECHA: <?php echo date("d-m-Y"); ?>";
-        document.getElementById('fecha_fin_fat').innerHTML = "FECHA VENCIMIENTO: <?php echo date("d-m-Y"); ?>";
-        document.getElementById('fecha_ultimo_fat').innerHTML = "FECHA ULTIMO PAGO: <?php echo date("d-m-Y"); ?>";
+        document.getElementById('fecha_fin_fat').innerHTML = "FECHA VENCIMIENTO: <?php echo  date_format(date_create($fila['vence']), 'd-m-Y'); ?>";
+        //document.getElementById('fecha_ultimo_fat').innerHTML = "FECHA ULTIMO PAGO: <?php echo date("d-m-Y"); ?>";
         document.getElementById('monto_fat').innerHTML = "MONTO: $ <?php echo $fila['monto'] ?>";
         
         document.getElementById('tasa_fat').innerHTML = "TASA NOMINAL:  <?php echo $fila['tasa'] ?>%";
@@ -48,8 +48,8 @@ foreach ($listado as $fila) {
         document.getElementById('cuota_hoy').value=cuota_personaa;
         document.getElementById('cuota_fat').innerHTML = "CUOTA: $ "+cuota_personaa;
         var codigo = "<?php echo $fila['idper']; ?>";
-        var pass = doSearch(codigo);
-        if (pass) {
+       
+        if (true) {
 
             var nombre = "<?php echo $fila['nombre']; ?>";
             var dui = "<?php echo $fila['dui']; ?>";
@@ -63,60 +63,19 @@ foreach ($listado as $fila) {
                     "<td>" + nombre + "</td>",
                     "<td>" + dui + "</td>",
                     "<td>" + nit + "</td>",
-                    "<td>" + tel + "</td>",
                     "<td>" + dir + "</td>",
+                    "<td>" + tel + "</td>",
                      "<td>" + cuota_personaa + "</td>",
                     "</tr>"
                     );
             $("#tabla_cliente_abono tbody").empty()//elimino el anterior
             $("table#tabla_cliente_abono tbody").append(linea);
 
-        } else {
-            swal("Importane!", codigo + " ya fue ingresado", "warning")
-
-        }
+        } 
 
 
         //para no ingresar los mismos activo a la tabla
-        function doSearch(codigo)
-        {
-            var pso = "true";
-            var tableReg = document.getElementById('tabla_cliente_abono');
-            var searchText = codigo;
-            var cellsOfRow = "";
-            var found = false;
-            var compareWith = "";
-
-
-            // Recorremos todas las filas con contenido de la tabla
-            for (var i = 1; i < tableReg.rows.length; i++)
-            {
-                cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
-                found = false;
-                // Recorremos todas las celdas
-                for (var j = 0; j < cellsOfRow.length && !found; j++)
-                {
-
-                    compareWith = cellsOfRow[j].innerHTML;
-
-                    // Buscamos el texto en el contenido de la celda
-                    if (searchText.length == 0 || (compareWith.indexOf(searchText) > -1))
-                    {
-                        found = true;
-                    }
-                }
-                if (found)
-                {
-                    pso = false;//tableReg.rows[i].style.display = '';
-                } else {
-                    // si no ha encontrado ninguna coincidencia, esconde la
-                    // fila de la tabla
-                    //tableReg.rows[i].style.display = 'none';
-                    pso = true;
-                }
-            }
-            return pso;
-        }
+       
 
     </script>
 
@@ -124,6 +83,3 @@ foreach ($listado as $fila) {
     <?php
 }
 ?>
-<script>//para no ingrasar los mismos activoa a la tabla de presatamo
-
-</script>

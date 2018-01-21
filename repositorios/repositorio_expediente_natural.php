@@ -26,11 +26,12 @@ class repositorio_expediente_natural {
                 $apellido = $persona->getApellido();
                 $direccion = $persona->getDireccion();
                 $telefono = $persona->getTelefono();
+                $cod= $persona->getId_persona_natural();
                 //$correo = $persona->getCorreo();
 
 
-                $sql = 'INSERT INTO persona_natural (nombre, apellido, direccion, dui, nit,  telefono, monto)'
-                        . ' values (:nombre,:apellido, :direccion, :dui, :nit, :telefono, "0")';
+                $sql = 'INSERT INTO persona_natural (nombre, apellido, direccion, dui, nit,  telefono, monto,id_persona_natural)'
+                        . ' values (:nombre,:apellido, :direccion, :dui, :nit, :telefono, "0",:cod)';
                 ///estos son alias para que PDO pueda trabajar 
                 $sentencia = $conexion->prepare($sql);
 
@@ -40,6 +41,7 @@ class repositorio_expediente_natural {
                 $sentencia->bindParam(':dui', $dui, PDO::PARAM_STR);
                 $sentencia->bindParam(':nit', $nit, PDO::PARAM_STR);
                 $sentencia->bindParam(':telefono', $telefono, PDO::PARAM_STR);
+                $sentencia->bindParam(':cod', $cod, PDO::PARAM_STR);
 
 
                 $persona_insertado = $sentencia->execute();
@@ -51,6 +53,26 @@ class repositorio_expediente_natural {
             }
         }
         return $persona_insertado;
+    }
+    
+      public static function obtenerU_ultimo_persona($conexion) {
+        $codigo = "";
+        $resultado = "";
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT COUNT( persona_natural.id_persona_natural)
+ from persona_natural
+order by persona_natural.id_persona_natural
+ desc limit 1";
+                $resultado = $conexion->query($sql);
+            } catch (PDOException $ex) {
+                print 'ERROR: ' . $ex->getMessage();
+            }
+            foreach ($resultado as $fila) {
+                $codigo = $fila[0];
+            }
+        }
+        return $codigo;
     }
     
       public static function insertar_bien($conexion, $bien) {
@@ -136,6 +158,7 @@ usuario.id_usuario AS idu,
 prestamo.tiempo AS tiempo,
 prestamo.proximo_pago AS pp,
 prestamo.fecha AS fech,
+DATE_ADD( prestamo.fecha, INTERVAL tiempo MONTH ) as vence,
 prestamo.tasa_interes as tasa
 FROM
 persona_natural
