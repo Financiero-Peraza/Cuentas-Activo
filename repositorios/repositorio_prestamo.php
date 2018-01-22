@@ -49,24 +49,36 @@ class repositorio_prestamo {
             try {
 
                 $sa = $prestamo->getSaldo_actual();
-
+                $estado = $prestamo->getEstado(); 
+                $ppesona=$prestamo->getId_asesor(); 
+               
                 $sql = "SELECT
-(DATE_ADD( prestamo.proximo_pago, INTERVAL 1 MONTH )) as pp
-FROM
-prestamo
-WHERE
-prestamo.id_prestamo = '$id'";
+                        (DATE_ADD( prestamo.proximo_pago, INTERVAL 1 MONTH )) as pp
+                        FROM
+                        prestamo
+                        WHERE
+                        prestamo.id_prestamo = '$id'";
+                
+                
                 $resultado = $conexion->query($sql);
                 foreach ($resultado as $fila) {
                     $pp = $fila[0] ;
                 }
 
-                echo '<script language="javascript">alert("' . $pp . '");</script>';
+               
 
-
+                 if($estado=="no"){
                 $sql = "UPDATE prestamo SET saldo_actual='$sa', proximo_pago='$pp' WHERE (`id_prestamo`=$id) LIMIT 1 ";
+                }else{
+                   $sql2 = "UPDATE `persona_natural` SET `monto`='0' WHERE (`id_persona_natural`='$ppesona') LIMIT 1 "; 
+                    $sql = "UPDATE prestamo SET saldo_actual='$sa', estado='FINALIZADO' WHERE (`id_prestamo`=$id) LIMIT 1 ";
+              $sentencia2 = $conexion->prepare($sql2);
+              $prestamo_insertado = $sentencia2->execute();
+                    }
                 ///estos son alias para que PDO pueda trabajar 
                 $sentencia = $conexion->prepare($sql);
+                
+                
                 $prestamo_insertado = $sentencia->execute();
             } catch (PDOException $ex) {
                 echo '<script>swal("No se puedo realizar el registro", "Revise los datos ingresados  ", "warning");</script>';

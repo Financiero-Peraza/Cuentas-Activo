@@ -174,6 +174,42 @@ persona_natural.id_persona_natural = $codigo ";
         }
         return $resultado;
     }
+    
+    public static function obtener_persona_juridica_abono($conexion, $codigo) {
+        $resultado = ""; //echo '<script language="javascript">alert("cod '.$codigo.'");</script>'; 
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+persona_juridica.id_persona_juridica AS idper,
+persona_juridica.nombre AS nombre,
+persona_juridica.dui AS dui,
+persona_juridica.nit AS nit,
+prestamo.id_prestamo AS idp,
+prestamo.prestamo_original AS monto,
+prestamo.saldo_actual AS sact,
+prestamo.mora_acumulada AS mora,
+prestamo.intereses_acumulados AS intacu,
+(CONCAT(usuario.nombre,' ',usuario.apellido)) AS nombreuser,
+usuario.id_usuario AS idu,
+prestamo.tiempo AS tiempo,
+prestamo.proximo_pago AS pp,
+prestamo.fecha AS fech,
+DATE_ADD( prestamo.fecha, INTERVAL tiempo MONTH ) as vence,
+prestamo.tasa_interes as tasa
+FROM
+persona_juridica
+INNER JOIN expediente_juridico ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
+INNER JOIN prestamo ON expediente_juridico.id_prestamo = prestamo.id_prestamo
+INNER JOIN usuario ON prestamo.id_asesor = usuario.id_usuario
+WHERE
+persona_juridica.id_persona_juridica= $codigo ";
+                $resultado = $conexion->query($sql);
+            } catch (PDOException $ex) {
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return $resultado;
+    }
 
     public static function lista_persona_natural($conexion) {
         $resultado = "";

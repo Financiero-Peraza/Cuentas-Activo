@@ -36,10 +36,11 @@ include_once '../plantilla/barra_lateral_usuario.php';
                         <h2 class="text-center">SELECCIONE EL CLIENTE</h2>
                     </div>
                     <div class="body">
-                        <form name="abono_form" id="abono_form" method="post" action="" >
+                        <form name="abono_form" id="abono_form" method="post" action="" onsubmit="impFact()" >
                             <input type="hidden" id="paso_abono" name="paso_abono"/>
                             <input type="hidden" id="saldo_act" name="saldo_act" />
                             <input type="hidden" id="interes" />
+                            <input type="hidden" id="finalizar" name="finalizar" value="no" />
                             <input type="hidden" id="fecha_pago" />
                             <input type="hidden" id="fecha_hoy" name="fecha_hoy" />
                             <input type="hidden" id="cuota_hoy" />
@@ -50,12 +51,12 @@ include_once '../plantilla/barra_lateral_usuario.php';
 
                             <div class="row clearfix">
                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="col-md-10">
+                                    <div class="form-line">
+                                        <div class="col-md-6">
                                             <div class="input-field"><i class="fa fa-search prefix" aria-hidden="true">
 
                                                 </i><label for="" style="font-size:16px">Buscar Cliente</label>
-                                                <input type="text" id="buscar_cliente_abono"  name="buscar_cliente_abono" autofocus onkeypress="llenar_tabla_cliente_abono(this)" list="lista_personas_cliente_abono">
+                                                <input type="text" id="buscar_cliente_abono"  name="buscar_cliente_abono" autofocus onkeypress="llenar_tabla_cliente_abono(this)" list="lista_personas_cliente_abono" class="form-control">
                                             </div>              
                                         </div>
                                     </div>
@@ -69,7 +70,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                 <thead>
                                 <th>Codigo</th>
                                 <th>Nombre</th>
-                                <th>Dui</th>
+                                <th><div id="tipoID">Dui</div></th>
                                 <th>Nit</th>
                                 <th>Monto</th>
                                 <th>Saldo Actual</th>  
@@ -93,7 +94,8 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     <button type="button" onclick="calcular_factura()" class="btn btn-primary m-t-15 waves-effect">CALCULAR</button>
                                 </div>
                             </div>
-                            <table class="table table-striped table-bordered" id="tabla_referencias">
+                           <div class="container-fluid" id="factura_N" >
+                            <table class="table table-striped table-bordered" s id="factura_natural">
                                 <caption>FACTURA</caption>
 
                                 <tbody>
@@ -175,6 +177,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                 </tbody>
 
                             </table>
+                            </div>
 
                             <div class="text-center">
                                 <button type="submit" form="abono_form" class="btn  btn-primary m-t-15 waves-effect" >GUARDAR</button>
@@ -196,19 +199,37 @@ include_once '../plantilla/barra_lateral_usuario.php';
 <datalist id="lista_personas_cliente_abono">
     <?php
     include_once '../app/Conexion.php';
-    include_once '../modelos/Libros.php';
+    include_once '../modelos/persona_juridica.php';
     include_once '../repositorios/repositorio_expediente_natural.php';
+    include_once '../repositorios/repositorio_juridico.php';
     Conexion::abrir_conexion();
-    $listado = repositorio_expediente_natural::lista_clientes(Conexion::obtener_conexion());
-
-
-    foreach ($listado as $fila) {
-        echo '<option value="' . $fila[2] . '" label="' . $fila[0] . '" > ';
+    
+    $listado1 = repositorio_juridico::lista_persona_juridca(Conexion::obtener_conexion());
+    $l=count($listado1);
+    for ($i=0 ; $i < $l ; $i++) {
+        echo '<option value="' . $listado1[$i]->getId_nombre() . '" label="' . $listado1[$i]->getId_persona_juridica() . '-J" > ';
     }
+    
+    $listado = repositorio_expediente_natural::lista_clientes(Conexion::obtener_conexion());
+    foreach ($listado as $fila) {
+        echo '<option value="' . $fila[1] .' ' . $fila[2] . '" label="' . $fila[0] . '-N" > ';
+    }
+    
+    
+    
     ?>
 </datalist>
 
 <script>
+    function impFact(){
+        var ficha = document.getElementById("factura_N");
+	  var ventimp = window.open(' ', 'popimpr');
+	  ventimp.document.write( ficha.innerHTML );
+	  ventimp.document.close();
+	  ventimp.print( );
+	  ventimp.close();
+    }
+    
     function llenar_tabla_cliente_abono(valor) {
         //var depto = valor.value;
         var depto = $("#lista_personas_cliente_abono option[value='" + $('#buscar_cliente_abono').val() + "']").attr('label');
@@ -231,7 +252,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
     function calcular_factura() {
         if (document.getElementById("abono").value > 0) {
             var pago = document.getElementById("abono").value;
-            var pagoTotal = document.getElementById("saldo_act").value;
+            var pagoTotal = parseInt( document.getElementById("saldo_act").value);
             var fecha_pago = document.getElementById("fecha_pago").value;
             var fecha_hoy = document.getElementById("fecha_hoy").value;
             var fecha_aux = fecha_hoy.split('-');
@@ -252,19 +273,24 @@ include_once '../plantilla/barra_lateral_usuario.php';
 
             if (dias == 0) {
                 var int_calculado = (document.getElementById("interes").value * document.getElementById("saldo_act").value * diasMes) / 360;
+              
             } else {
                 if (dias < 0) {
                     var int_calculado = (document.getElementById("interes").value * document.getElementById("saldo_act").value * (diasMes + dias)) / 360;
+                    
                 } else {
                     if (dias > 0) {
                         var int_calculado = (document.getElementById("interes").value * document.getElementById("saldo_act").value * diasMes) / 360;
-
+                       
                         var mora = (((document.getElementById("interes").value) * (document.getElementById("cuota_hoy").value - int_calculado)) / 360) * (dias);
                     }
                 }
 
             }
-            if ((int_calculado + pagoTotal) < pago) {
+            var deudaTotal=(parseFloat(int_calculado) + parseFloat(pagoTotal));
+            
+            
+            if ((deudaTotal) < pago) {
                 swal({
                     title: "¿Desea Continuar?",
                     text: "La cantidad ingresada es mayor al saldo actual mas los intereses, se finalizara el prestamo " ,
@@ -282,8 +308,12 @@ include_once '../plantilla/barra_lateral_usuario.php';
                                     'Datos Registrados con Exito',
                                     'success'
                                     );
-                           document.form_persona_natural.submit();//lo envio aqui porque retorna la vaiable antes y despues ejecuta el swal
-
+                            document.getElementById("finalizar").value = "si";
+                            document.getElementById("abono").value=(int_calculado + pagoTotal);
+                            document.getElementById("mora_hoy").value = mora;
+                            document.getElementById("int_hoy").value = int_calculado;
+                           document.abono_form.submit();//lo envio aqui porque retorna la vaiable antes y despues ejecuta el swal
+                           
                         });
             }else{
             if (pago > int_calculado) {
@@ -351,7 +381,7 @@ if (isset($_REQUEST["paso_abono"])) {
 
     Conexion::abrir_conexion();
 //echo '<script language="javascript">alert("juas");</script>'; 
-
+    $fin=$_REQUEST["finalizar"];
     $pago = new pago();
 
     $pago->setFecha($_REQUEST["fecha_hoy"]);
@@ -362,7 +392,8 @@ if (isset($_REQUEST["paso_abono"])) {
 
     $prestamo = new presamo();
     $prestamo->setSaldo_actual($_REQUEST["saldo_act_hoy"]);
-
+    $prestamo->setEstado($fin);
+    $prestamo->setId_asesor($_REQUEST["codCliente_abono"]);
 
     if (repositorio_pago::insertar_pago(Conexion::obtener_conexion(), $pago) && repositorio_prestamo::actualizar_prestamo(Conexion::obtener_conexion(), $prestamo, $_REQUEST["id_prestamo_abono"])) {
         echo "<script type='text/javascript'>";
@@ -370,9 +401,9 @@ if (isset($_REQUEST["paso_abono"])) {
                     title: "Exito",
                     text: "Pago registrado",
                     type: "success"},
-                    function(){
+                    function(){                    
                     }
-                    );';
+                    ); ';
         echo "</script>";
     } else {
         echo "<script type='text/javascript'>";
