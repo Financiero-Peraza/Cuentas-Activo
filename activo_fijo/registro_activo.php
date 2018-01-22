@@ -23,6 +23,7 @@ if (isset($_REQUEST['nameEnviar'])) {
     $fecha = $_REQUEST['fecha'];
     $descripcion  = $_REQUEST['descripcion'];
     $cantidad  = $_REQUEST['cantidad'];
+    $precio =$_REQUEST['precio'];
     
     
     $conexion = Conexion::obtener_conexion();
@@ -30,8 +31,8 @@ if (isset($_REQUEST['nameEnviar'])) {
  for($i=0; $i<$cantidad;$i++){
  
     $correlativo = correlativos::obtener_correlativo($conexion, 'activo');
-    $sql = "INSERT INTO activo (id_tipo, id_departamento, id_institucion, id_usuario, encargado_id_encargado, correlativo, fecha_adquisicion, descripcion, estado, tiempo_uso, observaciones) "
-                                   . "VALUES ( '$tipo_activo', '$departamento', '$institucion', '1', '$encargado', '$correlativo', '$fecha', '$descripcion', 'ACTIVO', '$meses', '$observaciones');";
+    $sql = "INSERT INTO activo (id_tipo, id_departamento, id_institucion, id_usuario, encargado_id_encargado, correlativo, fecha_adquisicion, descripcion, estado, tiempo_uso, observaciones,precio) "
+                                   . "VALUES ( '$tipo_activo', '$departamento', '$institucion', '1', '$encargado', '$correlativo', '$fecha', '$descripcion', 'ACTIVO', '$meses', '$observaciones','$precio');";
     $sentencia = $conexion->prepare($sql);
     $resultado = $sentencia->execute();
  }
@@ -177,6 +178,14 @@ if (isset($_REQUEST['nameEnviar'])) {
                                             <div class="form-line">
                                                 <span class="input-group-addon" id="basic-addon1">DESCRIPCION</span>
                                                 <input type=""  class="form-control text-center" required="" name="descripcion" placeholder="DESCRIPCION">
+                                            </div>
+                                        </div>
+                                    </div>
+                                       <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <span class="input-group-addon" id="basic-addon1">Precio</span>
+                                                <input type=""  class="form-control text-center" required="" name="precio" placeholder="Precio">
                                             </div>
                                         </div>
                                     </div>

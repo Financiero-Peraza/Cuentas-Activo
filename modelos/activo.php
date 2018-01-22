@@ -11,8 +11,10 @@ class activo {
  private $id_encargado;
  private $correlativo;
  private $fecha;
+ 
  private $descripcion;
  
+ private $precio;
  function __construct() {
      
  }
@@ -56,6 +58,10 @@ class activo {
      return $this->descripcion;
  }
 
+ function getPrecio() {
+     return $this->precio;
+ }
+
  function setId_activo($id_activo) {
      $this->id_activo = $id_activo;
  }
@@ -96,6 +102,9 @@ class activo {
      $this->descripcion = $descripcion;
  }
 
+ function setPrecio($precio) {
+     $this->precio = $precio;
+ }
 
 
 }
