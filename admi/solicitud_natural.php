@@ -66,7 +66,7 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_natural(Conexio
                                 <th class="text-center"><?php echo "$". $lista['4'];?></th>
                                 <th class="text-center"><?php echo $lista['5'];?></th>
                                  <td class="text-center">
-                                     <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['6'];?>')"> 
+                                     <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['6'];?>', '<?php echo $lista['3'];?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>
@@ -81,8 +81,8 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_pendiente_natural(Conexio
 </section>
 
 <script>
-function abrir_expediente(id_natural){
-    var url="./expediente_natural.php?id_natural=" +id_natural;
+function abrir_expediente(id_natural,tipo){
+    var url="./expediente_natural.php?id_natural=" +id_natural+"&tipo="+tipo;
     
     var a = document.createElement("a");
 		a.target = "_blank";
