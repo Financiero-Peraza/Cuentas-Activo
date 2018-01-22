@@ -41,7 +41,7 @@ WHERE tipo_activo.id_tipo=activo.id_tipo GROUP BY activo.id_activo
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2 class="text-center">Activos</h2>
+                            <h2 class="text-center">Activo</h2>
                         </div>
                         <div class="body">
                             <div class="row clearfix">
