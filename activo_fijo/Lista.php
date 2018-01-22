@@ -66,11 +66,7 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
                         <div id="heading" class="panel-heading">
 <div id="expedientes" class="panel panel-info">
           <div class="panel-body">
-          <script src="./js/jquery.min.js"> </script>
-          <script src="./js/buscaresc.js"></script>
-            
-  <input type="text" name="buscar" id="filtrar" class="form-control" placeholder="Buscar" >
-                        <div class="body">
+            <div class="body">
                             <div class="row clearfix">
 
 

@@ -27,10 +27,10 @@ activo.id_activo = '$clienteInfo'
 ");
 ?>
 <div class="row" >
-    <form id="imprimir_depre" method="post" action="../reportesActivo/imp_depre.php" target="_blank">
+    <!--<form id="imprimir_depre" method="post" action="../reportesActivo/imp_depre.php" target="_blank">-->
         <?php while ($fila = mysqli_fetch_array($datos)) { ?>
             <div>
-                <p>
+                
                 <table id="no_imp" class="table table-striped table-bordered">
                     <tbody>
 
@@ -107,7 +107,7 @@ activo.id_activo = '$clienteInfo'
 
                     </tbody>
                 </table>
-                </p>
+                
             </div>
 
 
@@ -163,7 +163,7 @@ activo.id_activo = '$clienteInfo'
         <?php
     }
     ?>
-</form>
+<!--</form>-->
 </div>
 
 

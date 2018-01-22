@@ -149,8 +149,8 @@ if (isset($_REQUEST["pas"])) {
     $persona->setDireccion($_REQUEST["direccion_natural"]);
     $persona->setTelefono($_REQUEST["telefono_natural"]);
     // $persona->setCorreo($_REQUEST["nameEmail"]);
-    $cod= '250595'.repositorio_expediente_natural::obtenerU_ultimo_persona(Conexion::obtener_conexion());
-    $persona->setId_persona_natural($cod);
+//    $cod= '250595'.repositorio_expediente_natural::obtenerU_ultimo_persona(Conexion::obtener_conexion());
+//    $persona->setId_persona_natural($cod);
     repositorio_expediente_natural::insertar_persona_natural(Conexion::obtener_conexion(), $persona);
 
     //

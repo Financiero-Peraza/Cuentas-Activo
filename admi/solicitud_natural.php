@@ -94,6 +94,10 @@ function aprobar_credito(id_prestamo){
     location.href="solicitud_natural.php?id_prestamo=" +id_prestamo, "_parent";
 }
 
+function aprobar_credito(id_prestamo){
+    location.href="solicitud_pendiente.php?id_prestamo=" +id_prestamo, "_parent";
+}
+
 </script>
 
 <?php

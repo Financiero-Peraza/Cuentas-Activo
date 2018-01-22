@@ -446,7 +446,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
     Conexion::abrir_conexion();
     $listado = repositorio_expediente_natural::lista_persona_natural(Conexion::obtener_conexion());
     foreach ($listado as $fila) {
-        echo '<option value="' . $fila[2] . '" label="' . $fila[0] . '" > ';
+        echo '<option value="' . $fila[1] .' '. $fila[2] . '" label="' . $fila[0] . '" > ';
     }
     ?>
 </datalist>
@@ -755,7 +755,7 @@ if (isset($_REQUEST["pas_cp"])) {
         $fiador->setLugar_trabajo($_REQUEST["Trabajo_fia_per"]);
         $prestamo = new presamo();
         // $prestamo->setId_plan("1");
-        $prestamo->setId_asesor($_SESSION['user']);
+        $prestamo->setId_asesor('1');
         $prestamo->setPrestamo_original($_REQUEST["monto_per"]);
         // $prestamo->setId_plan("1");
         $devolucion = date("d-m-Y");
