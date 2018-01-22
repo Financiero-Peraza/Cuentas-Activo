@@ -45,20 +45,18 @@ echo $clienteInfo;
             </thead>
             <tbody></tbody>
         </table>
-
-        <button class="btn btn-info" type="button" onclick="llamarPaginaBack('')"> 
+        <a href="javascript:history.back(1)">
+        <button class="btn btn-info" type="button" > 
             <i class="fa fa-eye"></i>Volver
         </button>
+        </a>
     </form>
 </div>
 
 <script type="text/javascript" >
 function llamarPaginaBack(id){
-    $("#contenido").load('lista.php');
-//	window.open("../activo_fijo/ver_depreciacion.php?datos="+id, '_parent');
-	}
-
-    
+    href="javascript:history.back(1)"
+}    
 </script>
 
 

@@ -163,7 +163,7 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
 
 <script type="text/javascript" >
 function llamarPagina(id){
-    $("#contenido").load('ver_depreciacion.php?clienteinfo:contenido');
+    $("#contenido").load('ver_depreciacion.php?clienteinfo=contenido');
 //	window.open("../activo_fijo/ver_depreciacion.php?datos="+id, '_parent');
 	}
 
