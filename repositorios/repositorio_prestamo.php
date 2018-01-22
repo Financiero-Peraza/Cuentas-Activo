@@ -51,6 +51,7 @@ class repositorio_prestamo {
                 $sa = $prestamo->getSaldo_actual();
                 $estado = $prestamo->getEstado();
                 $ppesona = $prestamo->getId_asesor();
+                $cual = $prestamo->getId_plan();
 
                 $sql = "SELECT
                         (DATE_ADD( prestamo.proximo_pago, INTERVAL 1 MONTH )) as pp
@@ -70,7 +71,12 @@ class repositorio_prestamo {
                 if ($estado == "no") {
                     $sql = "UPDATE prestamo SET saldo_actual='$sa', proximo_pago='$pp' WHERE (`id_prestamo`=$id) LIMIT 1 ";
                 } else {
+                    if($cual=="N"){
                     $sql2 = "UPDATE `persona_natural` SET `monto`='0' WHERE (`id_persona_natural`='$ppesona') LIMIT 1 ";
+                    }else{
+                        $sql2 = "UPDATE persona_juridica  SET `monto`='0' WHERE (`id_persona_juridica`='$ppesona') LIMIT 1 "; 
+                    }
+                    
                     $sql = "UPDATE prestamo SET saldo_actual='$sa', estado='FINALIZADO' WHERE (`id_prestamo`=$id) LIMIT 1 ";
                     $sentencia2 = $conexion->prepare($sql2);
                     $prestamo_insertado = $sentencia2->execute();

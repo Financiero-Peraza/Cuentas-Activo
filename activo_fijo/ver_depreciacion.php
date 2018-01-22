@@ -129,7 +129,7 @@ GROUP BY activo.id_activo
                } ?>
             </tbody>
         </table>
-        <a href="javascript:history.back(1)">
+        <a href="javascript:history.back()">
         <button class="btn btn-info" type="button" > 
             <i class="fa fa-eye"></i>Volver
         </button>
