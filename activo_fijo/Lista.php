@@ -22,12 +22,22 @@ include_once '../plantilla/barra_lateral_usuario.php';
 <script src="jquery-3.1.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.js"></script>
 <?php
+<<<<<<< HEAD
 // AGRAGAR CONTRASENA SI TIENEN CONTRA EL XAMPP
 $con = new mysqli('localhost', 'root', '', 'instituciones_financieras');
 $datos = $con->query("select activo.estado,tipo_activo.nombre as aa, activo.precio,departamento.nombre, usuario.nombre as nombre_de_usuario, institucion.nombre AS
 nombre_institucion, encargado.nombre as encargado,activo.id_activo as id FROM
 activo, usuario, departamento, institucion, tipo_activo, encargado
 WHERE tipo_activo.id_tipo=activo.id_tipo GROUP BY activo.id_activo 
+=======
+$con =new mysqli('localhost','root','root','instituciones_financieras');
+$datos=$con->query("select activo.correlativo,tipo_activo.nombre as aa, activo.precio,departamento.nombre, usuario.nombre as nombre_de_usuario,clasificacion.nombre,
+ institucion.nombre AS nombre_institucion, encargado.nombre as encargado, activo.descripcion FROM
+activo, usuario, departamento, institucion, tipo_activo, clasificacion,encargado
+WHERE tipo_activo.id_tipo=activo.id_tipo and activo.id_departamento=departamento.id_departamento
+and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=activo.encargado_id_encargado
+ GROUP BY activo.id_activo  
+>>>>>>> f368256985c778ad159da3c45fcccb0208a059b1
 ");
 ?>
 <!--<form action="" method="post" class="formNatural" name="credito_personal" id="credito_personal" onsubmit="return validarTablas_cper()" enctype="multipart/form-data" >-->
@@ -41,8 +51,15 @@ WHERE tipo_activo.id_tipo=activo.id_tipo GROUP BY activo.id_activo
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2 class="text-center">Activo</h2>
+                            <h2 class="text-center">Activos</h2>
                         </div>
+                        <div id="heading" class="panel-heading">
+<div id="expedientes" class="panel panel-info">
+          <div class="panel-body">
+          <script src="./js/jquery.min.js"> </script>
+          <script src="./js/buscaresc.js"></script>
+            
+  <input type="text" name="buscar" id="filtrar" class="form-control" placeholder="Buscar" >
                         <div class="body">
                             <div class="row clearfix">
 
@@ -51,9 +68,15 @@ WHERE tipo_activo.id_tipo=activo.id_tipo GROUP BY activo.id_activo
 
                                 <table class="table table-striped table-bordered" id="tabla_cliente_cpersonal">
                                     <caption></caption>
+<<<<<<< HEAD
                                     <thead>
                                     <th>Actvio</th>
 
+=======
+                                    <thead >
+                                    <th>Correlativos</th>
+                                   
+>>>>>>> f368256985c778ad159da3c45fcccb0208a059b1
                                     <th>Departamento</th>
                                     <th>Precio</th>
                                     <th>Institucion</th>
@@ -61,6 +84,7 @@ WHERE tipo_activo.id_tipo=activo.id_tipo GROUP BY activo.id_activo
                                     <th>Acciones </th>  
                                     </thead>
                                     <tbody class="buscar">
+<<<<<<< HEAD
                                         <?php while ($fila = mysqli_fetch_array($datos)) { ?>
 
                                             <tr>
@@ -88,6 +112,36 @@ WHERE tipo_activo.id_tipo=activo.id_tipo GROUP BY activo.id_activo
                                         ?>
 
                                     </tbody>
+=======
+     				<?php while($fila=mysqli_fetch_array($datos)){?>
+						
+                        <tr>
+                        	
+                          
+                           <td><?php echo $fila['correlativo']; ?></td>
+                           
+                            <td><?php echo $fila['nombre']; ?></td>
+                              
+                              <td><?php echo $fila['precio'].' $' ; ?></td>
+                              
+                                    <td><?php echo $fila['nombre_institucion']; ?></td>
+
+                                  <td><?php echo $fila['encargado']; ?></td>
+                                  <td 
+                                   <button class="btn btn-info" 
+                onclick="verDepreciacion('<?php echo $fila['nombre'] ?>','<?php echo $fila['precio'] ?>')"> 
+                <i class="fa fa-eye"></i>Depreciacion</td>
+                </button>
+                                      
+                            
+                            
+                            </tr>
+                            <?php
+						}
+							?>
+							
+                        </tbody>
+>>>>>>> f368256985c778ad159da3c45fcccb0208a059b1
                                 </table>
 
                             </div>
