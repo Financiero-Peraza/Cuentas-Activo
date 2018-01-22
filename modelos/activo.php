@@ -11,10 +11,10 @@ class activo {
  private $id_encargado;
  private $correlativo;
  private $fecha;
- 
  private $descripcion;
- 
- private $precio;
+  private $precio;
+  
+  
  function __construct() {
      
  }
