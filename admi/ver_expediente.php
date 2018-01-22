@@ -18,7 +18,7 @@ Conexion::abrir_conexion();
 $lista_balance = repositorio_balance::lista_balance(Conexion::obtener_conexion(), $_REQUEST['id_juridico']);
 $lista_estado = repositorio_estado_resultado::lista_estado(Conexion::obtener_conexion(), $_REQUEST['id_juridico']);
 $datos = repositorio_juridico::obtener_persona_juridca(Conexion::obtener_conexion(), $_REQUEST['id_juridico']);
-$prestamos_pendientes = repositorio_expediente_juridico::lista_prestamo_previos(Conexion::obtener_conexion(), $_REQUEST['id_juridico']);
+$prestamos_previos = repositorio_expediente_juridico::lista_prestamo_previos(Conexion::obtener_conexion(), $_REQUEST['id_juridico']);
 
 $ratio = array();
 
@@ -174,7 +174,7 @@ for ($i = 0; $i < count($lista_balance); $i++) {
 
                     </thead>
                     <tbody>
-                        <?php foreach ($prestamos_pendientes as $lista) { ?>
+                        <?php foreach ($prestamos_previos as $lista) { ?>
                             <tr>
                                 <th class="text-center"><?php echo $lista['3']; ?></th>
                                 <th class="text-center"><?php echo $lista['4']; ?></th>

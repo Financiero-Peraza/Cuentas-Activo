@@ -67,7 +67,7 @@ class repositorio_expediente_juridico {
                         INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
                         INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
                         WHERE
-                        prestamo.id_prestamo = '".$codigo."' and prestamo.estado != 'PENDIENTE'";
+                        prestamo.id_prestamo = '".$codigo."'";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
@@ -86,20 +86,19 @@ class repositorio_expediente_juridico {
         if (isset($conexion)) {
             try {
                 $sql = "SELECT
-persona_juridica.nombre,
-prestamo.prestamo_original,
-prestamo.estado,
-prestamo.id_prestamo,
-usuario.apellido
-FROM
-prestamo
-INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
-INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
-INNER JOIN usuario ON prestamo.id_asesor = usuario.id_usuario
-WHERE
-persona_juridica.id_persona_juridica = '".$codigo."' AND
-prestamo.estado != 'PENDIENTE'
-";
+                        persona_juridica.nombre,
+                        prestamo.prestamo_original,
+                        prestamo.estado,
+                        prestamo.id_prestamo,
+                        usuario.apellido
+                        FROM
+                        prestamo
+                        INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
+                        INNER JOIN usuario ON prestamo.id_asesor = usuario.id_usuario
+                        WHERE
+                        persona_juridica.id_persona_juridica = '".$codigo."' AND
+                        prestamo.estado != 'PENDIENTE'";
                 
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();

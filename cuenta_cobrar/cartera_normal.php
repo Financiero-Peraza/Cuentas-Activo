@@ -15,17 +15,18 @@ include_once '../repositorios/repositorio_prestamo.php';
 Conexion::abrir_conexion();
 if (isset($_REQUEST['id_prestamo'])) {
 
-    if (repositorio_prestamo::aprobar_prestamo(Conexion::obtener_conexion(), $_REQUEST['id_prestamo'])) {
+    if (repositorio_prestamo::hacer_incobrable(Conexion::obtener_conexion(), $_REQUEST['id_prestamo'])) {
         echo "<script>
-        alert('prestamo aprobado');
-        location.href='solicitud_pendiente.php';
+        alert('Credito Marcado como incobrable');
+        location.href='cartera_normal.php';
         </script>";
     }
     
 }else{
 
 
-$lista_prestamo = repositorio_prestamo::lista_prestamo_normales(Conexion::obtener_conexion());
+$lista_prestamo = repositorio_prestamo::lista_prestamo_normales_juridico(Conexion::obtener_conexion());
+$lista_prestamo_natural = repositorio_prestamo::lista_prestamo_normales_naturales(Conexion::obtener_conexion());
 ?>    
 
 
@@ -42,38 +43,58 @@ $lista_prestamo = repositorio_prestamo::lista_prestamo_normales(Conexion::obtene
             <div class="panel-body">
                 <table padding="20px" class="table table-striped" id="data-table-simple">
                     <thead class="">
-                    
+                    <th class="text-center">Incobrable</th>
                     <th class="text-center">Asesor</th>
                     <th class="text-center">Solicitante</th>
                     <th class="text-center">Tipo Prestamo</th>
-                    <th class="text-center">Sector de Empresa</th>
                     <th class="text-center">Monto solicitado($)</th>
                     <th class="text-center">Tiempo(Meses)</th>
-                    <th class="text-center">Expediente</th>
+                    <th class="text-center">Ver Pagoss</th>
 
                     </thead>
                     <tbody>
                         <?php foreach ($lista_prestamo as $lista) { ?>
                             <tr>
-                                <td class="text-center">
-                                    <button class="btn btn-success" onclick="aprobar_credito('<?php echo $lista['8'];?>')"> 
-                                        <i class="Medium material-icons prefix ">check_circle</i> 
+                               <td class="text-center">
+                                   <button class="btn btn-danger" onclick="hacer_incobrable('<?php echo $lista['8'];?>')"> 
+                                        <i class="Medium material-icons prefix">delete</i> 
                                     </button>
                                 </td>
                                 <th class="text-center"><?php echo $lista['4'];?></th>
                                 <th class="text-center"><?php echo $lista['2'];?></th>
                                 <th class="text-center"><?php echo $lista['1'];?></th>
-                                <th class="text-center">Servicio</th>
+                    
                                 <th class="text-center"><?php echo "$". $lista['3'];?></th>
                                 <th class="text-center"><?php echo $lista['6'];?></th>
                                  <td class="text-center">
-                                     <button class="btn btn-danger" onclick="abrir_expediente('<?php echo $lista['8'];?>')"> 
+                                     <button class="btn btn-success" onclick="abrir_expediente('<?php echo $lista['8'];?>')"> 
                                         <i class="Medium material-icons prefix">visibility</i> 
                                     </button>
                                 </td>
                             </tr>
                             
                         <?php } ?>
+                         <?php foreach ($lista_prestamo_natural as $lista2) { ?>
+                            <tr>
+                               <td class="text-center">
+                                   <button class="btn btn-danger" onclick="hacer_incobrable('<?php echo $lista['6'];?>')"> 
+                                        <i class="Medium material-icons prefix">delete</i> 
+                                    </button>
+                                </td>
+                                <th class="text-center"><?php echo $lista2['0'];?></th>
+                                <th class="text-center"><?php echo $lista2['1'] . " " .$lista2['2'];?></th>
+                                <th class="text-center"><?php echo $lista2['3'];?></th>
+                    
+                                <th class="text-center"><?php echo "$". $lista2['4'];?></th>
+                                <th class="text-center"><?php echo $lista2['5'];?></th>
+                                 <td class="text-center">
+                                     <button class="btn btn-success" onclick="abrir_expediente('<?php echo $lista['6'];?>')"> 
+                                        <i class="Medium material-icons prefix">visibility</i> 
+                                    </button>
+                                </td>
+                            </tr>
+                            
+                        <?php } ?>   
                     </tbody>
                 </table>
             </div>
@@ -91,8 +112,8 @@ function abrir_expediente(id_juridico){
 		a.click();
 }
 
-function aprobar_credito(id_prestamo){
-    location.href="solicitud_pendiente.php?id_prestamo=" +id_prestamo, "_parent";
+function hacer_incobrable(id_prestamo){
+    location.href="cartera_normal.php?id_prestamo=" +id_prestamo, "_parent";
 }
 
 </script>

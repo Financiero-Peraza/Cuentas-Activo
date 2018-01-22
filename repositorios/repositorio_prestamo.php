@@ -179,7 +179,7 @@ class repositorio_prestamo {
         return $resultado;
     }
     
-    public static function lista_prestamo_normales($conexion) {
+    public static function lista_prestamo_normales_juridico($conexion) {
         $lista = array();
 
         if (isset($conexion)) {
@@ -213,6 +213,108 @@ class repositorio_prestamo {
         return $resultado;
     }
     
+    public static function lista_prestamo_normales_naturales($conexion) {
+        $lista = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        usuario.apellido,
+                        persona_natural.nombre,
+                        persona_natural.apellido,
+                        prestamo.tipo_credito,
+                        prestamo.prestamo_original,
+                        prestamo.tiempo,
+                        prestamo.id_prestamo,
+                        usuario.id_usuario,
+                        expediente_natural.persona_natural
+                        FROM
+                        usuario
+                        INNER JOIN prestamo ON prestamo.id_asesor = usuario.id_usuario
+                        INNER JOIN expediente_natural ON expediente_natural.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_natural ON expediente_natural.persona_natural = persona_natural.id_persona_natural
+                        where prestamo.estado = 'NORMAL'";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+                
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
+    
+    public static function lista_prestamo_incobrable_juridico($conexion) {
+        $lista = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        usuario.nombre,
+                        prestamo.tipo_credito,
+                        persona_juridica.nombre,
+                        prestamo.saldo_actual,
+                        usuario.apellido,
+                        persona_juridica.categoria,
+                        prestamo.tiempo,
+                        persona_juridica.id_persona_juridica,
+                        prestamo.id_prestamo
+                        FROM
+                        prestamo
+                        INNER JOIN usuario ON prestamo.id_asesor = usuario.id_usuario
+                        INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
+                            WHERE prestamo.estado = 'INCOBRABLE'";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+                
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
+    
+    public static function lista_prestamo_incobrable_naturales($conexion) {
+        $lista = array();
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                        usuario.apellido,
+                        persona_natural.nombre,
+                        persona_natural.apellido,
+                        prestamo.tipo_credito,
+                        prestamo.saldo_actual,
+                        prestamo.tiempo,
+                        prestamo.id_prestamo,
+                        usuario.id_usuario,
+                        expediente_natural.persona_natural
+                        FROM
+                        usuario
+                        INNER JOIN prestamo ON prestamo.id_asesor = usuario.id_usuario
+                        INNER JOIN expediente_natural ON expediente_natural.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_natural ON expediente_natural.persona_natural = persona_natural.id_persona_natural
+                        where prestamo.estado = 'INCOBRABLE'";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+
+                
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $resultado;
+    }
+    
     public static function lista_prestamo_pendiente_natural($conexion) {
         $lista = array();
 
@@ -226,7 +328,8 @@ class repositorio_prestamo {
                         prestamo.prestamo_original,
                         prestamo.tiempo,
                         persona_natural.id_persona_natural,
-                        prestamo.estado
+                        prestamo.estado,
+                        prestamo.id_prestamo
                         FROM
                         usuario
                         INNER JOIN prestamo ON prestamo.id_asesor = usuario.id_usuario
@@ -246,11 +349,58 @@ class repositorio_prestamo {
         return $resultado;
     }
     
+    public static function lista_prestamo_mora($conexion , $codigo) {
+        $mora = "";
+
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT
+                       pago.mora
+                        FROM
+                        prestamo
+                        INNER JOIN expediente_juridico ON expediente_juridico.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN pago ON pago.id_prestamo = prestamo.id_prestamo
+                        INNER JOIN persona_juridica ON expediente_juridico.id_persona_juridica = persona_juridica.id_persona_juridica
+                        WHERE prestamo.id_prestamo = '$codigo' 
+                        ORDER BY pago.id_pago DESC
+                        LIMIT 1";
+                
+                        $sentencia = $conexion->prepare($sql);
+                        $sentencia->execute();
+                        $resultado = $sentencia->fetch();
+                        
+                        foreach ($resultado as $fila) {
+                            $mora = $fila[0];
+                            }
+
+                
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        }
+
+        return $mora;
+    }
+    
     public static function aprobar_prestamo($conexion, $id) {
          $respuesta = false;
         if (isset($conexion)) {
             try {
                 $sql = "UPDATE prestamo SET estado = 'NORMAL' where id_prestamo = '$id'" ;
+                $sentencia = $conexion->prepare($sql);
+                $respuesta = $sentencia->execute();
+            } catch (PDOException $exc) {
+                echo $exc->getTraceAsString();
+            }
+        }
+        return $respuesta;
+    }
+    
+    public static function hacer_incobrable($conexion, $id) {
+         $respuesta = false;
+        if (isset($conexion)) {
+            try {
+                $sql = "UPDATE prestamo SET estado = 'INCOBRABLE' where id_prestamo = '$id'" ;
                 $sentencia = $conexion->prepare($sql);
                 $respuesta = $sentencia->execute();
             } catch (PDOException $exc) {
