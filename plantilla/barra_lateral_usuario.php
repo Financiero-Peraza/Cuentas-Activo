@@ -96,6 +96,12 @@
                 </a>
             </li>
             <li>
+                <a href="../activo_fijo/Lista.php">
+                    <i class="material-icons col-red">contacts</i>
+                    <span>Lista de Activo</span>
+                </a>
+            </li>
+            <li>
                 <a href="../activo_fijo/registro_tipo_activo.php">
                     <i class="material-icons col-amber">mail</i>
                     <span>Registro de Tipo de Activo</span>
