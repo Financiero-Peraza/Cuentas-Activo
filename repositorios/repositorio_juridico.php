@@ -117,6 +117,40 @@ class repositorio_juridico {
         }
         return $lista_juridica;
     }
+    
+     public static function lista_persona_juridcaAbono($conexion) {
+        $lista_juridica =  Array();
+        //echo 'esta en administradodr actual<br>';
+        if (isset($conexion)) {
+            //echo 'hay conexion<br>';
+            try {
+                $sql = "select * from persona_juridica WHERE
+persona_juridica.categoria = 0";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+ 
+                if (count($resultado)) {
+                    foreach ($resultado as $fila) {
+                        $juridica = new persona_juridica();
+                        $juridica->setId_persona_juridica($fila['id_persona_juridica']);
+                        $juridica->setId_nombre($fila['nombre']);
+                        $juridica->setNumero($fila['numero']);
+                        $juridica->setDui($fila['dui']);
+                        $juridica->setDui($fila['nit']);
+                        
+                        $lista_juridica[] = $juridica;
+                        
+                    }
+                }
+            } catch (PDOException $exc) {
+                print('ERROR' . $exc->getMessage());
+            }
+        } else {
+            //echo 'no hay conexion<br>';
+        }
+        return $lista_juridica;
+    }
 
 }
 

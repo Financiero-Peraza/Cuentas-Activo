@@ -10,7 +10,12 @@ class repositorio_expediente_juridico {
             try {
                 $id_prestamo = $expediente->getId_prestamo();
                 $id_persona = $expediente->getId_persona_juridica();
-
+                
+                $sql = "UPDATE persona_juridica SET categoria='1'  "
+                         . "WHERE (id_persona_juridica='$id_persona') LIMIT 1";
+                 $sentencia = $conexion->prepare($sql);
+                 $expediente_insertado = $sentencia->execute();
+                
                 $sql = 'INSERT INTO expediente_juridico (id_prestamo,id_persona_juridica)'
                         . ' values ( :id_prestamo, :persona_juridica)';
                 ///estos son alias para que PDO pueda trabajar 

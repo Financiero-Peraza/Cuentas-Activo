@@ -39,6 +39,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
                         <form name="abono_form" id="abono_form" method="post" action="" onsubmit="impFact()" >
                             <input type="hidden" id="paso_abono" name="paso_abono"/>
                             <input type="hidden" id="saldo_act" name="saldo_act" />
+                            <input type="hidden" id="pj" name="pj" />
                             <input type="hidden" id="interes" />
                             <input type="hidden" id="finalizar" name="finalizar" value="no" />
                             <input type="hidden" id="fecha_pago" />
@@ -394,6 +395,7 @@ if (isset($_REQUEST["paso_abono"])) {
     $prestamo->setSaldo_actual($_REQUEST["saldo_act_hoy"]);
     $prestamo->setEstado($fin);
     $prestamo->setId_asesor($_REQUEST["codCliente_abono"]);
+    $prestamo->setId_plan($_REQUEST["pj"]);
 
     if (repositorio_pago::insertar_pago(Conexion::obtener_conexion(), $pago) && repositorio_prestamo::actualizar_prestamo(Conexion::obtener_conexion(), $prestamo, $_REQUEST["id_prestamo_abono"])) {
         echo "<script type='text/javascript'>";

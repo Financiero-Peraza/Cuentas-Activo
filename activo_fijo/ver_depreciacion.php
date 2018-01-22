@@ -151,8 +151,12 @@ activo.id_activo = '$clienteInfo'
                } ?>
             </tbody>
         </table>
+<<<<<<< HEAD
         </div>
         <a href="javascript:history.back(1)">
+=======
+        <a href="javascript:history.back()">
+>>>>>>> d81aad826f13a3017c962d5f9e0f64722d01c554
         <button class="btn btn-info" type="button" > 
             <i class="fa fa-eye"></i>Volver
         </button>

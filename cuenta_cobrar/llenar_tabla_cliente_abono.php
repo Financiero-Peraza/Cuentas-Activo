@@ -56,6 +56,7 @@ foreach ($listado as $fila) {
         document.getElementById('interes').value = tasa_personaa2;
         document.getElementById('fecha_pago').value = "<?php echo $fila['pp'] ?>";
         document.getElementById('fecha_hoy').value = "<?php echo date("Y-m-d"); ?>";
+        document.getElementById('pj').value = "<?php echo $cual; ?>";
         var cuota_personaa = 0;
 
         cuota_personaa = monto_personaa * ((Math.pow(1 + tasa_personaa, meses_personaa) * tasa_personaa) / (Math.pow(1 + tasa_personaa, meses_personaa) - 1));
