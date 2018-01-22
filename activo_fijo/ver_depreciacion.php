@@ -1,93 +1,115 @@
 <?php
 $clienteInfo=$_REQUEST['clienteinfo'];
-echo $clienteInfo;
-$con =new mysqli('localhost','root','','instituciones_financieras');
+
+$con =new mysqli('localhost','root','root','instituciones_financieras');
 $datos=$con->query("SELECT
-activo.estado,
-tipo_activo.nombre AS tipo,
-activo.precio as precio,
-departamento.nombre as dep,
-usuario.nombre AS nombreUser,
-institucion.nombre AS nombreInst,
-encargado.nombre AS encargado,
+activo.fecha_adquisicion AS fecha,
 activo.id_activo AS id,
-activo.fecha_adquisicion as fecha,
-tipo_activo.id_clasificacion as clasi
+usuario.nombre AS nombreUser,
+departamento.nombre AS dep,
+institucion.nombre AS nombreInst,
+tipo_activo.id_clasificacion,
+tipo_activo.nombre AS tipo,
+encargado.nombre AS encargado,
+activo.precio AS precio,
+clasificacion.id_clasificacion as clasi,
+clasificacion.nombre as ncla
 FROM
-activo, usuario, departamento, institucion, tipo_activo, encargado
+activo
+INNER JOIN usuario ON activo.id_usuario = usuario.id_usuario
+INNER JOIN departamento ON activo.id_departamento = departamento.id_departamento
+INNER JOIN institucion ON activo.id_institucion = institucion.id_institucion
+INNER JOIN tipo_activo ON activo.id_tipo = tipo_activo.id_tipo
+INNER JOIN encargado ON activo.encargado_id_encargado = encargado.id_encargado
+INNER JOIN clasificacion ON tipo_activo.id_clasificacion = clasificacion.id_clasificacion
 WHERE
-tipo_activo.id_tipo = activo.id_tipo AND
 activo.id_activo = '$clienteInfo'
-GROUP BY activo.id_activo  
 ");
 
 ?>
 <div class="row" >
     <form id="imprimir_depre" method="post" action="../reportesActivo/imp_depre.php" target="_blank">
         <?php while($fila=mysqli_fetch_array($datos)){?>
-        <table id="no_imp" class="table table-striped table-bordered">
+        <div>
+            <p>
+            <table id="no_imp" class="table table-striped table-bordered">
             <tbody>
                 
-                <tr>
-                    <td colspan="4" style="height:15px;" >
-                        <div class="input-field col s12 text-center">
+                <tr class="text-accent-1">
+                    <td  style="height:15px;" >
+                        <div class="">
                             <label for="textarea1" style="font-size:15px"><i class="fa fa-pencil-square-o"></i>C&oacutedigo</label>
                             <input type="text" id="ver_cod_depre" name="ver_cod_depre" value="<?php echo $fila['id']; ?>"  minlength="8"  readonly=""   >
                             
                         </div>
                     </td>
+                    <td colspan="4" style="height:15px;" >
+                        <div class="">
+                            <label for="textarea1" style="font-size:15px"><i class="fa fa-pencil-square-o"></i>Clasificacion</label>
+                            <input type="text" id="ver_cod_depre" name="ver_cod_depre" value="<?php echo $fila['ncla']; ?>"  minlength="8"  readonly=""   >
+                            
+                        </div>
+                    </td>
                 </tr>
-                <tr class="text-center" >
+                <tr class="text-accent-1" >
                     <td style="height:10px;"><div class="col m12">
-                            <div class="text-center">
+                             <div class="input-field col m12">
                                 <i class="fa fa-calendar prefix" aria-hidden="true"></i>
-                                <label for="fecha_pub"  class="active" style="font-size:16px">Fecha Adquisición</label>
+                                <label for="fecha_pub"  class="active" style="font-size:16px">Fecha Adquisición</label><br>
                                 <input type="text" name="ver_fecha_depre" value="<?php echo $fila['fecha']; ?>"  id="ver_fecha_depre" readonly=""   >
                             </div>
                         </div></td>
                     <td style="height:10px;">
                         <div class="input-field col m12">
                             <i class="fa fa-usd prefix"></i> 
+                            <label for="precioUnitario" style="font-size:16px">Valor del Activo<small></small> </label><br>
                             <input type="text" name="ver_valor" value="<?php echo $fila['precio']; ?>" min="0" step="any" id="ver_valor"  class="text-center validate" readonly="">
-                            <label for="precioUnitario" style="font-size:16px">Valor del Activo<small></small> </label>
                         </div>
                     </td>
                 </tr>
-                 <tr class="text-center" >
-                    <td style="height:10px;"><div class="col m12">
-                            <div class="input-field">
-                                <i class="fa fa-calendar prefix" aria-hidden="true"></i>
-                                <label for="fecha_pub"  class="active" style="font-size:16px">Tipo</label>
-                                <input type="text" name="ver_fecha_depre" value="<?php echo $fila['tipo']; ?>" id="ver_fecha_depre" readonly=""   >
-                            </div>
-                        </div></td>
+                 <tr class="text-accent-1" >
+                    
+                                             
+                        
+                         <td style="height:10px;">
+                            <div class="input-field col m12">
+                         <i class="fa fa-usd prefix"></i> 
+                            <label for="precioUnitario" style="font-size:16px">Tipo<small></small> </label><br>
+                            <input type="text" name="ver_valor" value="<?php echo $fila['tipo']; ?>" min="0" step="any" id="ver_valor"  class="text-center validate" readonly="">
+                        </div>
+                    </td>
+                        
+                        
+                        
                     <td style="height:10px;">
                         <div class="input-field col m12">
-                            <i class="fa fa-usd prefix"></i> 
+                            <i class="fa fa-usd prefix"></i> <label for="precioUnitario" style="font-size:16px">Encargado<small></small> </label><br>
                             <input type="text" name="ver_valor" value="<?php echo $fila['encargado']; ?>" min="0" step="any" id="ver_valor"  class="text-center validate" readonly="">
-                            <label for="precioUnitario" style="font-size:16px">Encargado<small></small> </label>
+                            
                         </div>
                     </td>
                 </tr>
-                 <tr class="text-center" >
+                 <tr class="text-accent-1" >
                     <td ><div class="col m12">
                             <div class="input-field">
                                 <i class="fa fa-calendar prefix" aria-hidden="true"></i>
-                                <label for="fecha_pub"  class="active" style="font-size:16px">Institucion</label>
+                                <label for="fecha_pub"  class="active" style="font-size:16px">Institucion</label><br>
                                 <input type="text" name="ver_fecha_depre" value="<?php echo $fila['nombreInst']; ?>" id="ver_fecha_depre" readonly=""   >
                             </div>
                         </div></td>
                     <td >
                         <div class="input-field col m12">
-                            <i class="fa fa-usd prefix"></i> 
+                            <i class="fa fa-usd prefix"></i> <label for="precioUnitario" style="font-size:16px">Departamento<small></small> </label><br>
                             <input type="text" name="ver_valor" value="<?php echo $fila['dep']; ?>"min="0" step="any" id="ver_valor"  class="text-center validate" readonly="">
-                            <label for="precioUnitario" style="font-size:16px">Departamento<small></small> </label>
+                            
                         </div>
-                    </td>
+                    </td><
                 </tr>
 
             </tbody>
         </table>
+        </p>
+        </div>
 
 
         <table id="ver_depre_tab" class="table table-striped table-bordered">
@@ -129,6 +151,7 @@ GROUP BY activo.id_activo
                } ?>
             </tbody>
         </table>
+        </div>
         <a href="javascript:history.back(1)">
         <button class="btn btn-info" type="button" > 
             <i class="fa fa-eye"></i>Volver

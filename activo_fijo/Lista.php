@@ -23,7 +23,7 @@ include_once '../plantilla/barra_lateral_usuario.php';
 <script src="bootstrap/js/bootstrap.js"></script>
 <?php
 // AGRAGAR CONTRASENA SI TIENEN CONTRA EL XAMPP
-$con =new mysqli('localhost','root','','instituciones_financieras');
+$con =new mysqli('localhost','root','root','instituciones_financieras');
 $datos=$con->query("select activo.correlativo,tipo_activo.nombre as aa, activo.precio,departamento.nombre, usuario.nombre as nombre_de_usuario,clasificacion.nombre,
  institucion.nombre AS nombre_institucion, encargado.nombre as encargado, activo.descripcion,activo.id_activo as id FROM
 activo, usuario, departamento, institucion, tipo_activo, clasificacion,encargado
