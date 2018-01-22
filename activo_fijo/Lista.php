@@ -22,15 +22,13 @@ include_once '../plantilla/barra_lateral_usuario.php';
 <script src="jquery-3.1.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.js"></script>
 <?php
-
 // AGRAGAR CONTRASENA SI TIENEN CONTRA EL XAMPP
-
-$con =new mysqli('localhost','root','root','instituciones_financieras');
+$con =new mysqli('localhost','root','','instituciones_financieras');
 $datos=$con->query("select activo.correlativo,tipo_activo.nombre as aa, activo.precio,departamento.nombre, usuario.nombre as nombre_de_usuario,clasificacion.nombre,
- institucion.nombre AS nombre_institucion, encargado.nombre as encargado, activo.descripcion ,activo.fecha_adquisicion FROM
+ institucion.nombre AS nombre_institucion, encargado.nombre as encargado, activo.descripcion,activo.id_activo as id FROM
 activo, usuario, departamento, institucion, tipo_activo, clasificacion,encargado
 WHERE tipo_activo.id_tipo=activo.id_tipo and activo.id_departamento=departamento.id_departamento
-and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=activo.encargado_id_encargado and clasificacion.id_clasificacion=activo.id_tipo
+and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=activo.encargado_id_encargado
  GROUP BY activo.id_activo  
 ");
 ?>
@@ -63,17 +61,20 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
                                 <table class="table table-striped table-bordered" id="tabla_cliente_cpersonal">
                                     <caption></caption>
 
-                                    
+                                    <thead>
+                                    <th>Actvio</th>
+
+
+                                    <thead >
                                     <th>Correlativos</th>
                                    
-                                    <th>Tipo</th>
-                                    <th>Activo</th>
+
+                                    <th>Departamento</th>
                                     <th>Precio</th>
-                                     <th>Fecha Aquisicion</th>
                                     <th>Institucion</th>
                                     <th>Encargado</th>
                                     <th>Acciones </th>  
-                                    
+                                    </thead>
                                     <tbody class="buscar">
 
                                         
@@ -85,22 +86,20 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
                         	
                           
                            <td><?php echo $fila['correlativo']; ?></td>
-                            <td><?php echo $fila['aa']; ?></td>
                            
                             <td><?php echo $fila['nombre']; ?></td>
                               
                               <td><?php echo $fila['precio'].' $' ; ?></td>
                               
-                           <td>  <?php echo date_format(date_create($fila['fecha_adquisicion']), 'd-m-Y') ?></td>
-                    
-                              
                                     <td><?php echo $fila['nombre_institucion']; ?></td>
 
                                   <td><?php echo $fila['encargado']; ?></td>
-                                  <td 
-                                   <button class="btn btn-info" onclick="llamarPagina('<?php echo $fila['id_activo']; ?>')"> 
-                                 <i class="fa fa-eye"></i>Depreciacion</td>
-                </button>
+                                  <td >
+                                   <button class="btn btn-info" 
+                onclick="llamarPagina('<?php echo $fila['id']; ?>')"> 
+                <i class="fa fa-eye"></i>Depreciacion
+                                   </button></td>
+                
                                       
                             
                             
@@ -126,17 +125,6 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
 <!--</form>-->
 
 
-<datalist id="lista_personas_naturales">
-    <?php
-    include_once '../app/Conexion.php';
-    include_once '../repositorios/repositorio_expediente_natural.php';
-    Conexion::abrir_conexion();
-    $listado = repositorio_expediente_natural::lista_persona_natural(Conexion::obtener_conexion());
-    foreach ($listado as $fila) {
-        echo '<option value="' . $fila[2] . '" label="' . $fila[0] . '" > ';
-    }
-    ?>
-</datalist>
 
 
 <script type="text/javascript" >
@@ -144,6 +132,5 @@ function llamarPagina(id){
     $("#contenido").load('ver_depreciacion.php?clienteinfo='+id);
 //	window.open("../activo_fijo/ver_depreciacion.php?datos="+id, '_parent');
 	}
-
     
 </script>

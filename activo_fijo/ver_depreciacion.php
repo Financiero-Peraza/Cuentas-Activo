@@ -98,7 +98,15 @@ GROUP BY activo.id_activo
             <th class="text-center">Depreciación</th>
             <th class="text-center">Valor Neto</th>
             </thead>
-            <tbody></tbody>
+            <tbody>
+               
+                <tr>
+                <td class="text-center" ></td>
+                <td class="text-center" >  </td>
+                <td class="text-center" > </td>
+                <td class="text-center" >  </td>
+                </tr> 
+            </tbody>
         </table>
         <a href="javascript:history.back(1)">
         <button class="btn btn-info" type="button" > 
@@ -111,10 +119,5 @@ GROUP BY activo.id_activo
     </form>
 </div>
 
-<script type="text/javascript" >
-function llamarPaginaBack(id){
-    href="javascript:history.back(1)"
-}    
-</script>
 
 
