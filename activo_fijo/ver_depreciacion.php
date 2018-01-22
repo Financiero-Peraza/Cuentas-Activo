@@ -99,13 +99,34 @@ GROUP BY activo.id_activo
             <th class="text-center">Valor Neto</th>
             </thead>
             <tbody>
-               
+               <?php 
+               if($fila['clasi']=="1")
+                   $veces=2;
+               if($fila['clasi']=="2")
+                   $veces=4;
+               if($fila['clasi']=="3")
+                   $veces=5;
+               if($fila['clasi']=="4")
+                   $veces=20;
+               if($fila['clasi']=="5")
+                   $veces=0;
+               $ano= explode('-', $fila['fecha']) ;
+               $ano=$ano[0];               
+               $valor=$fila['precio'];
+               $depre=$valor/$veces;
+               $vn=$valor-$depre;
+                    
+               for ($i=0; $i<$veces;$i++){
+               ?>
                 <tr>
-                <td class="text-center" ></td>
-                <td class="text-center" >  </td>
-                <td class="text-center" > </td>
-                <td class="text-center" >  </td>
+                <td class="text-center" > <?php echo ($ano+$i); ?></td>
+                <td class="text-center" > <?php echo $valor; ?> </td>
+                <td class="text-center" > <?php echo $depre; ?></td>
+                <td class="text-center" > <?php echo $vn; ?> </td>
                 </tr> 
+               <?php 
+               $vn=$vn-$depre;
+               } ?>
             </tbody>
         </table>
         <a href="javascript:history.back(1)">

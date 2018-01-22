@@ -61,10 +61,6 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
                                 <table class="table table-striped table-bordered" id="tabla_cliente_cpersonal">
                                     <caption></caption>
 
-                                    <thead>
-                                    <th>Actvio</th>
-
-
                                     <thead >
                                     <th>Correlativos</th>
                                    
