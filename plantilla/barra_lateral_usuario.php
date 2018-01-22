@@ -130,12 +130,7 @@
                     <span>Registro de Departamento</span>
                 </a>
             </li>
-            <li>
-                <a href="../activo_fijo/registro_clasificacion.php">
-                    <i class="material-icons col-amber">mail</i>
-                    <span>Registro de Clasificacion de Activo</span>
-                </a>
-            </li>
+            
         </ul>
     </div>
     <!-- #Menu -->

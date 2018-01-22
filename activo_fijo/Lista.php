@@ -24,9 +24,27 @@ include_once '../plantilla/barra_lateral_usuario.php';
 <?php
 // AGRAGAR CONTRASENA SI TIENEN CONTRA EL XAMPP
 $con =new mysqli('localhost','root','root','instituciones_financieras');
-$datos=$con->query("select activo.correlativo,tipo_activo.nombre as aa, activo.precio,departamento.nombre, usuario.nombre as nombre_de_usuario,clasificacion.nombre,
- institucion.nombre AS nombre_institucion, encargado.nombre as encargado, activo.descripcion,activo.id_activo as id FROM
-activo, usuario, departamento, institucion, tipo_activo, clasificacion,encargado
+$datos=$con->query("SELECT
+activo.fecha_adquisicion AS fecha,
+activo.id_activo AS id,
+usuario.nombre AS nombreUser,
+departamento.nombre AS dep,
+institucion.nombre AS nombreInst,
+tipo_activo.id_clasificacion,
+tipo_activo.nombre AS tipo,
+encargado.nombre AS encargado,
+activo.precio AS precio,
+clasificacion.id_clasificacion AS clasi,
+clasificacion.nombre AS ncla,
+activo.correlativo
+FROM
+activo
+INNER JOIN usuario ON activo.id_usuario = usuario.id_usuario
+INNER JOIN departamento ON activo.id_departamento = departamento.id_departamento
+INNER JOIN institucion ON activo.id_institucion = institucion.id_institucion
+INNER JOIN tipo_activo ON activo.id_tipo = tipo_activo.id_tipo
+INNER JOIN encargado ON activo.encargado_id_encargado = encargado.id_encargado
+INNER JOIN clasificacion ON tipo_activo.id_clasificacion = clasificacion.id_clasificacion
 WHERE tipo_activo.id_tipo=activo.id_tipo and activo.id_departamento=departamento.id_departamento
 and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=activo.encargado_id_encargado
  GROUP BY activo.id_activo  
@@ -83,11 +101,11 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
                           
                            <td><?php echo $fila['correlativo']; ?></td>
                            
-                            <td><?php echo $fila['nombre']; ?></td>
+                            <td><?php echo $fila['ncla']; ?></td>
                               
                               <td><?php echo $fila['precio'].' $' ; ?></td>
                               
-                                    <td><?php echo $fila['nombre_institucion']; ?></td>
+                                    <td><?php echo $fila['nombreInst']; ?></td>
 
                                   <td><?php echo $fila['encargado']; ?></td>
                                   <td >
